@@ -12,15 +12,21 @@ const TABLE_NAME = 'users';
 router.post('/newUser', async (req, res) => {
   try {
     const { username, first_name, last_name, email, password } = req.body;
+    const created_at = formatToYYYYMMDD(new Date());
+    const is_active = true;
+    const avatar_url = 'default';
+
+    const VALUES = [username, first_name, last_name, email, password, created_at, is_active, avatar_url];
     const createUserQuery = `
       INSERT INTO ${TABLE_NAME} (username, first_name, last_name, email, password, created_at, is_active, avatar_url)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
     `;
 
-    const created_at = formatToYYYYMMDD(new Date());
-    const VALUES = [username, first_name, last_name, email, password, ]
-
-    res.json({ data: created_at });
+    const newUser = await pool.query(createUserQuery, VALUES);
+    const jsonRes = {
+      success: 'New user successfully created.'
+    }
+    res.json(jsonRes);
 
   } catch (err) {
     console.log(err.message);
