@@ -12,6 +12,21 @@ const TABLE_NAME = 'users';
 router.post('/newUser', async (req, res) => {
   try {
     const { username, first_name, last_name, email, password } = req.body;
+
+    /** BEGIN: Validation **/
+    const error = {};
+    !username && (error.username = `Username is required.`);
+    !first_name && (error.first_name = `First name is required.`);
+    !last_name && (error.last_name = `Last name is required.`);
+    !email && (error.email = `Email is required.`);
+    !password && (error.password = `Password is required.`);
+   
+    if (!username || !first_name || !last_name || !email || !password) {
+      return res.status(500).json(error);
+    }
+    /** END: Validation **/
+
+    /** If all validations passed, continue DB INSERT **/
     const created_at = formatToYYYYMMDD(new Date());
     const is_active = true;
     const avatar_url = 'default';
