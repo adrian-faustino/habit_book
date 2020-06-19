@@ -1,0 +1,21 @@
+[x] set up db
+[] set up CRUD
+  [x] set up user model
+  [x] seed DB
+    [x] CREATE user (insert into db)
+      [] validation
+    [] READ users (display all users from db)
+    [] UPDATE users (change user info)
+    [] DELETE users from db
+[] set up new user registration form
+[] add new users to db
+
+
+Refactor tasks:
+[] set up res and status code on errors server side (CRUD files)
+
+
+
+Notes:
+[] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
+[] forms - server side validation AND server side validation
