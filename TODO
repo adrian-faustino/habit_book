@@ -19,6 +19,7 @@ CLIENT TODO:
 [x] set up react router
 [x] set up reactstrap
 [] set up new user registration form
+  [] set up valid/invalid messages based on error from backend?
   [] check if it added new users to db
 [] login/logout feature
 

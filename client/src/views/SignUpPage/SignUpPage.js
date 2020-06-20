@@ -1,53 +1,76 @@
 import React from 'react';
 
 /** Reactstrap **/
-import { Form, FormGroup, Label, Input, FormFeedback, FormText } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap';
 /** Styles **/
 import './SignUpPage.css';
 
 const SignUpPage = () => {
+
+  const registerFormHandler = e => {
+    e.preventDefault();
+    console.log('form submitted', e)
+  }
+
   return (
     <div className="SignUpPage__form-container">
-      <Form>
-      <FormGroup>
-          <Label for="exampleEmail">Input without validation</Label>
+      <Form onSubmit={registerFormHandler}>
+        
+        <FormGroup>
+          <Label for="exampleEmail">Username:</Label>
+          <Input valid={null}/>
+          <FormFeedback valid>Valid username</FormFeedback>
+          <FormFeedback invalid>Invalid username</FormFeedback>
+          <FormText>12 character limit</FormText>
+        </FormGroup>
+
+        <FormGroup>
+          <Label for="exampleEmail">First name:</Label>
+          <Input invalid={null}/>
+          <FormFeedback invalid>Please enter your first name</FormFeedback>
+        </FormGroup>
+
+        <FormGroup>
+          <Label for="examplePassword">Last name:</Label>
           <Input />
-          <FormFeedback>You will not be able to see this</FormFeedback>
-          <FormText>Example help text that remains unchanged.</FormText>
+          <FormFeedback invalid>Please enter your last name</FormFeedback>
         </FormGroup>
+
         <FormGroup>
-          <Label for="exampleEmail">Valid input</Label>
-          <Input valid />
-          <FormFeedback valid>Sweet! that name is available</FormFeedback>
-          <FormText>Example help text that remains unchanged.</FormText>
-        </FormGroup>
-        <FormGroup>
-          <Label for="examplePassword">Invalid input</Label>
-          <Input invalid />
-          <FormFeedback>Oh noes! that name is already taken</FormFeedback>
-          <FormText>Example help text that remains unchanged.</FormText>
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleEmail">Input without validation</Label>
+          <Label for="exampleEmail">Email:</Label>
           <Input />
-          <FormFeedback tooltip>You will not be able to see this</FormFeedback>
-          <FormText>Example help text that remains unchanged.</FormText>
+          <FormFeedback valid>Valid username</FormFeedback>
+          <FormFeedback invalid>Invalid email</FormFeedback>
         </FormGroup>
+
         <FormGroup>
-          <Label for="exampleEmail">Valid input</Label>
-          <Input valid />
-          <FormFeedback valid tooltip>Sweet! that name is available</FormFeedback>
-          <FormText>Example help text that remains unchanged.</FormText>
+          <Label for="exampleEmail">Password:</Label>
+          <Input />
+          <FormFeedback valid>Valid username</FormFeedback>
+          <FormFeedback invalid>Invalid username</FormFeedback>
+          <FormText>Passwords must be at least 6 characters long</FormText>
         </FormGroup>
+
         <FormGroup>
-          <Label for="examplePassword">Invalid input</Label>
-          <Input invalid />
-          <FormFeedback tooltip>Oh noes! that name is already taken</FormFeedback>
-          <FormText>Example help text that remains unchanged.</FormText>
+          <Label for="examplePassword">Confirm password:</Label>
+          <Input />
+          <FormFeedback valid>Valid username</FormFeedback>
+          <FormFeedback invalid>Invalid username</FormFeedback>
+          <FormText>Re-enter your password</FormText>
         </FormGroup>
+
+        <Button color="primary">Register</Button>
       </Form>
     </div>
   );
 };
 
 export default SignUpPage;
+
+/* Reactstrap form notes:
+ * Useful component attributes:
+ * - <Input /> => valid, invalid
+ * - <FormFeedback></> => valid (green text), invalid (red text)
+ * - <Input /> valid/invalid is a switch for FormFeedback
+ * - Use case: 2 statements for valid/invalid situations
+ * - <FormText></> simply describes the input field  */
