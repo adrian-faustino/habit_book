@@ -27,11 +27,37 @@ const isEmptyObj = obj => {
   return true;
 };
 
+/** Input: . Output: boolean **/
+const usernameExists = async (pool, table, username) => {
+  const query = `
+    SELECT *
+    FROM ${table}
+    WHERE username = $1
+    LIMIT 1;
+  `;
+  const queryResult = await pool.query(query, [username]);
+  return queryResult.rows.length > 0;
+};
+
+/** Input: . Output: boolean **/
+const emailExists = async (pool, table, email) => {
+  const query = `
+    SELECT *
+    FROM ${table}
+    WHERE email = $1
+    LIMIT 1;
+  `;
+  const queryResult = await pool.query(query, [email]);
+  return queryResult.rows.length > 0;
+};
+
 const userValidationHelpers = {
   isValidEmail,
   isValidUsername,
   isValidPassword,
-  isEmptyObj
+  isEmptyObj,
+  usernameExists,
+  emailExists
 };
 
 module.exports = userValidationHelpers;

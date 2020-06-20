@@ -4,9 +4,11 @@
   [x] seed DB
     [x] CREATE user (insert into db)
       [x] validation
+        [] no same users
     [x] READ users (display all users from db)
     [x] UPDATE users (change user info)
-      [] validation
+      [x] validation
+        [] no same users
     [x] DELETE users from db
       [] validation?
 [] set up new user registration form
@@ -21,3 +23,6 @@ Refactor tasks:
 Notes:
 [] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
 [] forms - server side validation AND server side validation
+
+Current task:
+[] validation to prevent create/update same username or email

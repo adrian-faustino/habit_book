@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
 const { formatToYYYYMMDD } = require('../helpers/formatHelpers');
-const { isValidUsername, isValidEmail, isValidPassword, isEmptyObj } = require('../helpers/userValidationHelpers');
+const { isValidUsername, isValidEmail, isValidPassword, isEmptyObj, usernameExists, emailExists } = require('../helpers/userValidationHelpers');
 
 /** Constants **/
 const TABLE_NAME = 'users';
@@ -33,6 +33,14 @@ router.post('/newUser', async (req, res) => {
     !isValidEmail(email) && (error.email = `Invalid email.`);
     /** Validate password **/
     !isValidPassword(password) && (error.password = `Invalid password.`);
+    /** Check if email exists already **/
+    if (email && await emailExists(pool, TABLE_NAME, email)) {
+      error.email = `Email is already registered.`;
+    }
+    /** Check if username exists already **/
+    if (username && await usernameExists(pool, TABLE_NAME, username)) {
+      error.username = `Username is taken.`;
+    }
 
     /** If there are any errors at all, res with error obj **/
     if (!isEmptyObj(error)) return res.status(500).json(error);
@@ -101,6 +109,8 @@ router.put('/:id', async (req, res) => {
     username && !isValidUsername(username) && (error.username = `Invalid username.`);
     /** Validate password **/
     password && !isValidPassword(password) && (error.password = `Invalid password.`);
+    /** Check if email exists already **/
+
 
     /** If there are any errors at all, res with error obj **/
     if (!isEmptyObj(error)) return res.status(500).json(error);
@@ -152,13 +162,12 @@ router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
-    const VALUES = [id];
     const deleteUserQuery = `
       DELETE FROM ${TABLE_NAME}
       WHERE user_id = $1;
     `;
 
-    const deleteUser = await pool.query(deleteUserQuery, VALUES);
+    const deleteUser = await pool.query(deleteUserQuery, [id]);
     res.json({ message: "User deleted." });
   } catch (err) {
     console.error(err.message);
