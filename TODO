@@ -16,7 +16,8 @@ SERVER TODO:
 
 CLIENT TODO:
 [x] set up redux
-[] set up react router
+[x] set up react router
+[x] set up reactstrap
 [] set up new user registration form
   [] check if it added new users to db
 [] login/logout feature
