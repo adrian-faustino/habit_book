@@ -73,6 +73,7 @@ router.post('/newUser', async (req, res) => {
      
   } catch (err) {
     console.log(err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -90,13 +91,14 @@ router.get('/', async (req, res) => {
 
   } catch (err) {
     console.error(err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
 
 
 // ===> UPDATE
-/** .com/users/4 **/
+/** .com/users/123 **/
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -156,11 +158,13 @@ router.put('/:id', async (req, res) => {
     
   } catch (err) {
     console.error(err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
 
 // ===> DELETE
+/** .com/users/123 **/
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -174,6 +178,7 @@ router.delete('/:id', async (req, res) => {
     res.json({ message: "User deleted." });
   } catch (err) {
     console.error(err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 

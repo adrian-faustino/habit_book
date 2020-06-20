@@ -4,20 +4,23 @@
   [x] seed DB
     [x] CREATE user (insert into db)
       [x] validation
-        [] no same users
+        [x] no same users
     [x] READ users (display all users from db)
     [x] UPDATE users (change user info)
       [x] validation
-        [] no same users
+        [x] no same users
     [x] DELETE users from db
-      [] validation?
+      [] validation? => require user to enter password to delete. see if matches
 [] set up new user registration form
-[] add new users to db
+  [] check if it added new users to db
+[] login/logout feature
 
 
 Refactor tasks:
-[] set up res and status code on errors server side (CRUD files)
-[] userCrud.js handle all catch (in try catch)
+[x] set up res and status code on errors server side (CRUD files)
+[x] userCrud.js handle all catch (in try catch)
+[x] fix CRUD response
+[] fix response on successful CRUD (userCRUD.js)
 
 
 Notes:
@@ -25,4 +28,6 @@ Notes:
 [] forms - server side validation AND server side validation
 
 Current task:
-[] validation to prevent create/update same username or email
+[x] validation to prevent create/update same username or email
+[x] refactor: fix CRUD response
+[] client side: set up new user registration form
