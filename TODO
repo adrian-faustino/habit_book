@@ -1,3 +1,4 @@
+SERVER TODO:
 [x] set up db
 [x] set up CRUD
   [x] set up user model
@@ -11,6 +12,11 @@
         [x] no same users
     [x] DELETE users from db
       [] validation? => require user to enter password to delete. see if matches
+
+
+CLIENT TODO:
+[x] set up redux
+[] set up react router
 [] set up new user registration form
   [] check if it added new users to db
 [] login/logout feature
