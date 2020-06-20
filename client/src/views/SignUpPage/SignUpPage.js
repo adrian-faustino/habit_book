@@ -32,7 +32,7 @@ const SignUpPage = () => {
     first_name: `Please enter your first name`,
     last_name: `Please enter your last name`,
     email: `Invalid email`,
-    password: `Invalid password`,
+    password: `Password is too short`,
     password__: `Password does not match`
   });
 
@@ -88,6 +88,7 @@ const SignUpPage = () => {
           <FormFeedback valid>Valid username</FormFeedback>
           <FormFeedback invalid>{error.username}</FormFeedback>
           {isValidUsername(username) && <FormText>Characters remaining: {USERNAME_MAX_LENGTH - username.length}</FormText>}
+          {!username && <FormText>{`Usernames must be within ${USERNAME_MAX_LENGTH} characters`}</FormText>}
         </FormGroup>
 
         <FormGroup>
@@ -115,11 +116,11 @@ const SignUpPage = () => {
 
         <FormGroup>
           <Label for="exampleEmail">Password:</Label>
-          <Input
-          {...bindPassword}/>
-          <FormFeedback valid>Valid username</FormFeedback>
+          <Input {...bindPassword}
+          valid={isValidPassword(password)}
+          invalid={password && !isValidPassword(password)}/>
           <FormFeedback invalid>{error.password}</FormFeedback>
-          <FormText>Passwords must be at least 6 characters long</FormText>
+          {!password && <FormText>Passwords must be at least 6 characters long</FormText>}
         </FormGroup>
 
         <FormGroup>
