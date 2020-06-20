@@ -93,7 +93,7 @@ const SignUpPage = () => {
 
         <FormGroup>
           <Label for="exampleEmail">First name:</Label>
-          <Input 
+          <Input
           {...bindFirst_name}
           invalid={null}/>
           <FormFeedback invalid>{error.first_name}</FormFeedback>
@@ -117,6 +117,7 @@ const SignUpPage = () => {
         <FormGroup>
           <Label for="exampleEmail">Password:</Label>
           <Input {...bindPassword}
+          type="password"
           valid={isValidPassword(password)}
           invalid={password && !isValidPassword(password)}/>
           <FormFeedback invalid>{error.password}</FormFeedback>
@@ -125,11 +126,13 @@ const SignUpPage = () => {
 
         <FormGroup>
           <Label for="examplePassword">Confirm password:</Label>
-          <Input
-          {...bindPassword__}/>
-          <FormFeedback valid>Valid username</FormFeedback>
+          <Input {...bindPassword__}
+          type="password"
+          valid={password__ && (password === password__)}
+          valid={!isValidPassword(password__) ? null : true}
+          invalid={password__ && !(password === password__)}/>
           <FormFeedback invalid>{error.password__}</FormFeedback>
-          <FormText>Re-enter your password</FormText>
+          {!password__ && <FormText>Re-enter your password</FormText>}
         </FormGroup>
 
         <Button color="primary">Register</Button>
