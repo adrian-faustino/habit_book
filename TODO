@@ -31,6 +31,9 @@ Refactor tasks:
 [x] fix CRUD response
 [] fix response on successful CRUD (userCRUD.js)
 
+Bugs:
+[] username shouldn't have white space
+
 
 Notes:
 [] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
