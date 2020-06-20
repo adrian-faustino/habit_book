@@ -6,6 +6,10 @@ import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'r
 import './SignUpPage.css';
 /** Custom hooks **/
 import useInput from '../../hooks/useInput';
+/** Helpers **/
+import { isValidEmail,
+      isValidUsername,
+      isValidPassword} from '../../helpers/userValidationHelpers';
 
 
 const SignUpPage = () => {
@@ -15,6 +19,8 @@ const SignUpPage = () => {
   const [email, bindEmail, resetEmail] = useInput('');
   const [password, bindPassword, resetPassword] = useInput('');
   const [password__, bindPassword__, resetPassword__] = useInput('');
+
+  
 
   const registerFormHandler = e => {
     e.preventDefault();
@@ -27,7 +33,7 @@ const SignUpPage = () => {
       password,
       password__
     }
-    console.log()
+    console.log('User info!', newUser);
   }
 
   return (

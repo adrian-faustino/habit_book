@@ -21,6 +21,7 @@ CLIENT TODO:
 [] set up new user registration form
   [] set up valid/invalid messages based on error from backend?
   [] check if it added new users to db
+  [] don't store password string
 [] login/logout feature
 
 
