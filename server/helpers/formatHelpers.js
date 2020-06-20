@@ -9,7 +9,7 @@ const formatZeros = (string, length) => {
   return result;
 };
 
-/** Input: new Date(), Output: 'YYYY-MM-DD' **/
+/** Input: new Date(). Output: 'YYYY-MM-DD' **/
 const formatToYYYYMMDD = dateObj => {
   const YEAR =  dateObj.getFullYear();
   const MONTH = formatZeros(dateObj.getMonth() + 1, 2); // January = 0, December = 12

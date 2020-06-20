@@ -3,9 +3,10 @@
   [x] set up user model
   [x] seed DB
     [x] CREATE user (insert into db)
+      [x] validation
+    [x] READ users (display all users from db)
+    [x] UPDATE users (change user info)
       [] validation
-    [] READ users (display all users from db)
-    [] UPDATE users (change user info)
     [] DELETE users from db
 [] set up new user registration form
 [] add new users to db
@@ -13,7 +14,7 @@
 
 Refactor tasks:
 [] set up res and status code on errors server side (CRUD files)
-
+[] userCrud.js handle all catch (in try catch)
 
 
 Notes:
