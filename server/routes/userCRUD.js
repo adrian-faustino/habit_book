@@ -96,6 +96,7 @@ router.get('/', async (req, res) => {
 
 
 // ===> UPDATE
+/** .com/users/4 **/
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -109,8 +110,10 @@ router.put('/:id', async (req, res) => {
     username && !isValidUsername(username) && (error.username = `Invalid username.`);
     /** Validate password **/
     password && !isValidPassword(password) && (error.password = `Invalid password.`);
-    /** Check if email exists already **/
-
+    /** Check if username exists already **/
+    if (username && await usernameExists(pool, TABLE_NAME, username)) {
+      error.username = `Username is taken.`;
+    }
 
     /** If there are any errors at all, res with error obj **/
     if (!isEmptyObj(error)) return res.status(500).json(error);
