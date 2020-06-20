@@ -91,18 +91,16 @@ router.get('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { username, first_name, last_name, email, password } = req.body;
+    const { username, first_name, last_name, password } = req.body;
 
     /* ==================/
      * BEGIN: Validation /
      * =================*/
     const error = {};
     /** Validate username **/
-    !isValidUsername(username) && (error.username = `Invalid username.`);
-    /** Validate email **/
-    !isValidEmail(email) && (error.email = `Invalid email.`);
+    username && !isValidUsername(username) && (error.username = `Invalid username.`);
     /** Validate password **/
-    !isValidPassword(password) && (error.password = `Invalid password.`);
+    password && !isValidPassword(password) && (error.password = `Invalid password.`);
 
     /** If there are any errors at all, res with error obj **/
     if (!isEmptyObj(error)) return res.status(500).json(error);
@@ -128,10 +126,6 @@ router.put('/:id', async (req, res) => {
       console.log('lastname,', last_name)
       VALUES.push(last_name);
       queryHead += `, last_name = $${VALUES.length}`
-    }
-    if (email) {
-      VALUES.push(email);
-      queryHead += `, email = $${VALUES.length}`
     }
     if (password) {
       VALUES.push(password);
