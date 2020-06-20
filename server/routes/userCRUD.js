@@ -137,5 +137,21 @@ router.put('/:id', async (req, res) => {
 
 
 // ===> DELETE
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const VALUES = [id];
+    const deleteUserQuery = `
+      DELETE FROM ${TABLE_NAME}
+      WHERE user_id = $1;
+    `;
+
+    const deleteUser = await pool.query(deleteUserQuery, VALUES);
+    res.json({ message: "User deleted." });
+  } catch (err) {
+    console.error(err.message);
+  }
+});
 
 module.exports = router;

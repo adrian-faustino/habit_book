@@ -1,5 +1,5 @@
 [x] set up db
-[] set up CRUD
+[x] set up CRUD
   [x] set up user model
   [x] seed DB
     [x] CREATE user (insert into db)
@@ -7,7 +7,8 @@
     [x] READ users (display all users from db)
     [x] UPDATE users (change user info)
       [] validation
-    [] DELETE users from db
+    [x] DELETE users from db
+      [] validation?
 [] set up new user registration form
 [] add new users to db
 
