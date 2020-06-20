@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 /** Reactstrap **/
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap';
 /** Styles **/
 import './SignUpPage.css';
+/** Custom hooks **/
+import useInput from '../../hooks/useInput';
+
 
 const SignUpPage = () => {
+  const [username, bindUsername, resetUsername] = useInput('');
+  const [firstName, bindFirstName, resetFirstName] = useInput('');
+  const [lastName, bindLastName, resetLastName] = useInput('');
+  const [email, bindEmail, resetEmail] = useInput('');
+  const [password, bindPassword, resetPassword] = useInput('');
+  const [password__, bindPassword__, resetPassword__] = useInput('');
 
   const registerFormHandler = e => {
     e.preventDefault();
-    console.log('form submitted', e)
+    
+    const newUser = {
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      password__
+    }
+    console.log()
   }
 
   return (
@@ -18,7 +36,9 @@ const SignUpPage = () => {
         
         <FormGroup>
           <Label for="exampleEmail">Username:</Label>
-          <Input valid={null}/>
+          <Input
+          {...bindUsername}
+          valid={null}/>
           <FormFeedback valid>Valid username</FormFeedback>
           <FormFeedback invalid>Invalid username</FormFeedback>
           <FormText>12 character limit</FormText>
@@ -26,26 +46,31 @@ const SignUpPage = () => {
 
         <FormGroup>
           <Label for="exampleEmail">First name:</Label>
-          <Input invalid={null}/>
+          <Input 
+          {...bindFirstName}
+          invalid={null}/>
           <FormFeedback invalid>Please enter your first name</FormFeedback>
         </FormGroup>
 
         <FormGroup>
           <Label for="examplePassword">Last name:</Label>
-          <Input />
+          <Input
+          {...bindLastName}/>
           <FormFeedback invalid>Please enter your last name</FormFeedback>
         </FormGroup>
 
         <FormGroup>
           <Label for="exampleEmail">Email:</Label>
-          <Input />
+          <Input
+          {...bindEmail}/>
           <FormFeedback valid>Valid username</FormFeedback>
           <FormFeedback invalid>Invalid email</FormFeedback>
         </FormGroup>
 
         <FormGroup>
           <Label for="exampleEmail">Password:</Label>
-          <Input />
+          <Input
+          {...bindPassword}/>
           <FormFeedback valid>Valid username</FormFeedback>
           <FormFeedback invalid>Invalid username</FormFeedback>
           <FormText>Passwords must be at least 6 characters long</FormText>
@@ -53,7 +78,8 @@ const SignUpPage = () => {
 
         <FormGroup>
           <Label for="examplePassword">Confirm password:</Label>
-          <Input />
+          <Input
+          {...bindPassword__}/>
           <FormFeedback valid>Valid username</FormFeedback>
           <FormFeedback invalid>Invalid username</FormFeedback>
           <FormText>Re-enter your password</FormText>
