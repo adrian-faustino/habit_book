@@ -93,6 +93,23 @@ router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { username, first_name, last_name, email, password } = req.body;
 
+    /* ==================/
+     * BEGIN: Validation /
+     * =================*/
+    const error = {};
+    /** Validate username **/
+    !isValidUsername(username) && (error.username = `Invalid username.`);
+    /** Validate email **/
+    !isValidEmail(email) && (error.email = `Invalid email.`);
+    /** Validate password **/
+    !isValidPassword(password) && (error.password = `Invalid password.`);
+
+    /** If there are any errors at all, res with error obj **/
+    if (!isEmptyObj(error)) return res.status(500).json(error);
+    /* ================/
+     * END: Validation /
+     * ===============*/
+
     const VALUES = [];
     let  queryHead = `
       UPDATE ${TABLE_NAME} SET
