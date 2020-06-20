@@ -84,7 +84,7 @@ const SignUpPage = () => {
         <FormGroup>
           <Label for="exampleEmail">Username:</Label>
           <Input {...bindUsername}
-          invalid={username.length !== 0 && !isValidUsername(username)}/>
+          invalid={username && !isValidUsername(username)}/>
           <FormFeedback valid>Valid username</FormFeedback>
           <FormFeedback invalid>{error.username}</FormFeedback>
           {isValidUsername(username) && <FormText>Characters remaining: {USERNAME_MAX_LENGTH - username.length}</FormText>}
@@ -107,8 +107,9 @@ const SignUpPage = () => {
 
         <FormGroup>
           <Label for="exampleEmail">Email:</Label>
-          <Input {...bindEmail}/>
-          <FormFeedback valid>Valid username</FormFeedback>
+          <Input {...bindEmail}
+          valid={isValidEmail(email)}
+          invalid={email && !isValidEmail(email)}/>
           <FormFeedback invalid>{error.email}</FormFeedback>
         </FormGroup>
 
