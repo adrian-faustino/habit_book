@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 /** Reactstrap **/
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row, Col } from 'reactstrap';
@@ -7,6 +7,7 @@ import './RegistrationForm.css';
 /** Custom hooks **/
 import useForm from '../../hooks/useFormHook';
 /** Helpers **/
+import useRegistrationFormData from '../../hooks/useRegistrationFormData';
 import userValidationHelpers from '../../helpers/userValidationHelpers';
 import constants from '../../constants';
 
@@ -21,6 +22,7 @@ const {
   isValidRegistration } = userValidationHelpers;
 
 const RegistrationForm = () => {
+  const {errors, setError, setErrors } = useRegistrationFormData();
 
   /** Output: boolean */
   const validate = () => {

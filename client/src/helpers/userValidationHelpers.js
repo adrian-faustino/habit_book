@@ -29,7 +29,7 @@ const isEmptyObj = obj => {
 };
 
 /** Input: an object container user values. Output: boolean **/
-const isValidNewUser = values => {
+const isValidRegistration = values => {
   console.log('Validating...', values);
 };
 
@@ -39,7 +39,7 @@ const userValidationHelpers = {
   isValidUsername,
   isValidPassword,
   isEmptyObj,
-  isValidNewUser
+  isValidRegistration
 };
 
 export default userValidationHelpers;
