@@ -22,27 +22,39 @@ const {
   isValidRegistration } = userValidationHelpers;
 
 const RegistrationForm = () => {
-  const {errors, setError, setErrors } = useRegistrationFormData();
-
-  /** Output: boolean */
-  const validate = () => {
-    console.log('Validating...');
-
-    return true;
-  };
+  const { error, setError } = useRegistrationFormData();
  
   const register = () => {
-    if (validate()) {
-      // axios request
-      console.log('Registering...');
-    }
+    // axios request
+    console.log('Registering...');
   };
 
+  /** Output: boolean */
+  /* Notes: for now I am validating if it is ok to submit. Errors
+   * will be returned if username or email exists already. */
+  const validate = () => {
+    console.log('Validating...');
+    const error = {};
+    // check if any null
+    !username && (error.username = `Username is required.`);
+    !first_name && (error.first_name = `First name is required.`);
+    !last_name && (error.last_name = `Last name is required.`);
+    !email && (error.email = `Email is required.`);
+    !password && (error.password = `Password is required.`);
+    
+    // check if valid username
 
-  const [values, handleChange, handleSubmit, handleReset] = useForm(register);
+    // check if valid password 
+
+
+    register();
+  };
+
+  const [values, handleChange, handleSubmit, handleReset] = useForm(validate);
 
   return (
     <div className="RegistrationForm__form-container">
+      {/* handleSubmit is the function passed into useForm hook */}
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>

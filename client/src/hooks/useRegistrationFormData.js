@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const useRegistrationFormData = () => {
-  const [errors, setErrors] = useState({
+  const [error, setError] = useState({
     first_name: '',
     last_name: '',
     username: '',
@@ -10,16 +10,7 @@ const useRegistrationFormData = () => {
     _password: ''
   });
 
-  /** For setting a specific error **/
-  const setError = (error, msg) => {
-    setErrors(prev => ({ ...prev, [error]: msg }));
-  };
-
-  return {
-    errors,
-    setError,
-    setErrors
-  };
+  return { error, setError };
 };
 
 export default useRegistrationFormData;
