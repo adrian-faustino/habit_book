@@ -28,12 +28,18 @@ const isEmptyObj = obj => {
   return true;
 };
 
+/** Input: an object container user values. Output: boolean **/
+const isValidNewUser = values => {
+  console.log('Validating...', values);
+};
+
 
 const userValidationHelpers = {
   isValidEmail,
   isValidUsername,
   isValidPassword,
-  isEmptyObj
+  isEmptyObj,
+  isValidNewUser
 };
 
 export default userValidationHelpers;
