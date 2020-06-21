@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+/** Subcomponents **/
+import { RegistrationForm } from '../../components';
 /** Reactstrap **/
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap';
 /** Styles **/
@@ -9,7 +11,7 @@ import useInput from '../../hooks/useInput';
 /** Helpers **/
 import userValidationHelpers from '../../helpers/userValidationHelpers';
 import constants from '../../constants';
-import { matchPath } from 'react-router-dom';
+
 const { USERNAME_MAX_LENGTH, PASSWORD_MIN_LENGTH } = constants;
 const {
   isValidEmail, 
@@ -17,7 +19,6 @@ const {
   isValidPassword,
   isEmptyObj
 } = userValidationHelpers;
-
 
 const SignUpPage = () => {
   const [username, bindUsername, resetUsername] = useInput('');
@@ -94,68 +95,8 @@ const SignUpPage = () => {
    * ==============================*/
 
   return (
-    <div className="SignUpPage__form-container">
-      {flags.username}
-      <Form onSubmit={registerFormHandler}>
-        
-        <FormGroup>
-          <Label for="exampleEmail">Username:</Label>
-          <Input {...bindUsername}
-          invalid={username && !isValidUsername(username)}/>
-          <FormFeedback valid>Valid username</FormFeedback>
-          <FormFeedback invalid>{error.username}</FormFeedback>
-          {isValidUsername(username) && <FormText>Characters remaining: {USERNAME_MAX_LENGTH - username.length}</FormText>}
-          {!username && <FormText>{`Usernames must be within ${USERNAME_MAX_LENGTH} characters`}</FormText>}
-
-          {flags.usernameFlag}
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="exampleEmail">First name:</Label>
-          <Input
-          {...bindFirst_name}
-          invalid={null}/>
-          <FormFeedback invalid>{error.first_name}</FormFeedback>
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="examplePassword">Last name:</Label>
-          <Input
-          {...bindLast_name}/>
-          <FormFeedback invalid>{error.last_name}</FormFeedback>
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="exampleEmail">Email:</Label>
-          <Input {...bindEmail}
-          valid={isValidEmail(email)}
-          invalid={email && !isValidEmail(email)}/>
-          <FormFeedback invalid>{error.email}</FormFeedback>
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="exampleEmail">Password:</Label>
-          <Input {...bindPassword}
-          type="password"
-          valid={isValidPassword(password)}
-          invalid={password && !isValidPassword(password)}/>
-          <FormFeedback invalid>{error.password}</FormFeedback>
-          {!password && <FormText>Passwords must be at least 6 characters long</FormText>}
-        </FormGroup>
-
-        <FormGroup>
-          <Label for="examplePassword">Confirm password:</Label>
-          <Input {...bindPassword__}
-          type="password"
-          valid={password__ && (password === password__)}
-          valid={!isValidPassword(password__) ? null : true}
-          invalid={password__ && !(password === password__)}/>
-          <FormFeedback invalid>{error.password__}</FormFeedback>
-          {!password__ && <FormText>Re-enter your password</FormText>}
-        </FormGroup>
-
-        <Button color="primary">Register</Button>
-      </Form>
+    <div>
+      <RegistrationForm />
     </div>
   );
 };
