@@ -10,6 +10,7 @@ import useForm from '../../hooks/useFormHook';
 import useRegistrationFormData from '../../hooks/useRegistrationFormData';
 import userValidationHelpers from '../../helpers/userValidationHelpers';
 import constants from '../../constants';
+import Axios from 'axios';
 
 const {
   USERNAME_MAX_LENGTH, 
@@ -18,38 +19,26 @@ const {
   isValidEmail, 
   isValidUsername,
   isValidPassword,
-  isEmptyObt,
-  isValidRegistration } = userValidationHelpers;
+  isEmptyObj,
+  isValidSubmission } = userValidationHelpers;
 
 const RegistrationForm = () => {
+  /** Form errors state **/
   const { error, setError } = useRegistrationFormData();
  
   const register = () => {
     // axios request
-    console.log('Registering...');
+    console.log('Registering...', values);
   };
 
-  /** Output: boolean */
-  /* Notes: for now I am validating if it is ok to submit. Errors
-   * will be returned if username or email exists already. */
   const validate = () => {
-    console.log('Validating...');
-    const error = {};
-    // check if any null
-    !username && (error.username = `Username is required.`);
-    !first_name && (error.first_name = `First name is required.`);
-    !last_name && (error.last_name = `Last name is required.`);
-    !email && (error.email = `Email is required.`);
-    !password && (error.password = `Password is required.`);
-    
-    // check if valid username
-
-    // check if valid password 
-
-
+    /** If there are any errors at all, do not register **/
+    const error = isValidSubmission(values);
+    if (!isEmptyObj(error)) return setError(error);
     register();
   };
 
+  /** Form values state **/
   const [values, handleChange, handleSubmit, handleReset] = useForm(validate);
 
   return (
@@ -135,6 +124,11 @@ const RegistrationForm = () => {
 
         <Button type="submit" block color="secondary">Register</Button>
       </Form>
+
+      <button onClick={e => {
+        e.preventDefault();
+        console.log(error);
+      }}>show errors</button>
     </div>
   )
 }

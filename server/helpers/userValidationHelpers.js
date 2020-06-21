@@ -1,3 +1,4 @@
+/** The validation methods in this file should be similar to client **/
 const { USERNAME_MAX_LENGTH, PASSWORD_MIN_LENGTH } = require('../constants');
 
 /** Input: string. Output: boolean **/

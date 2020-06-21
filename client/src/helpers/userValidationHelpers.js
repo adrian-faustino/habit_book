@@ -1,3 +1,4 @@
+/** The validation methods in this file should be similar to server **/
 import constants from '../constants';
 const { USERNAME_MAX_LENGTH, PASSWORD_MIN_LENGTH } = constants;
 
@@ -28,9 +29,28 @@ const isEmptyObj = obj => {
   return true;
 };
 
-/** Input: an object container user values. Output: boolean **/
-const isValidRegistration = values => {
-  console.log('Validating...', values);
+/** Output: boolean **/
+/* Notes: for now I am validating if it is ok to submit. Errors
+ * will be returned if username or email exists already. */
+const isValidSubmission = values => {
+  console.log('Validating...');
+  /** Validate null fields **/
+  const error = {};
+  !values.username && (error.username = `Username is required.`);
+  !values.first_name && (error.first_name = `First name is required.`);
+  !values.last_name && (error.last_name = `Last name is required.`);
+  !values.email && (error.email = `Email is required.`);
+  !values.password && (error.password = `Password is required.`);
+  /** Validate username **/
+  !isValidUsername(values.username) && (error.username = `Invalid username.`);
+  /** Validate email **/
+  !isValidEmail(values.email) && (error.email = `Invalid email.`);
+  /** Validate password **/
+  !isValidPassword(values.password) && (error.password = `Invalid password.`);
+  /** Validate if password matches **/
+  (values.password !== values._password) && (error._password = `Password does not match.;`);
+
+  return error;
 };
 
 
@@ -39,7 +59,7 @@ const userValidationHelpers = {
   isValidUsername,
   isValidPassword,
   isEmptyObj,
-  isValidRegistration
+  isValidSubmission
 };
 
 export default userValidationHelpers;
