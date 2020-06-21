@@ -21,13 +21,6 @@ const {
 } = userValidationHelpers;
 
 const SignUpPage = () => {
-  const [username, bindUsername, resetUsername] = useInput('');
-  const [first_name, bindFirst_name, resetFirst_name] = useInput('');
-  const [last_name, bindLast_name, resetLast_name] = useInput('');
-  const [email, bindEmail, resetEmail] = useInput('');
-  const [password, bindPassword, resetPassword] = useInput('');
-  const [password__, bindPassword__, resetPassword__] = useInput('');
-
   const [error, setErrors] = useState({
     username: `Username is too long`,
     first_name: `Please enter your first name`,
@@ -35,15 +28,6 @@ const SignUpPage = () => {
     email: `Invalid email`,
     password: `Password is too short`,
     password__: `Password does not match`
-  });
-
-  const [flags, setFlags] = useState({
-    usernameFlag: null,
-    first_nameFlag: null,
-    last_nameFlag: null,
-    emailFlag: null,
-    passwordFlag: null,
-    password__Flag: null
   });
 
 
@@ -88,7 +72,10 @@ const SignUpPage = () => {
   /* =================================/
    * BEGIN: Validation error messages /
    * ================================*/
-  // const usernameErr = isValidUsername(username) ? 'Username'
+  // Input: Object
+  const validateNewUser = values => {
+    console.log('Validating values...')
+  };
 
   /* ===============================/
    * END: Validation error messages /
@@ -96,7 +83,7 @@ const SignUpPage = () => {
 
   return (
     <div>
-      <RegistrationForm />
+      <RegistrationForm validate={validateNewUser}/>
     </div>
   );
 };

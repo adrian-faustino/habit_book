@@ -20,13 +20,16 @@ const {
   isValidPassword,
   isEmptyObt } = userValidationHelpers;
 
-const RegistrationForm = () => {
+const RegistrationForm = props => {
+  /** This is so we can separate validation **/
+  const { validate } = props;
 
   const register = () => {
     console.log('Registered!', values);
-  }
+    validate && validate(values);
+  };
 
-  const [values, handleChange, handleSubmit] = useForm(register);
+  const [values, handleChange, handleSubmit, handleReset] = useForm(register);
 
   return (
     <div className="RegistrationForm__form-container">
@@ -46,39 +49,63 @@ const RegistrationForm = () => {
 
           <Col>
             <FormGroup>
-              <Label for="exampleEmail">Last Name:</Label>
-              <Input />
+              <Label for="last_name">Last Name:</Label>
+              <Input
+                name="last_name"
+                type="text"
+                value={values.last_name || ''}
+                onChange={handleChange}
+                valid={null} />
             </FormGroup>
           </Col>
         </Row>
 
         <FormGroup>
-          <Label for="examplePassword">Username:</Label>
-          <Input />
+          <Label for="username">Username:</Label>
+          <Input
+            name="username"
+            type="text"
+            value={values.username || ''}
+            onChange={handleChange}
+            valid={null} />
           <FormFeedback invalid>Invalid username</FormFeedback>
           <FormText>Usernames must be within 12 characters</FormText>
         </FormGroup>
 
         <FormGroup>
-          <Label for="exampleEmail">E-mail:</Label>
-          <Input />
+          <Label for="email">E-mail:</Label>
+          <Input
+            name="email"
+            type="email"
+            value={values.email || ''}
+            onChange={handleChange}
+            valid={null} />
           <FormFeedback>Invalid email</FormFeedback>
         </FormGroup>
 
         <Row>
           <Col>
             <FormGroup>
-              <Label for="exampleEmail">Password:</Label>
-              <Input />
-
+              <Label for="password">Password:</Label>
+                <Input
+                name="password"
+                type="password"
+                value={values.password || ''}
+                onChange={handleChange}
+                valid={null} />
               <FormText>Passwords must be at least 6 characters long</FormText>
             </FormGroup>
           </Col>
 
           <Col>
             <FormGroup>
-              <Label for="examplePassword">Confirm Password:</Label>
-              <Input />
+              <Label for="_password">Confirm Password:</Label>
+              <Input 
+                name="_password"
+                type="password"
+                value={values._password || ''}
+                onChange={handleChange}
+                valid={null} />
               <FormText>Please re-enter your password</FormText>
             </FormGroup>
           </Col>
@@ -99,3 +126,9 @@ export default RegistrationForm
  * - <Input /> valid/invalid is a switch for FormFeedback
  * - Use case: 2 statements for valid/invalid situations
  * - <FormText></> simply describes the input field  */
+
+ /* Design notes:
+  * Originally I thought about doing form validation here
+  * but in order to separate file concerns, I will simply
+  * return the submitted values object to the parent and
+  * do validation there. (Confirm with senior) */
