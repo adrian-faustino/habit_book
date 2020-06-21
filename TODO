@@ -18,7 +18,7 @@ CLIENT TODO:
 [x] set up redux
 [x] set up react router
 [x] set up reactstrap
-[] set up new user registration form
+[x] set up new user registration form
   [] set up valid/invalid messages based on error from backend?
   [] check if it added new users to db
   [] don't store password string
@@ -42,4 +42,5 @@ Notes:
 Current task:
 [x] validation to prevent create/update same username or email
 [x] refactor: fix CRUD response
-[] client side: set up new user registration form
+[x] client side: set up new user registration form
+[] user validation client side
