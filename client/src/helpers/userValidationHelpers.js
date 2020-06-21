@@ -53,13 +53,20 @@ const isValidSubmission = values => {
   return error;
 };
 
+/** Output: boolean **/
+const inputWithinRange = (string, min, max) => {
+  if (!string) return;
+  return string.length >= min && string.length <= max;
+};
+
 
 const userValidationHelpers = {
   isValidEmail,
   isValidUsername,
   isValidPassword,
   isEmptyObj,
-  isValidSubmission
+  isValidSubmission,
+  inputWithinRange
 };
 
 export default userValidationHelpers;

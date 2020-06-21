@@ -20,7 +20,8 @@ const {
   isValidUsername,
   isValidPassword,
   isEmptyObj,
-  isValidSubmission } = userValidationHelpers;
+  isValidSubmission,
+  inputWithinRange } = userValidationHelpers;
 
 const RegistrationForm = () => {
   /** Form errors state **/
@@ -41,6 +42,7 @@ const RegistrationForm = () => {
   /** Form values state **/
   const [values, handleChange, handleSubmit, handleReset] = useForm(validate);
 
+
   return (
     <div className="RegistrationForm__form-container">
       {/* handleSubmit is the function passed into useForm hook */}
@@ -54,7 +56,8 @@ const RegistrationForm = () => {
                   type="text"
                   value={values.first_name || ''}
                   onChange={handleChange}
-                  valid={null} />
+                  valid={values.first_name} />
+                <FormFeedback>test</FormFeedback>
             </FormGroup>
           </Col>
 
@@ -66,7 +69,7 @@ const RegistrationForm = () => {
                   type="text"
                   value={values.last_name || ''}
                   onChange={handleChange}
-                  valid={null} />
+                  valid={values.last_name} />
             </FormGroup>
           </Col>
         </Row>
@@ -78,7 +81,10 @@ const RegistrationForm = () => {
               type="text"
               value={values.username || ''}
               onChange={handleChange}
-              valid={null} />
+              valid={
+                inputWithinRange(values.username, 1, USERNAME_MAX_LENGTH)}
+              invalid={
+                values.username && !isValidUsername(values.username)} />
           <FormFeedback invalid>Invalid username</FormFeedback>
           <FormText>Usernames must be within 12 characters</FormText>
         </FormGroup>
@@ -90,7 +96,10 @@ const RegistrationForm = () => {
               type="email"
               value={values.email || ''}
               onChange={handleChange}
-              valid={null} />
+              valid={
+                isValidPassword(values.email)}
+              invalid={
+                values.email && !isValidEmail(values.email)} />
           <FormFeedback>Invalid email</FormFeedback>
         </FormGroup>
 
@@ -103,8 +112,14 @@ const RegistrationForm = () => {
                   type="password"
                   value={values.password || ''}
                   onChange={handleChange}
-                  valid={null} />
-              <FormText>Passwords must be at least 6 characters long</FormText>
+                  valid={
+                    isValidPassword(values.password)}
+                  invalid={
+                    values.password &&
+                    !isValidPassword(values.password)} />
+              <FormText>
+                {`Passwords must be at least ${PASSWORD_MIN_LENGTH} characters long`}
+              </FormText>
             </FormGroup>
           </Col>
 
@@ -116,7 +131,12 @@ const RegistrationForm = () => {
                   type="password"
                   value={values._password || ''}
                   onChange={handleChange}
-                  valid={null} />
+                  valid={
+                    isValidPassword(values.password) &&
+                    values.password === values._password} 
+                  invalid={
+                    values.password !== values._password &&
+                    isValidPassword(values.password)} />
               <FormText>Please re-enter your password</FormText>
             </FormGroup>
           </Col>
