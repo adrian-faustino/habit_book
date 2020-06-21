@@ -36,14 +36,30 @@ const SignUpPage = () => {
     password__: `Password does not match`
   });
 
+  const [flags, setFlags] = useState({
+    usernameFlag: null,
+    first_nameFlag: null,
+    last_nameFlag: null,
+    emailFlag: null,
+    passwordFlag: null,
+    password__Flag: null
+  });
+
+
   const registerFormHandler = e => {
     e.preventDefault();
-
+    const flags = {};
     // check if anything null
-    if (!username || !first_name || !last_name || !email || !password || !password__) {
-      alert('emptu field')
-    }
+    !username && (flags.usernameFlag = `Please enter a username`);
+    !first_name && (flags.first_nameFlag = `Please enter your first_name`);
+    !last_name && (flags.last_nameFlag= `Please enter your last_name`);
+    !email && (flags.emailFlag = `Please enter an email`);
+    !password && (flags.passwordFlag = `Please enter a password`);
+    !password__ && (flags.password__Flag = `Please confirm your password`);
 
+    if (!isEmptyObj(flags)) {
+      setFlags(flags);
+    }
     // check if username valid : Length
 
     // check if email is valid : @
@@ -79,6 +95,7 @@ const SignUpPage = () => {
 
   return (
     <div className="SignUpPage__form-container">
+      {flags.username}
       <Form onSubmit={registerFormHandler}>
         
         <FormGroup>
@@ -89,6 +106,8 @@ const SignUpPage = () => {
           <FormFeedback invalid>{error.username}</FormFeedback>
           {isValidUsername(username) && <FormText>Characters remaining: {USERNAME_MAX_LENGTH - username.length}</FormText>}
           {!username && <FormText>{`Usernames must be within ${USERNAME_MAX_LENGTH} characters`}</FormText>}
+
+          {flags.usernameFlag}
         </FormGroup>
 
         <FormGroup>
