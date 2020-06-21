@@ -21,8 +21,13 @@ CLIENT TODO:
 [x] set up new user registration form
   [] set up valid/invalid messages based on error from backend?
   [] check if it added new users to db
-  [] don't store password string
+  [] don't store password in cleartext
 [] login/logout feature
+[] update validation to make sure passwords dont contain special chars
+[] update validation to not allow white space
+[] update validation to not allow white space
+[] make sure password is not in cleartext (hash, salt)
+[] make axios request to backend and handle error/insert dB
 
 
 Refactor tasks:
@@ -43,4 +48,5 @@ Current task:
 [x] validation to prevent create/update same username or email
 [x] refactor: fix CRUD response
 [x] client side: set up new user registration form
-[] user validation client side
+[x] user validation client side
+[] make axios request to backend and handle error/insert dB
