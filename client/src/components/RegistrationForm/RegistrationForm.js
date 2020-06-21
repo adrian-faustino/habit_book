@@ -10,7 +10,7 @@ import useForm from '../../hooks/useFormHook';
 import useRegistrationFormData from '../../hooks/useRegistrationFormData';
 import userValidationHelpers from '../../helpers/userValidationHelpers';
 import constants from '../../constants';
-import Axios from 'axios';
+import axios from 'axios';
 
 const {
   USERNAME_MAX_LENGTH, 
@@ -57,7 +57,6 @@ const RegistrationForm = () => {
                   value={values.first_name || ''}
                   onChange={handleChange}
                   valid={values.first_name} />
-                <FormFeedback>test</FormFeedback>
             </FormGroup>
           </Col>
 
@@ -142,7 +141,12 @@ const RegistrationForm = () => {
           </Col>
         </Row>
 
-        <Button type="submit" block color="secondary">Register</Button>
+        <Button block
+          type="submit"
+          color={
+            isEmptyObj(isValidSubmission(values)) ? "success" : "secondary"}>
+            Register
+        </Button>
       </Form>
 
       <button onClick={e => {
