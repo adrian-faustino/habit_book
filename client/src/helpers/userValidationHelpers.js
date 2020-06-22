@@ -11,14 +11,18 @@ const isValidEmail = email => {
 
 /** Input: string. Output: boolean **/
 const isValidUsername = username => {
+  const REGEX = /^[a-zA-Z0-9]+$/; // simple alpha numeric regex for now
   if (!username) return false;
-  return username.length <= USERNAME_MAX_LENGTH;
+  if (username.length > USERNAME_MAX_LENGTH) return false;
+  return REGEX.test(username);
 };
 
 /** Input: string. Output: boolean **/
 const isValidPassword = password => {
+  const REGEX = /^[a-zA-Z0-9]+$/; // simple alpha numeric regex for now
   if (!password) return false;
-  return password.length >= PASSWORD_MIN_LENGTH;
+  if (password.length < PASSWORD_MIN_LENGTH) return false;
+  return REGEX.test(password);
 };
 
 /** Input: object. Output: boolean **/
