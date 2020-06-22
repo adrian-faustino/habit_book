@@ -19,15 +19,14 @@ CLIENT TODO:
 [x] set up react router
 [x] set up reactstrap
 [x] set up new user registration form
-  [] set up valid/invalid messages based on error from backend?
-  [] check if it added new users to db
+  [x] set up valid/invalid messages based on error from backend?
+  [x] check if it added new users to db
   [] don't store password in cleartext
 [] login/logout feature
 [] update validation to make sure passwords dont contain special chars
-[] update validation to not allow white space
-[] update validation to not allow white space
+[x] update validation to not allow white space
 [] make sure password is not in cleartext (hash, salt)
-[] make axios request to backend and handle error/insert dB
+[x] make axios request to backend and handle error/insert dB
 
 
 Refactor tasks:
@@ -35,18 +34,20 @@ Refactor tasks:
 [x] userCrud.js handle all catch (in try catch)
 [x] fix CRUD response
 [] fix response on successful CRUD (userCRUD.js)
+[] fix username and password regex (special chars, _, -, etc);
 
 Bugs:
-[] username shouldn't have white space
+[x] username/password shouldn't have white space
 
 
 Notes:
-[] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
-[] forms - server side validation AND server side validation
+[x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
+[x] forms - server side validation AND server side validation
 
 Current task:
 [x] validation to prevent create/update same username or email
 [x] refactor: fix CRUD response
 [x] client side: set up new user registration form
 [x] user validation client side
-[] make axios request to backend and handle error/insert dB
+[x] make axios request to backend and handle error/insert dB
+[] login/logout feature
