@@ -28,8 +28,22 @@ const RegistrationForm = () => {
   const { error, setError } = useRegistrationFormData();
  
   const register = () => {
-    // axios request
     console.log('Registering...', values);
+    const endpoint = 
+      process.env.REACT_APP_API + 'users/newUser';
+
+    axios
+      .post(endpoint, values)
+      .then(() => {
+        console.log('successful registry')
+        // clear form
+        // change page?
+      })
+      .catch(err => {
+        // This is an object containing all errors
+        const error = err.response.data;
+        setError(setError);
+      });
   };
 
   const validate = () => {
@@ -151,8 +165,9 @@ const RegistrationForm = () => {
 
       <button onClick={e => {
         e.preventDefault();
-        const testVar = process.env.REACT_APP_TEST;
+        const testVar = process.env.REACT_APP_API;
         console.log(testVar);
+        console.log(error)
       }}>show errors</button>
     </div>
   )

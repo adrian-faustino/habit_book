@@ -13,6 +13,7 @@ const TABLE_NAME = 'users';
 // ===> CREATE
 /** .com/users/newUser **/
 router.post('/newUser', async (req, res) => {
+  console.log('New user request...', req.body);
   try {
     const { username, first_name, last_name, email, password } = req.body;
 
@@ -43,6 +44,7 @@ router.post('/newUser', async (req, res) => {
     }
 
     /** If there are any errors at all, res with error obj **/
+    console.log('New registry failed.');
     if (!isEmptyObj(error)) return res.status(500).json(error);
     /* ================/
      * END: Validation /
