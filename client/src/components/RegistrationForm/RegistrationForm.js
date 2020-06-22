@@ -151,7 +151,8 @@ const RegistrationForm = () => {
 
       <button onClick={e => {
         e.preventDefault();
-        console.log(error);
+        const testVar = process.env.REACT_APP_TEST;
+        console.log(testVar);
       }}>show errors</button>
     </div>
   )
