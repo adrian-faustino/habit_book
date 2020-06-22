@@ -2,3 +2,7 @@
   width: 30vw;
   margin: 0 auto;
 }
+
+.RegistrationForm__form-resetBtn {
+  margin: 8px 0;
+}

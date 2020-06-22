@@ -17,7 +17,6 @@ const useForm = submitCallback => {
   const handleChange = e => {
     e.persist();
     const { name, value } = e.target;
-    console.log(name, value);
     setState(prev => ({ ...prev, [name] : value }));
   };
 

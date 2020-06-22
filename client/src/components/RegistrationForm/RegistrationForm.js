@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 /** Reactstrap **/
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row, Col } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row, Col, Spinner } from 'reactstrap';
 /** Styles **/
 import './RegistrationForm.css';
 /** Custom hooks **/
@@ -26,36 +26,54 @@ const {
 const RegistrationForm = () => {
   /** Form errors state **/
   const { error, setError } = useRegistrationFormData();
+  /** Form values state **/
+  const [
+    values,
+    handleChange,
+    handleSubmit,
+    handleReset] = useForm(validate);
+  /** For loading spinner */
+  const [loading, setLoading] = useState(false);
  
-  const register = () => {
-    console.log('Registering...', values);
-    const endpoint = 
-      process.env.REACT_APP_API + 'users/newUser';
-
-    axios
-      .post(endpoint, values)
-      .then(() => {
-        console.log('successful registry')
-        // clear form
-        // change page?
-      })
-      .catch(err => {
-        // This is an object containing all errors
-        const error = err.response.data;
-        setError(setError);
-      });
-  };
-
-  const validate = () => {
-    /** If there are any errors at all, do not register **/
+  
+  function validate() { // for hoisting
+    console.log('Validating...', values);
     const error = isValidSubmission(values);
+    /** If there are any errors at all, do not register **/
     if (!isEmptyObj(error)) return setError(error);
     register();
   };
+  
+  function register() {
+    console.log('Registering...', values);
+    const endpoint = 
+      process.env.REACT_APP_API + 'users/newUser';
+    setLoading(true);
 
-  /** Form values state **/
-  const [values, handleChange, handleSubmit, handleReset] = useForm(validate);
+    axios
+      .post(endpoint, values)
+      .then(res => {
+        const successMsg = res.data;
+        setLoading(false);
+        console.log('Register successful:', successMsg)
+        // clear form
+        // redirect
+      })
+      .catch(err => {
+        setLoading(false);
+        /** This is an object containing all errors **/
+        const error = err.response.data;
+        console.log('Failed to register:', error);
+        setError(error);
+      });
+  };
 
+  /** Clear form values and clear errors **/
+  const handleResetForm = e => {
+    e.preventDefault();
+    handleReset();
+    setError({});
+  };
 
   return (
     <div className="RegistrationForm__form-container">
@@ -70,7 +88,11 @@ const RegistrationForm = () => {
                   type="text"
                   value={values.first_name || ''}
                   onChange={handleChange}
-                  valid={values.first_name} />
+                  valid={values.first_name}
+                  invalid={error.first_name} />
+                <FormFeedback invalid>
+                  {error.first_name}
+                </FormFeedback >
             </FormGroup>
           </Col>
 
@@ -82,7 +104,11 @@ const RegistrationForm = () => {
                   type="text"
                   value={values.last_name || ''}
                   onChange={handleChange}
-                  valid={values.last_name} />
+                  valid={values.last_name}
+                  invalid={error.last_name} />
+                <FormFeedback invalid>
+                  {error.last_name}
+                </FormFeedback >
             </FormGroup>
           </Col>
         </Row>
@@ -97,9 +123,15 @@ const RegistrationForm = () => {
               valid={
                 inputWithinRange(values.username, 1, USERNAME_MAX_LENGTH)}
               invalid={
-                values.username && !isValidUsername(values.username)} />
-          <FormFeedback invalid>Invalid username</FormFeedback>
-          <FormText>Usernames must be within 12 characters</FormText>
+                (values.username && !isValidUsername(values.username))
+                || error.username} />
+          <FormFeedback invalid>{error.username}</FormFeedback>
+          <FormText>
+            {values.username &&
+            isValidUsername(values.username) ? 
+              `Remaining characters: ${USERNAME_MAX_LENGTH - values.username.length}` :
+              `Usernames must be within ${USERNAME_MAX_LENGTH} characters`}
+          </FormText>
         </FormGroup>
 
         <FormGroup>
@@ -110,10 +142,11 @@ const RegistrationForm = () => {
               value={values.email || ''}
               onChange={handleChange}
               valid={
-                isValidPassword(values.email)}
+                isValidEmail(values.email)}
               invalid={
-                values.email && !isValidEmail(values.email)} />
-          <FormFeedback>Invalid email</FormFeedback>
+                (values.email && !isValidEmail(values.email))
+                || error.email} />
+          <FormFeedback invalid>{error.email}</FormFeedback>
         </FormGroup>
 
         <Row>
@@ -128,8 +161,12 @@ const RegistrationForm = () => {
                   valid={
                     isValidPassword(values.password)}
                   invalid={
-                    values.password &&
-                    !isValidPassword(values.password)} />
+                    (values.password &&
+                    !isValidPassword(values.password))
+                    || error.password} />
+              <FormFeedback invalid>
+                {error.password}
+              </FormFeedback>
               <FormText>
                 {`Passwords must be at least ${PASSWORD_MIN_LENGTH} characters long`}
               </FormText>
@@ -148,32 +185,40 @@ const RegistrationForm = () => {
                     isValidPassword(values.password) &&
                     values.password === values._password} 
                   invalid={
-                    values.password !== values._password &&
-                    isValidPassword(values.password)} />
+                    (values.password !== values._password &&
+                    isValidPassword(values.password))
+                    || error._password} />
+              <FormFeedback invalid>
+                {error._password}
+              </FormFeedback>
               <FormText>Please re-enter your password</FormText>
             </FormGroup>
           </Col>
         </Row>
 
-        <Button block
+        <Button
+          disabled={loading}
+          block
           type="submit"
           color={
             isEmptyObj(isValidSubmission(values)) ? "success" : "secondary"}>
-            Register
+            {loading ? <Spinner size="sm"/> : 'Register'}
         </Button>
       </Form>
-
-      <button onClick={e => {
-        e.preventDefault();
-        const testVar = process.env.REACT_APP_API;
-        console.log(testVar);
-        console.log(error)
-      }}>show errors</button>
+      
+      <Button
+        className="RegistrationForm__form-resetBtn"
+        disabled={loading}
+        block
+        color="warning"
+        onClick={handleResetForm}>
+          Reset Form
+      </Button>
     </div>
   )
-}
+};
 
-export default RegistrationForm
+export default RegistrationForm;
 
 /* Reactstrap form notes:
  * Useful component attributes:
@@ -182,3 +227,11 @@ export default RegistrationForm
  * - <Input /> valid/invalid is a switch for FormFeedback
  * - Use case: 2 statements for valid/invalid situations
  * - <FormText></> simply describes the input field  */
+
+/* Design notes:
+ * I chose to write the functions using function declerations
+ * for hoisting because originally I used arrows which forced
+ * me to separate all the state declerations all over the place. Also for the sake of readabilty (the order the
+ * functions will be read by a new dev, I wrote validate
+ * and register to be hoisted
+ * */

@@ -33,7 +33,6 @@ const isEmptyObj = obj => {
 /* Notes: for now I am validating if it is ok to submit. Errors
  * will be returned if username or email exists already. */
 const isValidSubmission = values => {
-  console.log('Validating...');
   /** Validate null fields **/
   const error = {};
   !values.username && (error.username = `Username is required.`);
@@ -42,13 +41,21 @@ const isValidSubmission = values => {
   !values.email && (error.email = `Email is required.`);
   !values.password && (error.password = `Password is required.`);
   /** Validate username **/
-  !isValidUsername(values.username) && (error.username = `Invalid username.`);
+  values.username &&
+    !isValidUsername(values.username) &&
+    (error.username = `Invalid username.`);
   /** Validate email **/
-  !isValidEmail(values.email) && (error.email = `Invalid email.`);
+  values.email &&
+    !isValidEmail(values.email) &&
+    (error.email = `Invalid email.`);
   /** Validate password **/
-  !isValidPassword(values.password) && (error.password = `Invalid password.`);
+  values.password &&
+    !isValidPassword(values.password) &&
+    (error.password = `Invalid password.`);
   /** Validate if password matches **/
-  (values.password !== values._password) && (error._password = `Password does not match.;`);
+  values._password &&
+    (values.password !== values._password) &&
+    (error._password = `Password does not match.;`);
 
   return error;
 };
