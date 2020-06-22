@@ -1,0 +1,9 @@
+.Navbar__container {
+  /* background: rgb(65,104,178); FB nav bar color */
+  background: rgb(135, 117, 147);
+}
+
+.Navbar__li {
+  font-weight: bold;
+  color: rgb(255,255,255);
+}

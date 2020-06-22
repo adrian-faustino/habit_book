@@ -175,7 +175,7 @@ const RegistrationForm = () => {
 
           <Col>
             <FormGroup>
-              <Label for="_password">Confirm Password:</Label>
+              <Label for="_password">Confirm:</Label>
                 <Input 
                   name="_password"
                   type="password"
@@ -219,6 +219,8 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
+
+
 
 /* Reactstrap form notes:
  * Useful component attributes:

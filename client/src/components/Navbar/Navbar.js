@@ -10,9 +10,14 @@ import './Navbar.css';
 
 const Navbar = () => {
   return (
-    <Nav>
+    <Nav className="Navbar__container">
       <NavItem>
-        <NavLink tag={Link} to="/signup">Register</NavLink>
+        <NavLink
+          className="Navbar__li"
+          tag={Link}
+          to="/signup">
+            Register
+        </NavLink>
       </NavItem>
     </Nav>
   );

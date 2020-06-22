@@ -1,6 +1,8 @@
 .RegistrationForm__form-container {
-  width: 30vw;
-  margin: 0 auto;
+  width: 300px;
+  margin: 20px auto;
+  background: pink;
+  box-shadow: 0 0 3px 12px pink;
 }
 
 .RegistrationForm__form-resetBtn {
