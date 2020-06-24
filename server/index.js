@@ -13,6 +13,8 @@ app.use(express.json());
 /** Routes **/
 const homeRoutes = require('./routes');
 const userRoutes = require('./routes/userCRUD');
+const userAuth = require('./routes/userAuth');
+app.use('/login', userAuth);
 app.use('/users', userRoutes);
 app.use('/', homeRoutes);
 
