@@ -44,7 +44,6 @@ router.post('/newUser', async (req, res) => {
     }
 
     /** If there are any errors at all, res with error obj **/
-    console.log('New registry failed.');
     if (!isEmptyObj(error)) return res.status(500).json(error);
     /* ================/
      * END: Validation /
