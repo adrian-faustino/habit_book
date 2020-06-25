@@ -1,0 +1,14 @@
+.LoginPage__form-container {
+  margin: 10px auto;
+  padding: 10px;
+  width: 290px;
+  display: grid;
+  justify-items: center;
+  box-shadow: 0 0 3px black;
+  border-radius: 5px;
+  background: grey;
+}
+
+.LoginPage__submit-btn {
+  margin-top: 12px;
+}

@@ -6,6 +6,8 @@ import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row, Col
 import './RegistrationForm.css';
 /** Custom hooks **/
 import useForm from '../../hooks/useFormHook';
+/** React Router **/
+import { Redirect } from 'react-router-dom';
 /** Helpers **/
 import useRegistrationFormData from '../../hooks/useRegistrationFormData';
 import userValidationHelpers from '../../helpers/userValidationHelpers';
@@ -32,8 +34,9 @@ const RegistrationForm = () => {
     handleChange,
     handleSubmit,
     handleReset] = useForm(validate);
-  /** For loading spinner */
+  /** For loading spinner, redirect **/
   const [loading, setLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false);
  
   
   function validate() { // for hoisting
@@ -55,9 +58,11 @@ const RegistrationForm = () => {
       .then(res => {
         const successMsg = res.data;
         setLoading(false);
-        console.log('Register successful:', successMsg)
-        // clear form
+        console.log('Register successful:', successMsg);
+        // clear form?
+
         // redirect
+        setRedirect(true);
       })
       .catch(err => {
         setLoading(false);
@@ -214,6 +219,8 @@ const RegistrationForm = () => {
         onClick={handleResetForm}>
           Reset Form
       </Button>
+
+      {redirect && <Redirect to="/login"/>}
     </div>
   )
 };

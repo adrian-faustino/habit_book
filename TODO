@@ -51,3 +51,5 @@ Current task:
 [x] user validation client side
 [x] make axios request to backend and handle error/insert dB
 [] login/logout feature
+
+  [] new register page -> redirect to login page -> login page enter username and password -> check DB if there, return JWT token :)

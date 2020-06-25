@@ -2,7 +2,7 @@ import React from 'react';
 import TestComponent from './components/TestComponent';
 
 /** Views **/
-import { SignUpPage, HomePage, WelcomePage } from './views';
+import { SignUpPage, HomePage, WelcomePage, LoginPage } from './views';
 /** Components **/
 import { Navbar } from './components';
 /** React router **/
@@ -18,6 +18,7 @@ function App() {
         <Route exact path="/" component={WelcomePage}/>
         <Route exact path="/test" component={TestComponent}/>
         <Route exact path="/signup" component={SignUpPage}/>
+        <Route exact path="/login" component={LoginPage}/>
         <Route exact path="/home" component={HomePage}/>
       </div>
     </Router>
