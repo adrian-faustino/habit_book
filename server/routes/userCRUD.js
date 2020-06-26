@@ -2,8 +2,15 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
+const bcrypt = require('bcrypt');
 const { formatToYYYYMMDD } = require('../helpers/formatHelpers');
-const { isValidUsername, isValidEmail, isValidPassword, isEmptyObj, usernameExists, emailExists } = require('../helpers/userValidationHelpers');
+const { 
+  isValidUsername, 
+  isValidEmail, 
+  isValidPassword, 
+  isEmptyObj, 
+  usernameExists, 
+  emailExists } = require('../helpers/userValidationHelpers');
 
 /** Constants **/
 const TABLE_NAME = 'users';
@@ -57,7 +64,11 @@ router.post('/newUser', async (req, res) => {
     const is_active = true;
     const avatar_url = 'default';
 
-    const VALUES = [username, first_name, last_name, email, password, created_at, is_active, avatar_url];
+    // hash and salt password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt); 
+
+    const VALUES = [username, first_name, last_name, email, hashedPassword, created_at, is_active, avatar_url];
     const createUserQuery = `
       INSERT INTO ${TABLE_NAME} (username, first_name, last_name, email, password, created_at, is_active, avatar_url)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
