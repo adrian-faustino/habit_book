@@ -21,11 +21,11 @@ CLIENT TODO:
 [x] set up new user registration form
   [x] set up valid/invalid messages based on error from backend?
   [x] check if it added new users to db
-  [] don't store password in cleartext
+  [x] don't store password in cleartext
 [x] login/logout feature
 [x] update validation to make sure passwords dont contain special chars
 [x] update validation to not allow white space
-[] make sure password is not in cleartext (hash, salt)
+[x] make sure password is not in cleartext (hash, salt)
 [x] make axios request to backend and handle error/insert dB
 
 
@@ -51,6 +51,7 @@ Current task:
 [x] user validation client side
 [x] make axios request to backend and handle error/insert dB
 [x] login/logout feature
-[]  usebcrypt to hash and salt passwords
+[x]  usebcrypt to hash and salt passwords
+[] implemeent j
 
   [] new register page -> redirect to login page -> login page enter username and password -> check DB if there, return JWT token :)

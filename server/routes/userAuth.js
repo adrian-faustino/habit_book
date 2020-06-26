@@ -1,12 +1,20 @@
-/** For Route: .com/login/~ **/
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const pool = require('../db/db');
 const bcrypt = require('bcrypt');
-const { emailExists, getUserByEmail } = require('../helpers/userValidationHelpers');
+const { 
+  emailExists, 
+  getUserByEmail
+} = require('../helpers/userValidationHelpers');
+const authenticateToken = require('../helpers/auth');
+
 /** Constants **/
 const TABLE_NAME = 'users';
+
+// @route   login/~
+// @desc    Auth user
+// @access  Public
 
 // return all posts made by that user?
 router.get('/test', authenticateToken, (req, res) => {
@@ -20,7 +28,7 @@ router.post('/', async (req, res) => {
   // ...check if email in DB
   const isValidEmail = await emailExists(pool, TABLE_NAME, email);
   if (!isValidEmail) return res.status(400).json({
-    error: "Unregistered email"
+    error: "Unregistered email" 
   });
 
   // ...get user email and password from DB
@@ -30,35 +38,28 @@ router.post('/', async (req, res) => {
   /** After successful authentification **/
   try {
     if (await bcrypt.compare(password, user.password)) {
-      res.json({ success: "Successful login."});
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+
+      console.log('Sending...', accessToken)
+      return res.json({
+        accessToken: accessToken,
+        user: {
+          username: user.username,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+          created_at: user.created_at,
+          avatar_url: user.avatar_url
+        }
+      });
     };
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: err });
-  }
-
-
-  if (password === user.password) {
-  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-  console.log('Sending...', accessToken)
-    return res.json({ accessToken: accessToken });
+    res.status(500).json({ error: "Invalid password" });
   }
   
   return res.status(401).json({ error: "Invalid password "});
 });
-
-function authenticateToken(req, res, next) {
-  //Bearer TOKEN will be in our verification header
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (token == null) return res.sendStatus(401);
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
-    next();
-  });
-};
 
 
 module.exports = router;

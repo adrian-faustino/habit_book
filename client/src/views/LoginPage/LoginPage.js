@@ -16,14 +16,13 @@ const LoginPage = () => {
     handleReset] = useForm(requestLogin);
 
   function requestLogin() {
-    console.log(userLogin);
     const endpoint = 
       process.env.REACT_APP_API + 'login';
 
     axios
       .post(endpoint, userLogin)
       .then(res => {
-        console.log('Successfully logged in', res)
+        console.log('Successfully logged in', res.data)
       })
       .catch(err => console.log(err));
   };
