@@ -22,8 +22,8 @@ CLIENT TODO:
   [x] set up valid/invalid messages based on error from backend?
   [x] check if it added new users to db
   [] don't store password in cleartext
-[] login/logout feature
-[] update validation to make sure passwords dont contain special chars
+[x] login/logout feature
+[x] update validation to make sure passwords dont contain special chars
 [x] update validation to not allow white space
 [] make sure password is not in cleartext (hash, salt)
 [x] make axios request to backend and handle error/insert dB
@@ -33,8 +33,8 @@ Refactor tasks:
 [x] set up res and status code on errors server side (CRUD files)
 [x] userCrud.js handle all catch (in try catch)
 [x] fix CRUD response
-[] fix response on successful CRUD (userCRUD.js)
-[] fix username and password regex (special chars, _, -, etc);
+[x] fix response on successful CRUD (userCRUD.js)
+[x] fix username and password regex (special chars, _, -, etc);
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -50,6 +50,7 @@ Current task:
 [x] client side: set up new user registration form
 [x] user validation client side
 [x] make axios request to backend and handle error/insert dB
-[] login/logout feature
+[x] login/logout feature
+[]  usebcrypt to hash and salt passwords
 
   [] new register page -> redirect to login page -> login page enter username and password -> check DB if there, return JWT token :)
