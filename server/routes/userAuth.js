@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const pool = require('../db/db');
+const bcrypt = require('bcrypt');
 const { emailExists, getUserByEmail } = require('../helpers/userValidationHelpers');
 /** Constants **/
 const TABLE_NAME = 'users';
@@ -27,6 +28,16 @@ router.post('/', async (req, res) => {
   const user = result.rows[0];
   
   /** After successful authentification **/
+  try {
+    if (await bcrypt.compare(password, user.password)) {
+      res.json({ success: "Successful login."});
+    };
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: err });
+  }
+
+
   if (password === user.password) {
   const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
   console.log('Sending...', accessToken)
