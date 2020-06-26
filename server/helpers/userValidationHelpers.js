@@ -44,7 +44,7 @@ const usernameExists = async (pool, table, username) => {
   return queryResult.rows.length > 0;
 };
 
-/** Input: . Output: boolean **/
+/** Input: obj, str, str. Output: boolean **/
 const emailExists = async (pool, table, email) => {
   const query = `
     SELECT *
@@ -56,13 +56,26 @@ const emailExists = async (pool, table, email) => {
   return queryResult.rows.length > 0;
 };
 
+/** Input: obj, str. Output: user obj  **/
+const getUserByEmail = async (pool, table, email) => {
+  const query = `
+  SELECT *
+  FROM ${table}
+  WHERE email = $1
+  LIMIT 1;
+`;
+  const queryResult = await pool.query(query, [email]);
+  return queryResult;
+};
+
 const userValidationHelpers = {
   isValidEmail,
   isValidUsername,
   isValidPassword,
   isEmptyObj,
   usernameExists,
-  emailExists
+  emailExists,
+  getUserByEmail
 };
 
 module.exports = userValidationHelpers;
