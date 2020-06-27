@@ -8,7 +8,7 @@ import './LoginPage.css';
 /** Helpers **/
 import useForm from '../../hooks/useFormHook';
 import { Redirect } from 'react-router-dom';
-import { login } from '../../helpers/LoginHelpers';
+import { loginReq } from '../../helpers/LoginHelpers';
 
 const LoginPage = () => {
   const [redirectURL, setRedirectURL] = useState(null);
@@ -20,7 +20,7 @@ const LoginPage = () => {
     handleReset] = useForm(requestLogin);
 
   function requestLogin() {
-    login(userLogin, () => setRedirectURL('/home'));
+    loginReq(userLogin, () => setRedirectURL('/home'));
   };
 
   return (
@@ -32,7 +32,7 @@ const LoginPage = () => {
       <Form 
         formNoValidate
         onSubmit={handleSubmit}>
-        <FormGroup clssName="mb-2 mr-sm-2 mb-sm-0">
+        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
           <Label 
             for="email"
             className="mr-sm-2">

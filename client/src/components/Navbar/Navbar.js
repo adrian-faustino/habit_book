@@ -19,7 +19,25 @@ const Navbar = () => {
             Home
         </NavLink>
       </NavItem>
+
+      <NavItem>
+        <NavLink
+          className="Navbar__li"
+          tag={Link}
+          to="/test">
+            Test
+        </NavLink>
+      </NavItem>
       
+      <NavItem>
+        <NavLink
+          className="Navbar__li"
+          tag={Link}
+          to="/login">
+            Login
+        </NavLink>
+      </NavItem>
+
       <NavItem>
         <NavLink
           className="Navbar__li"

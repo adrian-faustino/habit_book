@@ -1,12 +1,18 @@
 /** This is an example file for reference **/
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; // useSelector for accessing state
 import { login, logout, increment, decrement } from '../actions';
+import { setUser } from '../actions/userActions';
 import { Redirect } from 'react-router-dom';
+import { getUserData } from '../helpers/protectedRouteOnMount';
 
 const TestComponent = () => {
 
   // return <Redirect to="/home"/>
+  // set userobj from localStorage
+  useEffect(() => {
+    getUserData(dispatch);
+  }, []);
 
   const counter = useSelector(state => state.counter);
   const isLogged = useSelector(state => state.isLogged);

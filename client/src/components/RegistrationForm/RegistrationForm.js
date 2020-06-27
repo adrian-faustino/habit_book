@@ -13,7 +13,7 @@ import useRegistrationFormData from '../../hooks/useRegistrationFormData';
 import userValidationHelpers from '../../helpers/userValidationHelpers';
 import constants from '../../constants';
 import axios from 'axios';
-import { login } from '../../helpers/LoginHelpers';
+import { loginReq } from '../../helpers/LoginHelpers';
 
 const {
   USERNAME_MAX_LENGTH, 
@@ -66,7 +66,7 @@ const RegistrationForm = () => {
           email: values.email,
           password: values.password
         }
-        login(user, () => setRedirectURL('/home'));
+        loginReq(user, () => setRedirectURL('/home'));
       })
       .catch(err => {
         setLoading(false);
