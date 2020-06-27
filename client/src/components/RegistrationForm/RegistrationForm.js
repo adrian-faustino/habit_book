@@ -13,6 +13,7 @@ import useRegistrationFormData from '../../hooks/useRegistrationFormData';
 import userValidationHelpers from '../../helpers/userValidationHelpers';
 import constants from '../../constants';
 import axios from 'axios';
+import { login } from '../../helpers/LoginHelpers';
 
 const {
   USERNAME_MAX_LENGTH, 
@@ -36,6 +37,7 @@ const RegistrationForm = () => {
     handleReset] = useForm(validate);
   /** For loading spinner, redirect **/
   const [loading, setLoading] = useState(false);
+  const [redirectURL, setRedirectURL] = useState(null);
  
   
   function validate() { // for hoisting
@@ -58,10 +60,13 @@ const RegistrationForm = () => {
         const successMsg = res.data;
         setLoading(false);
         console.log('Register successful:', successMsg);
-        // clear form?
 
-        // redirect
-        return <Redirect to="/home"/>
+        // login
+        const user = {
+          email: values.email,
+          password: values.password
+        }
+        login(user, () => setRedirectURL('/home'));
       })
       .catch(err => {
         setLoading(false);
@@ -79,6 +84,7 @@ const RegistrationForm = () => {
     setError({});
   };
 
+  if (redirectURL) return <Redirect to={redirectURL} />
   return (
     <div className="RegistrationForm__form-container">
       {/* handleSubmit is the function passed into useForm hook */}

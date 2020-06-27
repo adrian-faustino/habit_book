@@ -1,0 +1,11 @@
+.WelcomePage__site-banner {
+  text-align: center;
+  font-weight: bold;
+}
+
+.WelcomePage__form-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  text-align: center;
+}

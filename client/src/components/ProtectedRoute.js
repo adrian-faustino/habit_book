@@ -14,11 +14,11 @@ const ProtectedRoute = ({children, ...rest}) => {
   return (
     <Route
       {...rest}
-      render={() => {
-        isAuth ? children : (
-          <Redirect to="/home" />
+      render={() => 
+        isAuth() ? children : (
+          <Redirect to="/welcome" />
         )
-      }} />
+      } />
   );
 };
 

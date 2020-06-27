@@ -8,6 +8,7 @@ import './LoginPage.css';
 /** Helpers **/
 import useForm from '../../hooks/useFormHook';
 import { Redirect } from 'react-router-dom';
+import { login } from '../../helpers/LoginHelpers';
 
 const LoginPage = () => {
   const [redirectURL, setRedirectURL] = useState(null);
@@ -19,21 +20,7 @@ const LoginPage = () => {
     handleReset] = useForm(requestLogin);
 
   function requestLogin() {
-    const endpoint = 
-      process.env.REACT_APP_API + 'login';
-
-    axios
-      .post(endpoint, userLogin)
-      .then(res => {
-        const { accessToken, user } = res.data;
-        console.log('Successfully logged in', user)
-
-        // save to local storage ** this method takes a key and val
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('user', user);
-        setRedirectURL('/home');
-      })
-      .catch(err => console.log(err));
+    login(userLogin, () => setRedirectURL('/home'));
   };
 
   return (

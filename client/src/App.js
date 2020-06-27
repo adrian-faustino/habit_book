@@ -2,7 +2,12 @@ import React from 'react';
 import TestComponent from './components/TestComponent';
 
 /** Views **/
-import { SignUpPage, HomePage, WelcomePage, LoginPage, LandingPage } from './views';
+import { 
+  SignUpPage, 
+  HomePage, 
+  WelcomePage, 
+  LoginPage, 
+  LandingPage,  } from './views';
 /** Components **/
 import { Navbar, ProtectedRoute } from './components';
 /** React router **/
@@ -12,21 +17,27 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <Route exact path="/welcome" component={LandingPage}/>
-      {/* <Route exact path="/login" component={LoginPage}/>
-      <Route exact path="/signup" component={SignUpPage}/> */}
+    <div className="App">
+      
 
-      <ProtectedRoute component={HomePage}/>
-          {/* <Route exact path="/home" component={HomePage}/> */}
+      <Router>
+        <Navbar />
 
 
-        <div className="App">
-          <Navbar />
-          <Route exact path="/test" component={TestComponent}/>
-          <Route exact path="/" component={WelcomePage}/>
-        </div>
-    </Router>
+
+        <Route exact path="/" component={LandingPage}/>
+        <Route exact path="/welcome" component={WelcomePage}/>
+        <Route exact path="/signup" component={SignUpPage}/>
+        <Route exact path="/login" component={LoginPage}/>
+
+        <ProtectedRoute path="/home">
+          <HomePage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/test">
+          <TestComponent />
+        </ProtectedRoute>
+      </Router>
+    </div>
   );
 }
 
