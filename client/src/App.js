@@ -2,9 +2,9 @@ import React from 'react';
 import TestComponent from './components/TestComponent';
 
 /** Views **/
-import { SignUpPage, HomePage, WelcomePage, LoginPage } from './views';
+import { SignUpPage, HomePage, WelcomePage, LoginPage, LandingPage } from './views';
 /** Components **/
-import { Navbar } from './components';
+import { Navbar, ProtectedRoute } from './components';
 /** React router **/
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 /** Styles **/
@@ -13,14 +13,19 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Navbar />
-        <Route exact path="/" component={WelcomePage}/>
-        <Route exact path="/test" component={TestComponent}/>
-        <Route exact path="/signup" component={SignUpPage}/>
-        <Route exact path="/login" component={LoginPage}/>
-        <Route exact path="/home" component={HomePage}/>
-      </div>
+      <Route exact path="/welcome" component={LandingPage}/>
+      {/* <Route exact path="/login" component={LoginPage}/>
+      <Route exact path="/signup" component={SignUpPage}/> */}
+
+      <ProtectedRoute component={HomePage}/>
+          {/* <Route exact path="/home" component={HomePage}/> */}
+
+
+        <div className="App">
+          <Navbar />
+          <Route exact path="/test" component={TestComponent}/>
+          <Route exact path="/" component={WelcomePage}/>
+        </div>
     </Router>
   );
 }

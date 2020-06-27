@@ -76,7 +76,7 @@ router.post('/newUser', async (req, res) => {
 
     const newUser = await pool.query(createUserQuery, VALUES);
     const jsonRes = {
-      success: 'New user successfully created.'
+      success: 'New user successfully created.',
     }
     res.json(jsonRes);
     /* =============================/

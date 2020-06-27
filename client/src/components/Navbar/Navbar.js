@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 /** Reactstrap **/
 import { Nav, NavItem, NavLink } from 'reactstrap';
 /** React router **/
-import { Link } from 'react-router-dom'; 
+import { Link, Redirect } from 'react-router-dom'; 
 /** Styles **/
 import './Navbar.css';
 
@@ -28,6 +28,14 @@ const Navbar = () => {
             Register
         </NavLink>
       </NavItem>
+
+      <button onClick={() => {
+        console.log(localStorage)
+      }}>show localstorage</button>
+
+      <button onClick={() => {
+        localStorage.clear();
+      }}>LOGOUT</button>
     </Nav>
   );
 };

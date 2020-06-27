@@ -2,8 +2,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'; // useSelector for accessing state
 import { login, logout, increment, decrement } from '../actions';
+import { Redirect } from 'react-router-dom';
 
 const TestComponent = () => {
+
+  // return <Redirect to="/home"/>
+
   const counter = useSelector(state => state.counter);
   const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch(); // this is for dispatching actions to change state

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 /** Reactstrap **/
@@ -7,8 +7,11 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import './LoginPage.css';
 /** Helpers **/
 import useForm from '../../hooks/useFormHook';
+import { Redirect } from 'react-router-dom';
 
 const LoginPage = () => {
+  const [redirectURL, setRedirectURL] = useState(null);
+
   const [
     userLogin, 
     handleChange, 
@@ -22,13 +25,22 @@ const LoginPage = () => {
     axios
       .post(endpoint, userLogin)
       .then(res => {
-        console.log('Successfully logged in', res.data)
+        const { accessToken, user } = res.data;
+        console.log('Successfully logged in', user)
+
+        // save to local storage ** this method takes a key and val
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('user', user);
+        setRedirectURL('/home');
       })
       .catch(err => console.log(err));
   };
 
   return (
-    <div className="LoginPage__form-container">
+    redirectURL ? (
+      <Redirect to={redirectURL} />
+    ) : (
+      <div className="LoginPage__form-container">
       <h1>Login</h1>
       <Form 
         formNoValidate
@@ -64,6 +76,7 @@ const LoginPage = () => {
         </Button>
       </Form>
     </div>
+    )
   );
 };
 

@@ -36,7 +36,6 @@ const RegistrationForm = () => {
     handleReset] = useForm(validate);
   /** For loading spinner, redirect **/
   const [loading, setLoading] = useState(false);
-  const [redirect, setRedirect] = useState(false);
  
   
   function validate() { // for hoisting
@@ -62,7 +61,7 @@ const RegistrationForm = () => {
         // clear form?
 
         // redirect
-        setRedirect(true);
+        return <Redirect to="/home"/>
       })
       .catch(err => {
         setLoading(false);
@@ -219,8 +218,6 @@ const RegistrationForm = () => {
         onClick={handleResetForm}>
           Reset Form
       </Button>
-
-      {redirect && <Redirect to="/login"/>}
     </div>
   )
 };
