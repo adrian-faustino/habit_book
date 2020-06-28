@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
 
 /** Reactstrap **/
 import { Nav, NavItem, NavLink } from 'reactstrap';
@@ -10,6 +12,8 @@ import NavDashboard from './NavDashboard';
 
 
 const Navbar = () => {
+  const isLogged = useSelector(state => state.isLogged);
+
   return (
     <Nav className="Navbar__container">
       <NavItem>
@@ -52,9 +56,11 @@ const Navbar = () => {
         console.log(localStorage)
       }}>show localstorage</button>
 
-      <NavItem>
-        <NavDashboard />
-      </NavItem>
+      {isLogged && (
+        <NavItem>
+          <NavDashboard />
+        </NavItem>
+      )}
     </Nav>
   );
 };

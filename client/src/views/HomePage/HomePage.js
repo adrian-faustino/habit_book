@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserData } from '../../helpers/protectedRouteOnMount';
+import { Redirect } from 'react-router-dom';
 
 const HomePage = () => {
+  const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch();
   useEffect(() => {
     getUserData(dispatch);
@@ -16,6 +18,7 @@ const HomePage = () => {
     email
   } = user;
 
+  if (!isLogged) return <Redirect to="/welcome"/>
   return (
     <div>
       <h2>

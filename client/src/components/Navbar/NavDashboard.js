@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'reactstrap';
 import { logout } from '../../actions';
 import { clearUser } from '../../actions/userActions';
-import { Redirect } from 'react-router-dom';
 
 const NavDashboard = () => {
-  const [redirectURL, setRedirectURL] = useState(null);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const {
@@ -21,10 +19,9 @@ const NavDashboard = () => {
     localStorage.clear();
     dispatch(logout());
     dispatch(clearUser());
-    setRedirectURL('/login');
   };
 
-  if (redirectURL) return <Redirect to="/signup"/>
+  if (!username) return null;
   return (
     <div>
       <h4>

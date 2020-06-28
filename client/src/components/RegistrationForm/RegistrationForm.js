@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions';
 
 /** Reactstrap **/
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row, Col, Spinner } from 'reactstrap';
@@ -38,6 +40,7 @@ const RegistrationForm = () => {
   /** For loading spinner, redirect **/
   const [loading, setLoading] = useState(false);
   const [redirectURL, setRedirectURL] = useState(null);
+  const dispatch = useDispatch();
  
   
   function validate() { // for hoisting
@@ -66,7 +69,10 @@ const RegistrationForm = () => {
           email: values.email,
           password: values.password
         }
-        loginReq(user, () => setRedirectURL('/home'));
+        loginReq(user, () => {
+          dispatch(login());
+          setRedirectURL('/home')
+        });
       })
       .catch(err => {
         setLoading(false);

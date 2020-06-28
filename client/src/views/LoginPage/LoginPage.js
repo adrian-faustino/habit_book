@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions';
 
 /** Reactstrap **/
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
@@ -12,6 +13,7 @@ import { loginReq } from '../../helpers/LoginHelpers';
 
 const LoginPage = () => {
   const [redirectURL, setRedirectURL] = useState(null);
+  const dispatch = useDispatch();
 
   const [
     userLogin, 
@@ -20,7 +22,10 @@ const LoginPage = () => {
     handleReset] = useForm(requestLogin);
 
   function requestLogin() {
-    loginReq(userLogin, () => setRedirectURL('/home'));
+    loginReq(userLogin, () => {
+      dispatch(login());
+      setRedirectURL('/home')
+    });
   };
 
   return (
