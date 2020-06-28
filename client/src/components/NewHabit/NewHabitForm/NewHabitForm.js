@@ -29,8 +29,9 @@ const NewHabitForm = () => {
     axios
       .post(endpoint, payload, config)
       .then(res => {
-        console.log('Successfully posted habit')
+        console.log(res.data.msg);
         // handleReset
+        handleReset();
       })
       .catch(err => console.log(err));
   }

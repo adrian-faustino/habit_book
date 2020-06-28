@@ -1,5 +1,7 @@
 SERVER TODO:
 [x] set up db
+
+  Users:
 [x] set up CRUD
   [x] set up user model
   [x] seed DB
@@ -13,8 +15,20 @@ SERVER TODO:
     [x] DELETE users from db
       [] validation? => require user to enter password to delete. see if matches
 
+  Habits:
+  [] set up habit CRUD routes
+    [] habit validation before submission
+      [] no empty title
+      [] no empty desc
+    [x] list all Habits /habits
+    [] list a user's own Habits /habits/:userID
+    [x] post a new habit
+    [] update habit
+    [] delete habit
+
 
 CLIENT TODO:
+  Users:
 [x] set up redux
 [x] set up react router
 [x] set up reactstrap
@@ -35,6 +49,7 @@ Refactor tasks:
 [x] fix CRUD response
 [x] fix response on successful CRUD (userCRUD.js)
 [x] fix username and password regex (special chars, _, -, etc);
+[] clean up React imports, comment (for consistency)
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -52,6 +67,5 @@ Current task:
 [x] make axios request to backend and handle error/insert dB
 [x] login/logout feature
 [x]  usebcrypt to hash and salt passwords
-[] implemeent j
-
-  [] new register page -> redirect to login page -> login page enter username and password -> check DB if there, return JWT token :)
+  [x] new register page -> redirect to login page -> login page enter username and password -> check DB if there, return JWT token :)
+[] habit crud routes
