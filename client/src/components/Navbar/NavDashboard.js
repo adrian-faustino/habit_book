@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'reactstrap';
 import { logout } from '../../actions';
 import { clearUser } from '../../actions/userActions';
+import './NavDashboard.css';
 
 const NavDashboard = () => {
   const dispatch = useDispatch();
@@ -21,14 +22,22 @@ const NavDashboard = () => {
     dispatch(clearUser());
   };
 
-  if (!username) return null;
   return (
-    <div>
-      <h4>
+    <div
+      className="NavDashboard__container">
+      <span 
+        className="NavDashboard__welcome-span">
         {`Welcome ${first_name}`}
-      </h4>
+      </span>
 
       <Button
+        className="NavDashboard__button"
+        onClick={() => console.log(localStorage)}>
+        localstorage
+      </Button>
+
+      <Button
+        className="NavDashboard__button"
         onClick={handleLogout}>
         logout
       </Button>

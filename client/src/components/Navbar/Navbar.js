@@ -16,45 +16,45 @@ const Navbar = () => {
 
   return (
     <Nav className="Navbar__container">
-      <NavItem>
-        <NavLink
-          className="Navbar__li"
-          tag={Link}
-          to="/home">
-            Home
-        </NavLink>
-      </NavItem>
+      {isLogged && (<> 
+        <NavItem>
+          <NavLink
+            className="Navbar__li"
+            tag={Link}
+            to="/home">
+              Home
+          </NavLink>
+        </NavItem>
 
-      <NavItem>
-        <NavLink
-          className="Navbar__li"
-          tag={Link}
-          to="/test">
-            Test
-        </NavLink>
-      </NavItem>
+        <NavItem>
+          <NavLink
+            className="Navbar__li"
+            tag={Link}
+            to="/test">
+              Test
+          </NavLink>
+        </NavItem>  
+      </>)}
       
-      <NavItem>
-        <NavLink
-          className="Navbar__li"
-          tag={Link}
-          to="/login">
-            Login
-        </NavLink>
-      </NavItem>
+      {!isLogged && (<>
+        <NavItem>
+          <NavLink
+            className="Navbar__li"
+            tag={Link}
+            to="/login">
+              Login
+          </NavLink>
+        </NavItem>
 
-      <NavItem>
-        <NavLink
-          className="Navbar__li"
-          tag={Link}
-          to="/signup">
-            Register
-        </NavLink>
-      </NavItem>
-
-      <button onClick={() => {
-        console.log(localStorage)
-      }}>show localstorage</button>
+        <NavItem>
+          <NavLink
+            className="Navbar__li"
+            tag={Link}
+            to="/signup">
+              Register
+          </NavLink>
+        </NavItem>
+      </>)}
 
       {isLogged && (
         <NavItem>

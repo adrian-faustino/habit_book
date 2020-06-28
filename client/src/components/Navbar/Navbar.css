@@ -1,6 +1,12 @@
 .Navbar__container {
   /* background: rgb(65,104,178); FB nav bar color */
   background: rgb(135, 117, 147);
+  position: fixed;
+  width: 100vw;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
 }
 
 .Navbar__li {
