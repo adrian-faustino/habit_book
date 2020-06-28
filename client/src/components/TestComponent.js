@@ -10,12 +10,13 @@ const TestComponent = () => {
 
   // return <Redirect to="/home"/>
   // set userobj from localStorage
-  useEffect(() => {
-    getUserData(dispatch);
-  }, []);
+  // useEffect(() => {
+  //   getUserData(dispatch);
+  // }, []);
 
   const counter = useSelector(state => state.counter);
   const isLogged = useSelector(state => state.isLogged);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch(); // this is for dispatching actions to change state
 
   const loginHandler = e => {
@@ -37,6 +38,8 @@ const TestComponent = () => {
       <button onClick={loginHandler}>
         {isLogged ? 'Log out' : 'Log in'}
       </button>
+
+      {user.username}
     </div>
   )
 }

@@ -3,12 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUserData } from '../../helpers/protectedRouteOnMount';
 
 const HomePage = () => {
-
+  const dispatch = useDispatch();
   useEffect(() => {
     getUserData(dispatch);
   }, []);
 
-  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const {
     first_name,

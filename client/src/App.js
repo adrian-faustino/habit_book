@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TestComponent from './components/TestComponent';
+import { useDispatch, useSelector } from 'react-redux';
 
 /** Views **/
 import { 
@@ -14,16 +15,23 @@ import { Navbar, ProtectedRoute } from './components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 /** Styles **/
 import './App.css';
+/** Helpers **/
+import { getUserData } from './helpers/protectedRouteOnMount';
 
 function App() {
+  /** To persist user data when user refreshes app **/
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log('Fetching user data from local storage...');
+    getUserData(dispatch);
+  }, []);
+
   return (
     <div className="App">
       
 
       <Router>
         <Navbar />
-
-
 
         <Route exact path="/" component={LandingPage}/>
         <Route exact path="/welcome" component={WelcomePage}/>

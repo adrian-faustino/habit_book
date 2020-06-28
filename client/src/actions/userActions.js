@@ -4,3 +4,9 @@ export const setUser = userObj => {
     payload: userObj
   }
 };
+
+export const clearUser = () => {
+  return {
+    type: 'CLEAR_USER'
+  }
+};

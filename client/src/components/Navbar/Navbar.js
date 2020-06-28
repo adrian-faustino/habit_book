@@ -6,6 +6,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom'; 
 /** Styles **/
 import './Navbar.css';
+import NavDashboard from './NavDashboard';
 
 
 const Navbar = () => {
@@ -51,9 +52,9 @@ const Navbar = () => {
         console.log(localStorage)
       }}>show localstorage</button>
 
-      <button onClick={() => {
-        localStorage.clear();
-      }}>LOGOUT</button>
+      <NavItem>
+        <NavDashboard />
+      </NavItem>
     </Nav>
   );
 };
