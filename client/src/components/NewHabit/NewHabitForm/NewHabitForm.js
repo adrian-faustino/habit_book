@@ -3,6 +3,7 @@ import axios from 'axios';
 import './NewHabitForm.css';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import useForm from '../../../hooks/useFormHook';
+import { useSelector } from 'react-redux';
 
 const NewHabitForm = () => {
   const [
@@ -11,14 +12,22 @@ const NewHabitForm = () => {
     handleSubmit,
     handleReset
   ] = useForm(submitHabit);
+  const user = useSelector(state => state.user);
 
   function submitHabit() {
     const endpoint = 
       process.env.REACT_APP_API + 'habits/newHabit';
-    console.log('Submitting...', values);
+
+    const payload = { user, habit: values };
+
+    const config = {
+      headers: {
+        authorization : `Bearer ${localStorage.accessToken}`
+      }
+    };
 
     axios
-      .post(endpoint, values)
+      .post(endpoint, payload, config)
       .then(res => {
         console.log('Successfully posted habit')
       })

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
+const authenticateToken = require('../helpers/auth');
 
 // @route   habits/~
 // @desc    handle habits CRUD requests
@@ -8,9 +9,9 @@ const pool = require('../db/db');
 
 
 // CREATE Habit
-router.post('/newHabit', (req, res) => {
-  const { title, description } = req.body;
-  console.log(req.body);
+router.post('/newHabit', authenticateToken, (req, res) => {
+  const { user, habit } = req.body;
+  console.log(habit);
 });
 
 // READ habits
@@ -18,6 +19,5 @@ router.post('/newHabit', (req, res) => {
 // EDIT habits
 
 // DELETE habits
-
 
 module.exports = router;
