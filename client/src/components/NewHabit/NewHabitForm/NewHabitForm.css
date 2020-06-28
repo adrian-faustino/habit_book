@@ -1,0 +1,11 @@
+.NewHabitForm__container {
+  width: 290px;
+  background-color: pink;
+  padding: 20px 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 3px black;
+}
+
+#textarea {
+  resize: none;
+}

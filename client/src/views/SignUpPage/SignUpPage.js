@@ -10,9 +10,10 @@ const SignUpPage = () => {
 
 
   return (
-    <div>
+    <section
+      className="SignUpPage">
       <RegistrationForm />
-    </div>
+    </section>
   );
 };
 

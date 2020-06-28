@@ -32,6 +32,8 @@ const LoginPage = () => {
     redirectURL ? (
       <Redirect to={redirectURL} />
     ) : (
+    <section
+      className="LoginPage">
       <div className="LoginPage__form-container">
       <h1>Login</h1>
       <Form 
@@ -68,6 +70,7 @@ const LoginPage = () => {
         </Button>
       </Form>
     </div>
+    </section>
     )
   );
 };

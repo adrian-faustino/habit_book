@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserData } from '../../helpers/protectedRouteOnMount';
 import { Redirect } from 'react-router-dom';
+import NewHabit from '../../components/NewHabit/NewHabit';
 
 const HomePage = () => {
   const isLogged = useSelector(state => state.isLogged);
@@ -34,6 +35,8 @@ const HomePage = () => {
           <li>Email: {email}</li>
         </ul>
       </h4>
+
+      <NewHabit />
     </div>
   )
 }
