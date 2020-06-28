@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
 const authenticateToken = require('../helpers/auth');
+const { formatToYYYYMMDD } = require('../helpers/formatHelpers');
 
 /** Constants **/
 const TABLE_NAME = 'habits';
@@ -19,6 +20,11 @@ router.post('/newHabit', authenticateToken, (req, res) => {
   const userID = user.user_id;
 
   //query using user id,
+  const VALUES = [
+    habit.title,
+    habit.description,
+
+  ];
   const queryString = `
     INSERT INTO ${TABLE_NAME} (title, description, created_at, last_completed_at, last_broken_at, is_edited)
     VALUES ($1, $2, $3, $4, $5, $6);
