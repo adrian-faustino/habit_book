@@ -12,6 +12,10 @@ const authenticateToken = require('../helpers/auth');
 router.post('/newHabit', authenticateToken, (req, res) => {
   const { user, habit } = req.body;
   console.log(habit);
+  console.log('UserID:', user.user_id);
+  const userID = user.user_id;
+
+  //query using user id,
 });
 
 // READ habits

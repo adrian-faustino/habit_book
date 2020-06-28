@@ -30,6 +30,7 @@ const NewHabitForm = () => {
       .post(endpoint, payload, config)
       .then(res => {
         console.log('Successfully posted habit')
+        // handleReset
       })
       .catch(err => console.log(err));
   }
