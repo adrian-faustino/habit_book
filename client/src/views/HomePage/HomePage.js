@@ -39,9 +39,7 @@ const HomePage = () => {
       </h4>
 
       <NewHabit />
-      <CardsContainer>
-        <HabitCard />
-      </CardsContainer>
+      <CardsContainer />
     </div>
   )
 }

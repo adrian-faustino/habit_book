@@ -25,6 +25,7 @@ SERVER TODO:
   [x] post a new habit
   [] update habit
   [] delete habit
+[] add a limit to requests (pagination? inf scroll etc)
 
 
 CLIENT TODO:
