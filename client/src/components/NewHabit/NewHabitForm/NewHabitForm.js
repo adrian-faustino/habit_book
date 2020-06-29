@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './NewHabitForm.css';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import useForm from '../../../hooks/useFormHook';
 import { useSelector } from 'react-redux';
+import { Alert } from 'reactstrap';
 
 const NewHabitForm = () => {
   const [
@@ -12,6 +13,7 @@ const NewHabitForm = () => {
     handleSubmit,
     handleReset
   ] = useForm(submitHabit);
+  const [formFeedback, setFormFeedback] = useState('');
   const user = useSelector(state => state.user);
 
   function submitHabit() {
@@ -30,8 +32,14 @@ const NewHabitForm = () => {
       .post(endpoint, payload, config)
       .then(res => {
         console.log(res.data.msg);
-        // handleReset
+        // reset form and set feedback
         handleReset();
+        setFormFeedback(res.data.msg);
+
+        // remove form feedback after 2 seconds
+        setTimeout(() => {
+          setFormFeedback('');
+        }, 2000);
       })
       .catch(err => console.log(err));
   }
@@ -63,10 +71,17 @@ const NewHabitForm = () => {
             type="textarea" />
         </FormGroup>
 
-        <Button>
+        <Button type="submit">
           Submit
         </Button>
       </Form>
+
+      {formFeedback && 
+        (<Alert
+          className="NewHabitForm__form-feedback"
+          color="success">
+          {formFeedback}
+      </Alert>)}
     </div>
   );
 };
