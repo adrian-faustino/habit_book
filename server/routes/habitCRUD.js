@@ -5,7 +5,7 @@ const authenticateToken = require('../helpers/auth');
 const { formatToYYYYMMDD } = require('../helpers/formatHelpers');
 
 /** Constants **/
-const TABLE_NAME = 'habits';
+const HABITS_TABLE = 'habits';
 
 // @route   habits/~
 // @desc    handle habits CRUD requests
@@ -28,7 +28,7 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
     userID
   ];
   const queryString = `
-    INSERT INTO ${TABLE_NAME} (title, description, created_at, last_completed_at, last_broken_at, is_edited, user_id)
+    INSERT INTO ${HABITS_TABLE} (title, description, created_at, last_completed_at, last_broken_at, is_edited, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7);
   `;
 
@@ -41,16 +41,34 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
 });
 
 // READ habits
+/** Return all habits in db **/
 router.get('/', async (req, res) => {
   try {
     const queryString = `
-      SELECT * FROM ${TABLE_NAME};
+      SELECT * FROM ${HABITS_TABLE};
     `; 
     const allHabits = (await pool.query(queryString)).rows;
     res.json(allHabits);  
   } catch (err) {
     console.err(err);
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ msg: err.message });
+  }
+});
+
+/** Return all habits of a user **/
+router.get('/:user_id', async (req, res) => {
+  try {
+    const queryString = `
+      SELECT * FROM ${HABITS_TABLE}
+      WHERE user_id = $1;
+    `;
+    const allHabits = (
+      await pool.query(queryString, [req.params.user_id])
+    ).rows;
+    res.json(allHabits);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: err.message });
   }
 });
 
