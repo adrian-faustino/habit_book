@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUserData } from '../../helpers/protectedRouteOnMount';
 import { Redirect } from 'react-router-dom';
 import NewHabit from '../../components/NewHabit/NewHabit';
+import CardsContainer from '../../components/CardsContainer/CardsContainer';
+import HabitCard from '../../components/HabitCard/HabitCard';
 
 const HomePage = () => {
   const isLogged = useSelector(state => state.isLogged);
@@ -37,6 +39,9 @@ const HomePage = () => {
       </h4>
 
       <NewHabit />
+      <CardsContainer>
+        <HabitCard />
+      </CardsContainer>
     </div>
   )
 }
