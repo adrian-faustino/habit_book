@@ -1,4 +1,6 @@
 import React from 'react';
+/** Subcomponents **/
+import CalendarComponent from './CalendarComponent/CalendarComponent';
 /** Reactstrap **/
 import { Tooltip } from 'reactstrap';
 /** Styles **/
@@ -20,9 +22,10 @@ const HabitCard = ({habit}) => {
 
   return (
     <div className="HabitCard__container">
-      <div className="HabitCard__calendar">
+      {/* <div className="HabitCard__calendar">
         calendar
-      </div>
+      </div> */}
+      <CalendarComponent />
       <div className="HabitCard__data-container">
         <h4 className="HabitCard__title">{title}</h4>
         <span

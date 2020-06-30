@@ -11,12 +11,12 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.HabitCard__calendar {
+/* .HabitCard__calendar {
   height: 200px;
   min-width: 300px;
   width: 100%;
   background: pink;
-}
+} */
 
 .HabitCard__data-container {
   height: 100%;

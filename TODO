@@ -45,7 +45,7 @@ CLIENT TODO:
 
   Habits:
 [x] habit cards to display user habits (component)
-  [] format created at to proper date
+  [x] format created at to proper date
   [] implement calendar like on github
   [] implement like and commment button
     [] display total likes 
