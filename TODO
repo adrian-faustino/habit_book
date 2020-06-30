@@ -44,7 +44,14 @@ CLIENT TODO:
 [x] make axios request to backend and handle error/insert dB
 
   Habits:
-[] habit cards to display user habits (component)
+[x] habit cards to display user habits (component)
+  [] format created at to proper date
+  [] implement calendar like on github
+  [] implement like and commment button
+    [] display total likes 
+    [] display comments
+  [] implement "check" (completed today) button
+
 
 
 Refactor tasks:

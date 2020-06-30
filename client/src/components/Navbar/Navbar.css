@@ -5,6 +5,8 @@
   top: 0;
   width: 100vw;
   height: var(--navbar-height);
+  z-index: 30;
+  box-shadow: 0 0 5px black;
 
   display: flex;
   align-items: center;

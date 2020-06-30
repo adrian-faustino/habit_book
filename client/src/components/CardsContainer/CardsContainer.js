@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getUserHabits } from '../../helpers/habitDataHelpers';
 import { useSelector } from 'react-redux';
 import HabitCard from '../HabitCard/HabitCard';
+import './CardsContainer.css';
 
 // props will be a list of components
 const CardsContainer = props => {
@@ -19,7 +20,7 @@ const CardsContainer = props => {
   });
 
   return (
-    <div>
+    <div className="CardsContainer">
       {renderHabits}
 
       <button onClick={e => {

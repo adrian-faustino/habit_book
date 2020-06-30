@@ -28,7 +28,7 @@ const HabitCard = ({habit}) => {
           {description}
         </span>
         <h5
-          className="HabitCard__container">
+          className="HabitCard__created-at">
           Created at: {created_at}
         </h5>
       </div>
