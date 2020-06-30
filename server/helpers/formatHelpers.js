@@ -19,7 +19,6 @@ const formatToYYYYMMDD = dateObj => {
 }; 
 
 
-
 const formatHelpers = {
   formatToYYYYMMDD,
   formatZeros

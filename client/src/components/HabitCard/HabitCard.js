@@ -3,6 +3,8 @@ import React from 'react';
 import { Tooltip } from 'reactstrap';
 /** Styles **/
 import './HabitCard.css';
+/** Helpers **/
+import { formatToWords } from '../../helpers/formatHelpers';
 
 const HabitCard = ({habit}) => {
   const {
@@ -29,11 +31,11 @@ const HabitCard = ({habit}) => {
         </span>
         <h5
           className="HabitCard__created-at">
-          Created at: {created_at}
+          Created at {formatToWords(created_at)}
         </h5>
       </div>
 
-      <footer>
+      <footer className="HabitCard__footer">
         <button>like</button>
         <button>comments</button>
       </footer>
