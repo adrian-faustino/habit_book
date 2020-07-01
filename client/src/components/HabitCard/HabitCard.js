@@ -10,9 +10,10 @@ import './HabitCard.css';
 import { formatToWords } from '../../helpers/formatHelpers';
 import { handleDeleteCard } from '../../helpers/habitDataHelpers';
 /** Redux **/
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const HabitCard = ({habit}) => {
+  /** Props **/
   const {
     habit_id,
     title,
@@ -24,8 +25,12 @@ const HabitCard = ({habit}) => {
     user_id
   } = habit;
 
+  /** State **/
   const [completedAt, setCompletedAt] = useState([]);
   const [isMyHabit, setIsMyHabit] = useState(false);
+
+  /** Redux **/
+  const dispatch = useDispatch();
 
   /* STRETCH: use for auth later */
   const user = useSelector(state => state.user);
@@ -58,9 +63,6 @@ const HabitCard = ({habit}) => {
 
   return (
     <div className="HabitCard__container">
-      {/* <div className="HabitCard__calendar">
-        calendar
-      </div> */}
       <CalendarComponent
         completedAt={completedAt}/>
       <div className="HabitCard__data-container">
@@ -81,7 +83,7 @@ const HabitCard = ({habit}) => {
       </footer>
 
       {isMyHabit && (<button
-        onClick={e => handleDeleteCard(e, _user_id, habit_id)}
+        onClick={e => handleDeleteCard(e, _user_id, habit_id, dispatch)}
         className="HabitCard__delete-card-btn">
           delete
       </button>)}

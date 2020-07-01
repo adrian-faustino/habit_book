@@ -14,7 +14,7 @@ const HomePage = () => {
   /** Redux **/
   const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch();
-  const refreshCount = useSelector(state => state.count);
+  const refreshCount = useSelector(state => state.counter);
   const user = useSelector(state => state.user);
   const {
     first_name,

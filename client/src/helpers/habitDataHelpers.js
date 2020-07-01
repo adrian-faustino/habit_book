@@ -1,4 +1,6 @@
 import axios from 'axios';
+/** Redux - actions **/
+import { increment } from '../actions';
 
 // given user_id, get all habits
 export const getUserHabits = (user_id, callback) => {
@@ -12,7 +14,8 @@ export const getUserHabits = (user_id, callback) => {
     .catch(err => console.log(err));
 };
 
-export const handleDeleteCard = async (e, user_id, habit_id) => {
+// delete habit
+export const handleDeleteCard = async (e, user_id, habit_id, dispatch) => {
   e.preventDefault();
 
   const endpoint =
@@ -22,7 +25,8 @@ export const handleDeleteCard = async (e, user_id, habit_id) => {
   axios
     .delete(endpoint)
     .then(res => {
-      console.log('Delete OK', res);
+      // trigger fetch data after crud operation
+      dispatch(increment(1));
     })
     .catch(err => console.log(err));
 };
