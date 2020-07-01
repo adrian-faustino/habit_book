@@ -64,7 +64,7 @@ CLIENT TODO:
           [x] seed compelted_at table for user 19
           [x] get list of completed days for user 19
           [x] write functions to extract data from that array
-        [] refresh displayed when new habit is added or when its deleted
+        [x] refresh displayed when new habit is added or when its deleted
 
 
 
@@ -76,7 +76,7 @@ Refactor tasks:
 [x] fix username and password regex (special chars, _, -, etc);
 [] clean up React imports, comment (for consistency)
 [] add auth for all read routes (like habits/:user_id)
-[] refresh page after all CRUD? (to show most updated version from DB)
+[x] refresh page after all CRUD? (to show most updated version from DB)
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -103,4 +103,4 @@ Current task:
 [x] habit cards to display user habits
   [x] learn about children props
 [] auth (make sure only logged in user can delete their OWN habits) 
-[] refresh displayed when new habit is added or when its deleted
+[x] refresh displayed when new habit is added or when its deleted
