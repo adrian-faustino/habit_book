@@ -11,9 +11,8 @@ import { getDateYYYYMMDD } from '../../../helpers/dateObjHelpers';
 /*  returned from getDateYYYYMMDD function */
 const CalendarComponent = props => {
   const { completedAt } = props;
-  console.log(completedAt, 'complete!?')
-
   const [value, setValue] = useState(new Date());
+
 
   const handleClickDay = (value, e) => {
     console.log('Cicked day,', value, e);
@@ -26,10 +25,7 @@ const CalendarComponent = props => {
     const CALENDAR_SELECTED = 'CalendarComponent__selected';
     if (view === 'month') {
       const _date = getDateYYYYMMDD(date);
-      console.log(_date);
-      if (completedAt.includes(_date)) {
-        return CALENDAR_SELECTED;
-      }
+      if (completedAt.includes(_date)) return CALENDAR_SELECTED;
     }
   };
 
