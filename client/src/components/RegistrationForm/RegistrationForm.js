@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+/** Redux **/
 import { useDispatch } from 'react-redux';
-import { login } from '../../actions';
-
 /** Reactstrap **/
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, Row, Col, Spinner } from 'reactstrap';
 /** Styles **/
@@ -11,10 +11,10 @@ import useForm from '../../hooks/useFormHook';
 /** React Router **/
 import { Redirect } from 'react-router-dom';
 /** Helpers **/
+import { login } from '../../actions';
 import useRegistrationFormData from '../../hooks/useRegistrationFormData';
 import userValidationHelpers from '../../helpers/userValidationHelpers';
 import constants from '../../constants';
-import axios from 'axios';
 import { loginReq } from '../../helpers/LoginHelpers';
 
 const {
@@ -29,20 +29,22 @@ const {
   inputWithinRange } = userValidationHelpers;
 
 const RegistrationForm = () => {
-  /** Form errors state **/
+  /** State **/
+    // form errors
   const { error, setError } = useRegistrationFormData();
-  /** Form values state **/
+    // form values
   const [
     values,
     handleChange,
     handleSubmit,
     handleReset] = useForm(validate);
-  /** For loading spinner, redirect **/
+    // for loading spinner and redirect
   const [loading, setLoading] = useState(false);
   const [redirectURL, setRedirectURL] = useState(null);
+
+  /** Redux **/
   const dispatch = useDispatch();
  
-  
   function validate() { // for hoisting
     console.log('Validating...', values);
     const error = isValidSubmission(values);
