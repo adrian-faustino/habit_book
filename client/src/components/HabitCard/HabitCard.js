@@ -8,6 +8,7 @@ import { Tooltip } from 'reactstrap';
 import './HabitCard.css';
 /** Helpers **/
 import { formatToWords } from '../../helpers/formatHelpers';
+import { handleDeleteCard } from '../../helpers/habitDataHelpers';
 /** Redux **/
 import { useSelector } from 'react-redux';
 
@@ -54,6 +55,7 @@ const HabitCard = ({habit}) => {
     }
   }, []);
 
+
   return (
     <div className="HabitCard__container">
       {/* <div className="HabitCard__calendar">
@@ -79,7 +81,7 @@ const HabitCard = ({habit}) => {
       </footer>
 
       {isMyHabit && (<button
-        onClick={handleDeleteCard}
+        onClick={e => handleDeleteCard(e, _user_id, habit_id)}
         className="HabitCard__delete-card-btn">
           delete
       </button>)}

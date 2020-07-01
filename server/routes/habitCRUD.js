@@ -57,6 +57,7 @@ router.get('/', async (req, res) => {
 });
 
 /** Return all habits of a user **/
+// TODO: add auth
 router.get('/:user_id', async (req, res) => {
   try {
     const queryString = `
@@ -74,6 +75,7 @@ router.get('/:user_id', async (req, res) => {
 });
 
 /** Return all completed dates for a habit **/
+// TODO: add auth
 router.get('/:user_id/:habit_id', async (req, res) => {
   const { user_id, habit_id } = req.params;
 
@@ -95,5 +97,23 @@ router.get('/:user_id/:habit_id', async (req, res) => {
 // EDIT habits
 
 // DELETE habits
+router.delete('/:user_id/:habit_id', async (req, res) => {
+  console.log(req.params);
+  // authent
+
+  try {
+    const queryString = `
+      DELETE FROM ${HABITS_TABLE}
+      WHERE habit_id = $1;
+    `;
+    const result = (
+      await pool.query(queryString, [req.params.habit_id])
+    ).rows;
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: err.message });
+  }
+});
 
 module.exports = router;

@@ -11,3 +11,18 @@ export const getUserHabits = (user_id, callback) => {
     .then(res => callback(res.data))
     .catch(err => console.log(err));
 };
+
+export const handleDeleteCard = async (e, user_id, habit_id) => {
+  e.preventDefault();
+
+  const endpoint =
+    process.env.REACT_APP_API + 
+    `habits/${user_id}/${habit_id}`
+  
+  axios
+    .delete(endpoint)
+    .then(res => {
+      console.log('Delete OK', res);
+    })
+    .catch(err => console.log(err));
+};
