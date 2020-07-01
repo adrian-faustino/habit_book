@@ -5,8 +5,6 @@ import './NewHabit.css';
 
 const NewHabit = () => {
 
-
-
   return (
     <section className="NewHabit__section">
       <NewHabitForm />

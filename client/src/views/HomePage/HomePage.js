@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
+/** Redux **/
 import { useSelector, useDispatch } from 'react-redux';
+/** Helpers **/
 import { getUserData } from '../../helpers/protectedRouteOnMount';
+/** React router **/
 import { Redirect } from 'react-router-dom';
+/** Subcomponents **/
 import NewHabit from '../../components/NewHabit/NewHabit';
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
 import HabitCard from '../../components/HabitCard/HabitCard';
 
 const HomePage = () => {
+  /** Redux **/
   const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch();
-  useEffect(() => {
-    getUserData(dispatch);
-  }, []);
 
   const user = useSelector(state => state.user);
   const {
@@ -21,6 +23,12 @@ const HomePage = () => {
     email,
     user_id
   } = user;
+
+  /** On mount **/
+  // sync local storage user info with redux
+  useEffect(() => {
+    getUserData(dispatch);
+  }, []);
 
   if (!isLogged) return <Redirect to="/welcome"/>
   return (

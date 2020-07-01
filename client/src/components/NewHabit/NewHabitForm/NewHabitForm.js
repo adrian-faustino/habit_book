@@ -9,7 +9,7 @@ import useForm from '../../../hooks/useFormHook';
 /** Styles **/
 import './NewHabitForm.css';
 
-const NewHabitForm = () => {
+const NewHabitForm = props => {
   /** State **/
   const [
     values,
@@ -34,13 +34,13 @@ const NewHabitForm = () => {
         authorization : `Bearer ${localStorage.accessToken}`
       }
     };
-
+    // set loading to display spinner
     setLoading(true);
     axios
       .post(endpoint, payload, config)
       .then(res => {
         console.log(res.data.msg);
-        // reset form and set feedback
+        // reset form, set form feedback, and clear spinner
         handleReset();
         setFormFeedback(res.data.msg);
         setLoading(false);
@@ -51,7 +51,7 @@ const NewHabitForm = () => {
         }, 2000);
       })
       .catch(err => console.log(err));
-  }
+    }
 
   return (
     <div className="NewHabitForm__container">
