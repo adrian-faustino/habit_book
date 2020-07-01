@@ -62,7 +62,8 @@ router.get('/:user_id', async (req, res) => {
   try {
     const queryString = `
       SELECT * FROM ${HABITS_TABLE}
-      WHERE user_id = $1;
+      WHERE user_id = $1
+      ORDER BY habit_id DESC;
     `;
     const allHabits = (
       await pool.query(queryString, [req.params.user_id])
