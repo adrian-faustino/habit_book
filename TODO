@@ -16,12 +16,17 @@ SERVER TODO:
       [] validation? => require user to enter password to delete. see if matches
 
   Habits:
-[] set up habit CRUD routes
+[] habit crud routes
+  [x] create habit
+  [] read habit
+  [] update habit (edit)
+  [] delete habit
   [] habit validation before submission
+  [] validation:
     [] no empty title
     [] no empty desc
   [x] list all Habits /habits
-  [] list a user's own Habits /habits/:userID
+  [x] list a user's own Habits /habits/:userID
   [x] post a new habit
   [] update habit
   [] delete habit
@@ -53,11 +58,11 @@ CLIENT TODO:
   [] implement "check" (completed today) button
 
       Habits - calendar
-        [] Highlight range of dates (to show successful days)
+        [x] Highlight range of dates (to show successful days)
           [x] set up compelted_at table
           [x] seed compelted_at table for user 19
-          [] get list of completed days for user 19
-          [] write functions to extract data from that array
+          [x] get list of completed days for user 19
+          [x] write functions to extract data from that array
 
 
 
@@ -88,5 +93,9 @@ Current task:
 [x]  usebcrypt to hash and salt passwords
   [x] new register page -> redirect to login page -> login page enter username and password -> check DB if there, return JWT token :)
 [] habit crud routes
-[] habit cards to display user habits
-  [] learn about children props
+  [x] create habit
+  [] read habit
+  [] update habit (edit)
+  [] delete habit
+[x] habit cards to display user habits
+  [x] learn about children props
