@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUserData } from '../../helpers/protectedRouteOnMount';
 /** React router **/
 import { Redirect } from 'react-router-dom';
-/** Subcomponents **/
+/** Subcomponents */
 import NewHabit from '../../components/NewHabit/NewHabit';
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
 import HabitCard from '../../components/HabitCard/HabitCard';
@@ -14,7 +14,7 @@ const HomePage = () => {
   /** Redux **/
   const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch();
-
+  const refreshCount = useSelector(state => state.count);
   const user = useSelector(state => state.user);
   const {
     first_name,
@@ -39,11 +39,11 @@ const HomePage = () => {
       <h4>
         Your stats:
         <ul>
-          <li>{}</li>
           <li>First name: {first_name}</li>
           <li>Last name: {last_name}</li>
           <li>Username: {username}</li>
           <li>Email: {email}</li>
+          <li>Refresh count: {refreshCount}</li>
         </ul>
       </h4>
 

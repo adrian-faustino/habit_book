@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 /** Redux **/
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+/** Redux - actions **/
+import { increment } from '../../../actions';
 /** Reactstrap **/
 import { Button, Form, FormGroup, Label, Input, FormText, Alert, Spinner } from 'reactstrap';
 /** Helpers **/
 import useForm from '../../../hooks/useFormHook';
 /** Styles **/
 import './NewHabitForm.css';
+
 
 const NewHabitForm = props => {
   /** State **/
@@ -22,6 +25,7 @@ const NewHabitForm = props => {
 
   /** Redux **/
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   function submitHabit() {
     const endpoint = 
@@ -44,6 +48,9 @@ const NewHabitForm = props => {
         handleReset();
         setFormFeedback(res.data.msg);
         setLoading(false);
+
+        // trigger fetch data after crud operation
+        dispatch(increment(1));
 
         // remove form feedback after 2 seconds
         setTimeout(() => {

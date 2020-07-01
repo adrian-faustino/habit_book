@@ -8,10 +8,14 @@ import { getUserHabits } from '../../helpers/habitDataHelpers';
 /** Styles **/
 import './CardsContainer.css';
 
-// props will be a list of components
+
 const CardsContainer = props => {
+  /** State **/
   const [habits, setHabits] = useState([]);
+
+  /** Redux **/
   const user_id = useSelector(state => state.user.user_id)
+  const count = useSelector(state => state.counter);
   
   // on load, get all of the user's habits
   useEffect(() => {
@@ -19,7 +23,7 @@ const CardsContainer = props => {
       console.log('Setting habits...', data);
       setHabits(data);
     });
-  }, []);
+  }, [count]);
 
   // spread for rendering
   const renderHabits = habits.map(habit => {
