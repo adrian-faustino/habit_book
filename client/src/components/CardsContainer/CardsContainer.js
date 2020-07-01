@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getUserHabits } from '../../helpers/habitDataHelpers';
-import { useSelector } from 'react-redux';
+/** Subcomponents **/
 import HabitCard from '../HabitCard/HabitCard';
+/** Redux **/
+import { useSelector } from 'react-redux';
+/** Helpers **/
+import { getUserHabits } from '../../helpers/habitDataHelpers';
+/** Styles **/
 import './CardsContainer.css';
 
 // props will be a list of components
