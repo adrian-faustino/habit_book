@@ -24,25 +24,34 @@ const HabitCard = ({habit}) => {
   } = habit;
 
   const [completedAt, setCompletedAt] = useState([]);
+  const [isMyHabit, setIsMyHabit] = useState(false);
 
   /* STRETCH: use for auth later */
   const user = useSelector(state => state.user);
-
+  
   // When each habit loads, get a list of completed days
   useEffect(() => {
     const endpoint =
-      process.env.REACT_APP_API +
-      `habits/${user_id}/${habit_id}`;
-
+    process.env.REACT_APP_API +
+    `habits/${user_id}/${habit_id}`;
+    
     axios
-      .get(endpoint)
-      .then(res => {
-        const dates = res.data.map(date => {
-          return date.completed_at.split('T')[0];
-        });
-        setCompletedAt(dates);
-      })
-      .catch(err => console.log(err));
+    .get(endpoint)
+    .then(res => {
+      const dates = res.data.map(date => {
+        return date.completed_at.split('T')[0];
+      });
+      setCompletedAt(dates);
+    })
+    .catch(err => console.log(err));
+  }, []);
+  
+  // If this habit belongs to this user, display delete btn
+  const _user_id = useSelector(state => state.user.user_id);
+  useEffect(() => {
+    if (habit.user_id === _user_id) {
+      setIsMyHabit(true);
+    }
   }, []);
 
   return (
@@ -68,6 +77,12 @@ const HabitCard = ({habit}) => {
         <button>like</button>
         <button>comments</button>
       </footer>
+
+      {isMyHabit && (<button
+        onClick={handleDeleteCard}
+        className="HabitCard__delete-card-btn">
+          delete
+      </button>)}
     </div>
   )
 }

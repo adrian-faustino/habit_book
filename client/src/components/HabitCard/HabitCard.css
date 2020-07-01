@@ -22,7 +22,7 @@
   height: 100%;
   width: 95%;
   padding: 5px;
-  margin: auto;
+  margin: 0 0 0 15px;
   box-shadow: inset 0 0 5px black;
 }
 
@@ -52,4 +52,15 @@
   border-radius: 4px;
   padding: 2px 8px;
   margin: 0 5px;
+}
+
+.HabitCard__delete-card-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border: none;
+  border-radius: 3px;
+  background: red;
+  box-shadow: 0 0 3px black;
+  color: white;
 }

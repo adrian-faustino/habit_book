@@ -53,7 +53,7 @@ const NewHabitForm = () => {
             Title:
           </Label>
           <Input
-            value={values.title}
+            value={values.title || ''}
             onChange={handleChange}
             id="title"
             name="title"
@@ -64,7 +64,7 @@ const NewHabitForm = () => {
             Description:
           </Label>
           <Input
-            value={values.description}
+            value={values.description || ''}
             onChange={handleChange}
             id="textarea"
             name="description"
