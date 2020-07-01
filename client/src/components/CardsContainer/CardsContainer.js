@@ -11,12 +11,15 @@ const CardsContainer = props => {
   
   // on load, get all of the user's habits
   useEffect(() => {
-    getUserHabits(user_id, data => setHabits(data));
+    getUserHabits(user_id, data => {
+      console.log('Setting habits...', data);
+      setHabits(data);
+    });
   }, []);
 
   // spread for rendering
   const renderHabits = habits.map(habit => {
-    return <HabitCard habit={habit}/>;
+    return <HabitCard key={habit.habit_id} habit={habit}/>;
   });
 
   return (

@@ -20,6 +20,8 @@ const HabitCard = ({habit}) => {
     user_id
   } = habit;
 
+  // Get successful days in a row
+
   return (
     <div className="HabitCard__container">
       {/* <div className="HabitCard__calendar">

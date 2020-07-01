@@ -4,11 +4,8 @@ import Calendar from 'react-calendar';
 /** Styles **/
 import './CalendarComponent.css';
 /** Helpers **/
-import { getDateYYYYMMDD } from '../../../helpers/dateObjHelpers';
+import { highlightRange, getRange } from '../../../helpers/CalendarHelpers';
 
-
-/** Constants **/
-const CALENDAR_SELECTED = 'CalendarComponent__selected';
 
 const CalendarComponent = () => {
   const [value, setValue] = useState(new Date());
@@ -18,31 +15,18 @@ const CalendarComponent = () => {
     setValue(value);
   }
 
-  // sets the color of the last selected date tile
-  const tileClassName = ({ date, view }) => {
-    if (view === 'month') {
-      const _date = getDateYYYYMMDD(date);
-      const _value = getDateYYYYMMDD(value);
-      if (_date === _value) {
-        return CALENDAR_SELECTED;
-      }
-    }
-  };
-
-
   return (
     <section
       className="CalendarComponent">
       <Calendar
         value={value}
         onClickDay={handleClickDay}
-        tileClassName={tileClassName}
+        tileClassName={highlightRange}
       />
 
       <hr />
       <button onClick={e => {
         e.preventDefault();
-        console.log(getDateYYYYMMDD(value));
       }}>
         stats
       </button>
