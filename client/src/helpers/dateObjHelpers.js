@@ -5,7 +5,7 @@ import { formatZeros } from './formatHelpers';
 /** Input: date object. Output: string in YYYY-MM-DD format **/
 export const getDateYYYYMMDD = dateObj => {
   const year = formatZeros(dateObj.getFullYear(), 2);
-  const month = formatZeros(dateObj.getMonth(), 2);
+  const month = formatZeros(dateObj.getMonth() + 1, 2); // Months: 0-11
   const date = formatZeros(dateObj.getDate(), 2);
   return `${year}-${month}-${date}`;
 };

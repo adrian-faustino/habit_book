@@ -6,6 +6,10 @@ import './CalendarComponent.css';
 /** Helpers **/
 import { getDateYYYYMMDD } from '../../../helpers/dateObjHelpers';
 
+/** Calendar classnames constants **/
+const CALENDAR_SELECTED = 'CalendarComponent__selected';
+const CALENDAR_TODAY = 'CalendarComponent__today';
+
 /* Props notes:
 /* completedAt is an array of dates in the same format as what is 
 /*  returned from getDateYYYYMMDD function */
@@ -20,12 +24,14 @@ const CalendarComponent = props => {
   }
 
   const highlightRange = ({ date, view }) => {
-    /** Constants **/
-    // to add successful day highlight css class
-    const CALENDAR_SELECTED = 'CalendarComponent__selected';
     if (view === 'month') {
       const _date = getDateYYYYMMDD(date);
+      const today = getDateYYYYMMDD(new Date());
+
+      // highlight completed days in the past
       if (completedAt.includes(_date)) return CALENDAR_SELECTED;
+      // highlight today
+      if (_date === today) return CALENDAR_TODAY;
     }
   };
 

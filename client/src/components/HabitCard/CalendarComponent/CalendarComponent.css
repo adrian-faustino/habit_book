@@ -8,3 +8,7 @@
 .CalendarComponent__selected {
   background: blue;
 }
+
+.CalendarComponent__today {
+  background: green;
+}
