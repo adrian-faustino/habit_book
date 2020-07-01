@@ -218,7 +218,7 @@ const RegistrationForm = () => {
           type="submit"
           color={
             isEmptyObj(isValidSubmission(values)) ? "success" : "secondary"}>
-            {loading ? <Spinner size="sm"/> : 'Register'}
+              {loading ? <Spinner size="sm"/> : 'Register'}
         </Button>
       </Form>
       

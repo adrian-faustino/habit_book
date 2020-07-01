@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './NewHabitForm.css';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import useForm from '../../../hooks/useFormHook';
+/** Redux **/
 import { useSelector } from 'react-redux';
-import { Alert } from 'reactstrap';
+/** Reactstrap **/
+import { Button, Form, FormGroup, Label, Input, FormText, Alert, Spinner } from 'reactstrap';
+/** Helpers **/
+import useForm from '../../../hooks/useFormHook';
+/** Styles **/
+import './NewHabitForm.css';
 
 const NewHabitForm = () => {
+  /** State **/
   const [
     values,
     handleChange,
@@ -14,6 +18,9 @@ const NewHabitForm = () => {
     handleReset
   ] = useForm(submitHabit);
   const [formFeedback, setFormFeedback] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  /** Redux **/
   const user = useSelector(state => state.user);
 
   function submitHabit() {
@@ -28,6 +35,7 @@ const NewHabitForm = () => {
       }
     };
 
+    setLoading(true);
     axios
       .post(endpoint, payload, config)
       .then(res => {
@@ -35,6 +43,7 @@ const NewHabitForm = () => {
         // reset form and set feedback
         handleReset();
         setFormFeedback(res.data.msg);
+        setLoading(false);
 
         // remove form feedback after 2 seconds
         setTimeout(() => {
@@ -71,8 +80,10 @@ const NewHabitForm = () => {
             type="textarea" />
         </FormGroup>
 
-        <Button type="submit">
-          Submit
+        <Button
+          disabled={loading}
+          type="submit">
+            {loading ? <Spinner size="sm"/> : 'Submit'}
         </Button>
       </Form>
 
