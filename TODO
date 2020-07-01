@@ -68,6 +68,7 @@ Refactor tasks:
 [x] fix response on successful CRUD (userCRUD.js)
 [x] fix username and password regex (special chars, _, -, etc);
 [] clean up React imports, comment (for consistency)
+[] add auth for all read routes (like habits/:user_id)
 
 Bugs:
 [x] username/password shouldn't have white space

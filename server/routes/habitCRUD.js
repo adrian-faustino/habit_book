@@ -6,6 +6,7 @@ const { formatToYYYYMMDD } = require('../helpers/formatHelpers');
 
 /** Constants **/
 const HABITS_TABLE = 'habits';
+const COMPLETED_AT_TABLE = 'completed_at';
 
 // @route   habits/~
 // @desc    handle habits CRUD requests
@@ -66,6 +67,25 @@ router.get('/:user_id', async (req, res) => {
       await pool.query(queryString, [req.params.user_id])
     ).rows;
     res.json(allHabits);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: err.message });
+  }
+});
+
+/** Return all completed dates for a habit **/
+router.get('/:user_id/:habit_id', async (req, res) => {
+  const { user_id, habit_id } = req.params;
+
+  try {
+    const queryString = `
+      SELECT * FROM ${COMPLETED_AT_TABLE}
+      WHERE user_id = $1 AND habit_id = $2;
+    `;
+    const result = (
+      await pool.query(queryString, [user_id, habit_id])
+      ).rows;
+      res.json(result);
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: err.message });
