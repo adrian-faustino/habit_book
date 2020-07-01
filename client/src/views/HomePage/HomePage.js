@@ -18,7 +18,8 @@ const HomePage = () => {
     first_name,
     last_name,
     username,
-    email
+    email,
+    user_id
   } = user;
 
   if (!isLogged) return <Redirect to="/welcome"/>
@@ -39,7 +40,7 @@ const HomePage = () => {
       </h4>
 
       <NewHabit />
-      <CardsContainer />
+      {user_id && <CardsContainer />}
     </div>
   )
 }

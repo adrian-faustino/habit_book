@@ -18,9 +18,9 @@ SERVER TODO:
   Habits:
 [] habit crud routes
   [x] create habit
-  [] read habit
+  [x] read habit
   [] update habit (edit)
-  [] delete habit
+  [x] delete habit
   [] habit validation before submission
   [] validation:
     [] no empty title
@@ -29,7 +29,8 @@ SERVER TODO:
   [x] list a user's own Habits /habits/:userID
   [x] post a new habit
   [] update habit
-  [] delete habit
+  [x] delete habit
+    [] auth (make sure only logged in user can delete their OWN habits)
 [] add a limit to requests (pagination? inf scroll etc)
 
 
@@ -51,7 +52,7 @@ CLIENT TODO:
   Habits:
 [x] habit cards to display user habits (component)
   [x] format created at to proper date
-  [] implement calendar like on github
+  [x] implement calendar like on github
   [] implement like and commment button
     [] display total likes 
     [] display comments
@@ -63,6 +64,7 @@ CLIENT TODO:
           [x] seed compelted_at table for user 19
           [x] get list of completed days for user 19
           [x] write functions to extract data from that array
+        [] refresh displayed when new habit is added or when its deleted
 
 
 
@@ -74,6 +76,7 @@ Refactor tasks:
 [x] fix username and password regex (special chars, _, -, etc);
 [] clean up React imports, comment (for consistency)
 [] add auth for all read routes (like habits/:user_id)
+[] refresh page after all CRUD? (to show most updated version from DB)
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -94,8 +97,10 @@ Current task:
   [x] new register page -> redirect to login page -> login page enter username and password -> check DB if there, return JWT token :)
 [] habit crud routes
   [x] create habit
-  [] read habit
+  [x] read habit
   [] update habit (edit)
-  [] delete habit
+  [x] delete habit
 [x] habit cards to display user habits
   [x] learn about children props
+[] auth (make sure only logged in user can delete their OWN habits) 
+[] refresh displayed when new habit is added or when its deleted

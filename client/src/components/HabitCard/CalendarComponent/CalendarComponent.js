@@ -44,12 +44,12 @@ const CalendarComponent = props => {
         tileClassName={highlightRange}
       />
 
-      <hr />
+      {/* <hr />
       <button onClick={e => {
         e.preventDefault();
       }}>
         stats
-      </button>
+      </button> */}
     </section>
   );
 };
