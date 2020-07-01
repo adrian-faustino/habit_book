@@ -54,9 +54,9 @@ CLIENT TODO:
 
       Habits - calendar
         [] Highlight range of dates (to show successful days)
-          [] set up broken_at table
-          [] seed broken_at table for user 19
-          [] get list of broken days for user 19
+          [x] set up compelted_at table
+          [x] seed compelted_at table for user 19
+          [] get list of completed days for user 19
           [] write functions to extract data from that array
 
 
