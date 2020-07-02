@@ -8,6 +8,7 @@ import { increment } from '../../../actions';
 import { Button, Form, FormGroup, Label, Input, FormText, Alert, Spinner } from 'reactstrap';
 /** Helpers **/
 import useForm from '../../../hooks/useFormHook';
+import { validateForm } from '../../../helpers/habitFormHelpers';
 /** Styles **/
 import './NewHabitForm.css';
 
@@ -29,10 +30,13 @@ const NewHabitForm = props => {
   const dispatch = useDispatch();
 
   function submitHabit() {
+    const validate = validateForm(values);
+    if (validate.err) return setError(validate.err);
+
     const endpoint = 
       process.env.REACT_APP_API + 'habits/newHabit';
 
-    const payload = { user, habit: values };
+    const payload = { user, habit: validate.habit };
 
     const config = {
       headers: {
