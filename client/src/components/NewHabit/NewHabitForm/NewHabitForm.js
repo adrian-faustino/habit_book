@@ -22,6 +22,7 @@ const NewHabitForm = props => {
   ] = useForm(submitHabit);
   const [formFeedback, setFormFeedback] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   /** Redux **/
   const user = useSelector(state => state.user);
@@ -48,6 +49,7 @@ const NewHabitForm = props => {
         handleReset();
         setFormFeedback(res.data.msg);
         setLoading(false);
+        setError('');
 
         // trigger fetch data after crud operation
         dispatch(increment(1));
@@ -57,7 +59,10 @@ const NewHabitForm = props => {
           setFormFeedback('');
         }, 2000);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        setLoading(false);
+        setError(err.response.data.err)
+      });
     }
 
   return (
@@ -98,8 +103,15 @@ const NewHabitForm = props => {
         (<Alert
           className="NewHabitForm__form-feedback"
           color="success">
-          {formFeedback}
+            {formFeedback}
       </Alert>)}
+      {error &&
+        (<Alert
+          className="NewHabitForm__error"
+          color="danger">
+            {error}
+        </Alert>)
+      }
     </div>
   );
 };

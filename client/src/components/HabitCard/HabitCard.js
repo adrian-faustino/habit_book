@@ -69,7 +69,7 @@ const HabitCard = ({habit}) => {
         <h4 className="HabitCard__title">{title}</h4>
         <span
           className="HabitCard__description">
-          {description}
+          {description ? description : <i>No description provided.</i>}
         </span>
         <h5
           className="HabitCard__created-at">

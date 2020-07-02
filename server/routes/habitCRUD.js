@@ -16,6 +16,11 @@ const COMPLETED_AT_TABLE = 'completed_at';
 // CREATE Habit
 router.post('/newHabit', authenticateToken, async (req, res) => {
   const { user, habit } = req.body;
+  // check if title is not empty
+  if (!habit.title) return res.status(500).json({
+    err: 'Please enter a title.'
+  });
+
   const created_at = formatToYYYYMMDD(new Date());
   const userID = user.user_id;
 
@@ -33,12 +38,19 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7);
   `;
 
-  const newHabit = await pool.query(queryString, VALUES);
-  const jsonRes = {
-    msg: 'New habit successfully created.',
-    newHabit
-  };
-  res.json(jsonRes);
+  pool
+    .query(queryString, VALUES)
+    .then(data => {
+      const jsonRes = {
+        msg: 'New habit created!',
+        habit: data.data
+      };
+      res.json(jsonRes);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ msg: err.message });
+    });
 });
 
 // READ habits
