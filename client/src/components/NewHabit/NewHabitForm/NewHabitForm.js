@@ -30,13 +30,16 @@ const NewHabitForm = props => {
   const dispatch = useDispatch();
 
   function submitHabit() {
-    const validate = validateForm(values);
-    if (validate.err) return setError(validate.err);
+    // ensure no empty title, and trim text for whitespace
+    const validated = validateForm(values);
+    if (validated.err) return setError(validated.err);
 
+    // if validation passes, send post request
+    console.log('Submitting new habit...');
     const endpoint = 
       process.env.REACT_APP_API + 'habits/newHabit';
 
-    const payload = { user, habit: validate.habit };
+    const payload = { user, habit: validated.habit };
 
     const config = {
       headers: {

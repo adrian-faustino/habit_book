@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../db/db');
 const authenticateToken = require('../helpers/auth');
 const { formatToYYYYMMDD } = require('../helpers/formatHelpers');
+const validateForm = require('../helpers/habitValidationHelpers');
 
 /** Constants **/
 const HABITS_TABLE = 'habits';
@@ -16,17 +17,19 @@ const COMPLETED_AT_TABLE = 'completed_at';
 // CREATE Habit
 router.post('/newHabit', authenticateToken, async (req, res) => {
   const { user, habit } = req.body;
-  // check if title is not empty
-  if (!habit.title) return res.status(500).json({
-    err: 'Please enter a title.'
+  // ensure no empty title, and trim text for whitespace
+  const validated = validateForm(habit);
+  if (validated.err) return res.status(500).json({
+    err: validated.err
   });
 
+  // if validation passes, insert into DB
   const created_at = formatToYYYYMMDD(new Date());
   const userID = user.user_id;
 
   const VALUES = [
-    habit.title,
-    habit.description,
+    validated.habit.title,
+    validated.habit.description,
     created_at,
     null,
     null,

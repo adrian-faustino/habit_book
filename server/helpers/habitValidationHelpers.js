@@ -1,12 +1,12 @@
-/** Output: valid title **/
-// no repeated whitespace
+/** Output: boolean **/
+// only allows alphanumeric and white space
 const isValidTitle = title => {
   const REGEX = /^[a-z\d\-_\s]+$/i; // simple alpha numeric regex with whitespace for now
   return REGEX.test(title);
 };
 
 /** Input: string **/
-// remove excess whitespace and tabs
+// remove excess whitespace and tabs (prepare for DB insert)
 const trimText = title => {
   if (!title) return;
   const _title = title.trim().replace(/\s\s+/g, ' ');
@@ -14,7 +14,7 @@ const trimText = title => {
 };
 
 /** Input: object. Output: object **/
-export const validateForm = values => {
+const validateForm = values => {
   const { title, description } = values;
 
   if (!title) return { err: 'Please enter a title.' };
@@ -27,3 +27,5 @@ export const validateForm = values => {
 
   return { err: null, habit };
 };
+
+module.exports = validateForm;
