@@ -21,10 +21,10 @@ SERVER TODO:
   [x] read habit
   [] update habit (edit)
   [x] delete habit
-  [] habit validation before submission
-  [] validation:
-    [] no empty title
-    [] no empty desc
+  [x] habit validation before submission
+  [x] validation:
+    [x] no empty title
+    [x] no empty desc
   [x] list all Habits /habits
   [x] list a user's own Habits /habits/:userID
   [x] post a new habit
