@@ -60,7 +60,7 @@ CLIENT TODO:
   [] implement like and commment button
     [] display total likes 
     [] display comments
-  [] implement "check" (completed today) button
+  [x] implement "check" (completed today) button
 
       Habits - calendar
         [x] Highlight range of dates (to show successful days)
@@ -71,7 +71,7 @@ CLIENT TODO:
         [x] refresh displayed when new habit is added or when its deleted
 
   Calendar:
-  [] on click -> post req to create an entry in created_at
+  [x] on click -> post req to create an entry in created_at
 
 
 Refactor tasks:
@@ -84,6 +84,7 @@ Refactor tasks:
 [] add auth for all read routes (like habits/:user_id)
 [x] refresh page after all CRUD? (to show most updated version from DB)
 [] when deleting a habit, delete all completed_at entries related to it
+[] no dates in the future can be clicked for completed_at
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -113,6 +114,6 @@ Current task:
 [x] refresh displayed when new habit is added or when its deleted
 
 
-[] when user clicks current day, update DB 
-  [] set compeleted_at
-  [] set 
+[x] when user clicks current day, update DB 
+  [x] set compeleted_at
+  [x] trigger update 
