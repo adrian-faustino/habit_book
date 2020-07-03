@@ -20,23 +20,25 @@ router.post('/:date/:user_id/:habit_id', async (req, res) => {
     AND habit_id = $2
     AND CAST(completed_at AS text) LIKE '${date}%';
   `;
-  const exists = pool
+
+  pool
     .query(checkQuery, [user_id, habit_id])
     .then(result => {
       // if completed at exists already
       if (result.rows.length > 0) {
-        
-      }
+        console.log('Day already marked compelte!');
+        return res
+          .status(500)
+          .json({ msg: 'Day already marked completed!'});
+      };
     })
     .catch(err => {
       console.error(err);
       res.status(500).json({ msg: err.message });
     });
-  console.log('exists', exists);
 
 
-
-  
+  // if day is not marked as compelte yet, add to database
   const insertQuery = `
     INSERT INTO ${CREATED_AT_TABLE} (user_id, habit_id, completed_at)
     VALUES ($1, $2, $3);
