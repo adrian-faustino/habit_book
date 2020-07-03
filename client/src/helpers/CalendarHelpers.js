@@ -31,6 +31,9 @@ export const createCompletedAt = async (date, user_id, habit_id) => {
     `created_at/${date}/${user_id}/${habit_id}`;
 
   axios
-    .post(endpoint);
-  console.log('good', date, user_id, habit_id);
+    .post(endpoint)
+    .then(data => {
+      console.log('good entry')
+    })
+    .catch(err => console.log('bad day',err.response));
 };
