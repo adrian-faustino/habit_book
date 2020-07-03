@@ -28,7 +28,7 @@ import axios from 'axios';
 // todo: auth (THIS NEEDS TO BE A PROTECTED ROUTE)
 export const createCompletedAt = async (date, user_id, habit_id) => {
   const endpoint = process.env.REACT_APP_API +
-  `created_at/${date}/${user_id}/${habit_id}`;
+    `created_at/${date}/${user_id}/${habit_id}`;
 
   axios
     .post(endpoint);

@@ -13,7 +13,7 @@ const {
   emailExists } = require('../helpers/userValidationHelpers');
 
 /** Constants **/
-const TABLE_NAME = 'users';
+const USERS_TABLE = 'users';
 
 // @route   user/~
 // @desc    handle user CRUD requests
@@ -44,11 +44,11 @@ router.post('/newUser', async (req, res) => {
     /** Validate password **/
     !isValidPassword(password) && (error.password = `Invalid password.`);
     /** Check if email exists already **/
-    if (email && await emailExists(pool, TABLE_NAME, email)) {
+    if (email && await emailExists(pool, USERS_TABLE, email)) {
       error.email = `Email is already registered.`;
     }
     /** Check if username exists already **/
-    if (username && await usernameExists(pool, TABLE_NAME, username)) {
+    if (username && await usernameExists(pool, USERS_TABLE, username)) {
       error.username = `Username is taken.`;
     }
 
@@ -72,7 +72,7 @@ router.post('/newUser', async (req, res) => {
 
     const VALUES = [username, first_name, last_name, email, hashedPassword, created_at, is_active, avatar_url];
     const createUserQuery = `
-      INSERT INTO ${TABLE_NAME} (username, first_name, last_name, email, password, created_at, is_active, avatar_url)
+      INSERT INTO ${USERS_TABLE} (username, first_name, last_name, email, password, created_at, is_active, avatar_url)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
     `;
 
@@ -99,7 +99,7 @@ router.post('/newUser', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const getAllUsersQuery = `
-      SELECT * FROM ${TABLE_NAME};
+      SELECT * FROM ${USERS_TABLE};
     `;
     const allUsers = (await pool.query(getAllUsersQuery)).rows;
     res.json(allUsers); // [{}, {}, {}]
@@ -128,7 +128,7 @@ router.put('/:id', async (req, res) => {
     /** Validate password **/
     password && !isValidPassword(password) && (error.password = `Invalid password.`);
     /** Check if username exists already **/
-    if (username && await usernameExists(pool, TABLE_NAME, username)) {
+    if (username && await usernameExists(pool, USERS_TABLE, username)) {
       error.username = `Username is taken.`;
     }
 
@@ -140,7 +140,7 @@ router.put('/:id', async (req, res) => {
 
     const VALUES = [];
     let  queryHead = `
-      UPDATE ${TABLE_NAME} SET
+      UPDATE ${USERS_TABLE} SET
     `;
 
     if (username) {
@@ -185,7 +185,7 @@ router.delete('/:id', async (req, res) => {
     const { id } = req.params;
 
     const deleteUserQuery = `
-      DELETE FROM ${TABLE_NAME}
+      DELETE FROM ${USERS_TABLE}
       WHERE user_id = $1;
     `;
 
