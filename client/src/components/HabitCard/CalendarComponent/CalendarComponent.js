@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 import './CalendarComponent.css';
 /** Helpers **/
 import { getDateYYYYMMDD } from '../../../helpers/dateObjHelpers';
+import { createCompletedAt } from '../../../helpers/CalendarHelpers';
 
 /** Calendar classnames constants **/
 const CALENDAR_SELECTED = 'CalendarComponent__selected';
@@ -14,13 +15,23 @@ const CALENDAR_TODAY = 'CalendarComponent__today';
 /* completedAt is an array of dates in the same format as what is 
 /*  returned from getDateYYYYMMDD function */
 const CalendarComponent = props => {
-  const { completedAt } = props;
+  const { completedAt, user_id, habit_id } = props;
   const [value, setValue] = useState(new Date());
 
 
   const handleClickDay = (value, e) => {
-    console.log('Cicked day,', value, e);
     setValue(value);
+    
+    console.log('Cicked day,', getDateYYYYMMDD(value));
+    console.log('List of days', completedAt);
+    // check if day is not in completedAt[]
+
+
+    // request to create completed_at
+    const date = getDateYYYYMMDD(value);
+    createCompletedAt(date, user_id, habit_id);
+
+    // trigger change
   }
 
   const highlightRange = ({ date, view }) => {

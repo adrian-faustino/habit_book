@@ -15,7 +15,9 @@ const {
 /** Constants **/
 const TABLE_NAME = 'users';
 
-
+// @route   user/~
+// @desc    handle user CRUD requests
+// @access  Private
 
 // ===> CREATE
 /** .com/users/newUser **/

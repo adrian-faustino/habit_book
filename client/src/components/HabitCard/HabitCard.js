@@ -64,6 +64,8 @@ const HabitCard = ({habit}) => {
   return (
     <div className="HabitCard__container">
       <CalendarComponent
+        habit_id={habit_id}
+        user_id={user_id}
         completedAt={completedAt}/>
       <div className="HabitCard__data-container">
         <h4 className="HabitCard__title">{title}</h4>

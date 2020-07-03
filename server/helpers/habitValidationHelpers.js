@@ -18,7 +18,7 @@ const validateForm = values => {
   const { title, description } = values;
 
   if (!title) return { err: 'Please enter a title.' };
-  if (!isValidTitle(title)) return { err: 'Invalid characters used.' };
+if (!isValidTitle(title)) return { err: 'Invalid characters used.' };
 
   const habit = {
     title: trimText(title),

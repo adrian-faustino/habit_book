@@ -34,6 +34,10 @@ SERVER TODO:
 [] add a limit to requests (pagination? inf scroll etc)
 
 
+  created_at:
+  [] crud routes
+  [] protect route
+
 CLIENT TODO:
   Users:
 [x] set up redux
@@ -66,6 +70,8 @@ CLIENT TODO:
           [x] write functions to extract data from that array
         [x] refresh displayed when new habit is added or when its deleted
 
+  Calendar:
+  [] on click -> post req to create an entry in created_at
 
 
 Refactor tasks:
@@ -104,3 +110,8 @@ Current task:
   [x] learn about children props
 [] auth (make sure only logged in user can delete their OWN habits) 
 [x] refresh displayed when new habit is added or when its deleted
+
+
+[] when user clicks current day, update DB 
+  [] set compeleted_at
+  [] set 

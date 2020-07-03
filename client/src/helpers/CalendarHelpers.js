@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // import { getDateYYYYMMDD } from '../helpers/dateObjHelpers';
 
 // // Return an array of days that the user has marked 
@@ -21,3 +23,14 @@
 //     }
 //   }
 // };
+
+// Input: Date YYYY-MM-DD. Ask server to insert new created_at into db
+// todo: auth (THIS NEEDS TO BE A PROTECTED ROUTE)
+export const createCompletedAt = async (date, user_id, habit_id) => {
+  const endpoint = process.env.REACT_APP_API +
+  `created_at/${date}/${user_id}/${habit_id}`;
+
+  axios
+    .post(endpoint);
+  console.log('good', date, user_id, habit_id);
+};

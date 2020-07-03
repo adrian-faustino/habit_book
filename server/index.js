@@ -15,9 +15,11 @@ const homeRoutes = require('./routes');
 const userRoutes = require('./routes/userCRUD');
 const userAuth = require('./routes/userAuth');
 const habitRoutes = require('./routes/habitCRUD');
+const created_atRoutes = require('./routes/created_atCRUD');
 app.use('/login', userAuth);
 app.use('/users', userRoutes);
 app.use('/habits', habitRoutes);
+app.use('/created_at', created_atRoutes);
 app.use('/', homeRoutes);
 
 
