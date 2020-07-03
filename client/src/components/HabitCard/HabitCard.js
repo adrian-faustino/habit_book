@@ -31,6 +31,7 @@ const HabitCard = ({habit}) => {
 
   /** Redux **/
   const dispatch = useDispatch();
+  const counter = useSelector(state => state.counter);
 
   /* STRETCH: use for auth later */
   const user = useSelector(state => state.user);
@@ -50,7 +51,7 @@ const HabitCard = ({habit}) => {
       setCompletedAt(dates);
     })
     .catch(err => console.log(err));
-  }, []);
+  }, [counter]);
   
   // If this habit belongs to this user, display delete btn
   const _user_id = useSelector(state => state.user.user_id);

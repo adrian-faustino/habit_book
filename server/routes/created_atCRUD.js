@@ -35,9 +35,11 @@ router.post('/:date/:user_id/:habit_id', async (req, res) => {
         (user_id, habit_id, completed_at)
       VALUES ($1, $2, $3);
     `;
-    const newEntry = pool.query(insertQuery, [user_id, habit_id, date]);
+    
+    await pool.query(insertQuery, [user_id, habit_id, date]);
     res.json({
-      msg: 'Day marked completed!', newEntry
+      msg: 'Day marked completed!',
+      date
     });
 
   } catch (err) {

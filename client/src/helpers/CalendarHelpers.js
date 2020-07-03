@@ -30,10 +30,17 @@ export const createCompletedAt = async (date, user_id, habit_id) => {
   const endpoint = process.env.REACT_APP_API +
     `created_at/${date}/${user_id}/${habit_id}`;
 
-  axios
-    .post(endpoint)
-    .then(data => {
-      console.log('good entry')
-    })
-    .catch(err => console.log('bad day',err.response));
+  try {
+    const request = await axios.post(endpoint);
+    const newEntry = request.data;
+    return newEntry;
+  } catch (err) {
+    console.log(err);
+  }
+  // axios
+  //   .post(endpoint)
+  //   .then(data => {
+  //     console.log('good entry')
+  //   })
+  //   .catch(err => console.log('bad day',err.response));
 };
