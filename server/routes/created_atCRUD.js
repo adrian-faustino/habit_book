@@ -30,33 +30,32 @@ router.post('/:date/:user_id/:habit_id', async (req, res) => {
         return res
           .status(500)
           .json({ msg: 'Day already marked completed!'});
-      };
+      } else {
+        // if day is not marked as compelte yet, add to database
+        const insertQuery = `
+          INSERT INTO ${CREATED_AT_TABLE} (user_id, habit_id, completed_at)
+          VALUES ($1, $2, $3);
+        `;
+
+        pool
+          .query(insertQuery, [user_id, habit_id, date])
+          .then(data => {
+            const jsonRes = {
+              msg: 'New completed_at created!',
+              data
+            }
+            res.json(jsonRes);
+          })
+          .catch(err => {
+            console.error(err);
+            res.status(500).json({ msg: err.message });
+          })
+      }
     })
     .catch(err => {
       console.error(err);
       res.status(500).json({ msg: err.message });
     });
-
-
-  // if day is not marked as compelte yet, add to database
-  const insertQuery = `
-    INSERT INTO ${CREATED_AT_TABLE} (user_id, habit_id, completed_at)
-    VALUES ($1, $2, $3);
-  `;
-
-  pool
-    .query(insertQuery, [user_id, habit_id, date])
-    .then(data => {
-      const jsonRes = {
-        msg: 'New completed_at created!',
-        data
-      }
-      res.json(jsonRes);
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({ msg: err.message });
-    })
 });
 
 module.exports = router;
