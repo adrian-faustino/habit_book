@@ -26,7 +26,7 @@ const CalendarComponent = props => {
   /** Redux **/
   const dispatch = useDispatch();
 
-
+  // when user clicks a tile on the calendar...
   const handleClickDay = async (value, e) => {
     setValue(value);
     
@@ -44,10 +44,11 @@ const CalendarComponent = props => {
     const date = getDateYYYYMMDD(value);
     createCompletedAt(date, user_id, habit_id);
 
-    // trigger change
+    // trigger view update
     dispatch(increment(1));
   }
 
+  // this sets the color on completed days
   const highlightRange = ({ date, view }) => {
     if (view === 'month') {
       const _date = getDateYYYYMMDD(date);

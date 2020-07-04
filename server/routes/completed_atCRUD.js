@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
+const { getDateYYYYMMDD } = require('../helpers/formatHelpers');
 
 /** Constants **/
 const CREATED_AT_TABLE = 'completed_at';
@@ -27,6 +28,12 @@ router.post('/:date/:user_id/:habit_id', async (req, res) => {
       console.log('completed_at not created.')
       return res.status(500).json({ err: 'Day already marked complete!' });
     }
+
+    // check if day is in future
+    if (date > getDateYYYYMMDD(new Date())) {
+      console.log('completed_at not created.')
+      return res.status(500).json({ err: 'Cannot set dates in the future.' });
+    };
 
     // if validation passed
     console.log('inserting new completed_at...');
