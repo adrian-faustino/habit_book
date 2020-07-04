@@ -114,18 +114,25 @@ router.get('/:user_id/:habit_id', async (req, res) => {
 
 // DELETE habits
 router.delete('/:user_id/:habit_id', async (req, res) => {
-  console.log(req.params);
+  const { user_id, habit_id } = req.params;
   // authent
 
   try {
-    const queryString = `
+    // delete all completed_at related to that habit
+    const deleteCompleted_at = `
+      DELETE FROM ${COMPLETED_AT_TABLE}
+      WHERE habit_id = $1
+      AND user_id = $2;
+    `;
+    
+    const deleteHabit = `
       DELETE FROM ${HABITS_TABLE}
       WHERE habit_id = $1;
     `;
-    const result = (
-      await pool.query(queryString, [req.params.habit_id])
-    ).rows;
-    res.json(result);
+    
+    await pool.query(deleteCompleted_at, [habit_id, user_id]);
+    await pool.query(deleteHabit, [habit_id]);
+    res.json({ msg: 'Successfully deleted habit.'});
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: err.message });
