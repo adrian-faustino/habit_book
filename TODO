@@ -83,7 +83,7 @@ Refactor tasks:
 [] clean up React imports, comment (for consistency)
 [] add auth for all read routes (like habits/:user_id)
 [x] refresh page after all CRUD? (to show most updated version from DB)
-[] when deleting a habit, delete all completed_at entries related to it
+[x] when deleting a habit, delete all completed_at entries related to it
 [] no dates in the future can be clicked for completed_at
 
 Bugs:

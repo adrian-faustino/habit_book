@@ -30,11 +30,14 @@ const CalendarComponent = props => {
   const handleClickDay = async (value, e) => {
     setValue(value);
     
-    console.log('Cicked day,', getDateYYYYMMDD(value));
-    console.log('List of days', completedAt);
     // check if day is not in completedAt[]
     const isSelected = (e.target.className).includes(CALENDAR_SELECTED);
     if (isSelected) return console.log('Already marked blue.');
+
+    // check if day is not in future
+    if (getDateYYYYMMDD(value) > getDateYYYYMMDD(new Date())) {
+      return console.log('Cannot set future dates.');
+    }
 
     // request to create completed_at
     console.log('Requesting new completed_at...');
