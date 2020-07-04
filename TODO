@@ -84,7 +84,7 @@ Refactor tasks:
 [] add auth for all read routes (like habits/:user_id)
 [x] refresh page after all CRUD? (to show most updated version from DB)
 [x] when deleting a habit, delete all completed_at entries related to it
-[] no dates in the future can be clicked for completed_at
+[x] no dates in the future can be clicked for completed_at
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -94,7 +94,7 @@ Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
 [x] forms - server side validation AND server side validation
 
-Current task:
+Current task: (I set these when I end the night, to remind myself in the morning)
 [x] validation to prevent create/update same username or email
 [x] refactor: fix CRUD response
 [x] client side: set up new user registration form
@@ -112,8 +112,10 @@ Current task:
   [x] learn about children props
 [] auth (make sure only logged in user can delete their OWN habits) 
 [x] refresh displayed when new habit is added or when its deleted
-
-
 [x] when user clicks current day, update DB 
   [x] set compeleted_at
   [x] trigger update 
+
+[] habit card form feedback
+  [] when user marks a day complete
+  [] err feedback when user tries to set a day in the future
