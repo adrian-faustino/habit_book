@@ -54,6 +54,11 @@
   margin: 0 5px;
 }
 
+.HabitCard__err-msg {
+  position: absolute;
+  top: 35%;
+}
+
 .HabitCard__delete-card-btn {
   position: absolute;
   top: 2px;
