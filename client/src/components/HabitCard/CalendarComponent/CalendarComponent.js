@@ -15,11 +15,14 @@ import { increment } from '../../../actions';
 const CALENDAR_SELECTED = 'CalendarComponent__selected';
 const CALENDAR_TODAY = 'CalendarComponent__today';
 
+/** Constants **/
+const ERR_TIMEOUT_FADE = 2000 // time in ms
+
 /* Props notes:
 /* completedAt is an array of dates in the same format as what is 
 /*  returned from getDateYYYYMMDD function */
 const CalendarComponent = props => {
-  const { completedAt, user_id, habit_id } = props;
+  const { completedAt, user_id, habit_id, setErr } = props;
 
   /** State **/
   const [value, setValue] = useState(new Date());
@@ -36,7 +39,10 @@ const CalendarComponent = props => {
 
     // check if day is not in future
     if (getDateYYYYMMDD(value) > getDateYYYYMMDD(new Date())) {
-      return console.log('Cannot set future dates.');
+      setErr('Cannot set future date.');
+      return setTimeout(() => {
+        setErr('');
+      }, ERR_TIMEOUT_FADE);
     }
 
     // request to create completed_at

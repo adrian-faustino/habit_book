@@ -3,7 +3,7 @@ import axios from 'axios';
 /** Subcomponents **/
 import CalendarComponent from './CalendarComponent/CalendarComponent';
 /** Reactstrap **/
-import { Tooltip } from 'reactstrap';
+import { Tooltip, Alert } from 'reactstrap';
 /** Styles **/
 import './HabitCard.css';
 /** Helpers **/
@@ -28,6 +28,7 @@ const HabitCard = ({habit}) => {
   /** State **/
   const [completedAt, setCompletedAt] = useState([]);
   const [isMyHabit, setIsMyHabit] = useState(false);
+  const [err, setErr] = useState('');
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -67,7 +68,8 @@ const HabitCard = ({habit}) => {
       <CalendarComponent
         habit_id={habit_id}
         user_id={user_id}
-        completedAt={completedAt}/>
+        completedAt={completedAt}
+        setErr={setErr}/>
       <div className="HabitCard__data-container">
         <h4 className="HabitCard__title">{title}</h4>
         <span
@@ -78,6 +80,12 @@ const HabitCard = ({habit}) => {
           className="HabitCard__created-at">
           Created at {formatToWords(created_at)}
         </h5>
+
+        {err && <Alert
+          color="danger"
+          className="HabitCard__err-msg">
+            {err}
+        </Alert>}
       </div>
 
       <footer className="HabitCard__footer">
