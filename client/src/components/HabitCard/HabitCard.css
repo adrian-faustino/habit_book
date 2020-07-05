@@ -54,7 +54,8 @@
   margin: 0 5px;
 }
 
-.HabitCard__err-msg {
+.HabitCard__err-msg,
+.HabitCard__success-msg {
   position: absolute;
   top: 35%;
 }

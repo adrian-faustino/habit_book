@@ -29,6 +29,7 @@ const HabitCard = ({habit}) => {
   const [completedAt, setCompletedAt] = useState([]);
   const [isMyHabit, setIsMyHabit] = useState(false);
   const [err, setErr] = useState('');
+  const [success, setSuccess] = useState('');
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ const HabitCard = ({habit}) => {
         habit_id={habit_id}
         user_id={user_id}
         completedAt={completedAt}
+        setSuccess={setSuccess}
         setErr={setErr}/>
       <div className="HabitCard__data-container">
         <h4 className="HabitCard__title">{title}</h4>
@@ -81,10 +83,18 @@ const HabitCard = ({habit}) => {
           Created at {formatToWords(created_at)}
         </h5>
 
+        {/* error feedback */}
         {err && <Alert
           color="danger"
           className="HabitCard__err-msg">
             {err}
+        </Alert>}
+
+        {/* success feedback */}
+        {success && <Alert
+          color="success"
+          className="HabitCard__success-msg">
+            {success}
         </Alert>}
       </div>
 

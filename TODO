@@ -118,4 +118,4 @@ Current task: (I set these when I end the night, to remind myself in the morning
 
 [] habit card form feedback
   [] when user marks a day complete
-  [] err feedback when user tries to set a day in the future
+  [x] err feedback when user tries to set a day in the future

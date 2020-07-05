@@ -22,7 +22,11 @@ const ERR_TIMEOUT_FADE = 2000 // time in ms
 /* completedAt is an array of dates in the same format as what is 
 /*  returned from getDateYYYYMMDD function */
 const CalendarComponent = props => {
-  const { completedAt, user_id, habit_id, setErr } = props;
+  const { completedAt,
+          user_id,
+          habit_id,
+          setErr,
+          setSuccess } = props;
 
   /** State **/
   const [value, setValue] = useState(new Date());
@@ -39,6 +43,10 @@ const CalendarComponent = props => {
 
     // check if day is not in future
     if (getDateYYYYMMDD(value) > getDateYYYYMMDD(new Date())) {
+
+      // clear present feedback and set new feedback
+      setErr('');
+      setSuccess('');
       setErr('Cannot set future date.');
       return setTimeout(() => {
         setErr('');
@@ -52,6 +60,14 @@ const CalendarComponent = props => {
 
     // trigger view update
     dispatch(increment(1));
+
+    // clear present feedback and set new feedback
+    setErr('');
+    setSuccess('');
+    setSuccess('Day marked complete!');
+    setTimeout(() => {
+      setSuccess('');
+    }, ERR_TIMEOUT_FADE);
   }
 
   // this sets the color on completed days
