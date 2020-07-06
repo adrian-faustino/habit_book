@@ -33,11 +33,10 @@ const RegistrationForm = () => {
     // form errors
   const { error, setError } = useRegistrationFormData();
     // form values
-  const [
-    values,
-    handleChange,
-    handleSubmit,
-    handleReset] = useForm(validate);
+  const [ values,
+          handleChange,
+          handleSubmit,
+          handleReset] = useForm(validate);
     // for loading spinner and redirect
   const [loading, setLoading] = useState(false);
   const [redirectURL, setRedirectURL] = useState(null);
