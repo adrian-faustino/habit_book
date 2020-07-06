@@ -38,6 +38,9 @@ SERVER TODO:
   [] crud routes
   [] protect route
 
+  Search users:
+    []
+
 CLIENT TODO:
   Users:
 [x] set up redux
@@ -116,6 +119,12 @@ Current task: (I set these when I end the night, to remind myself in the morning
   [x] set compeleted_at
   [x] trigger update 
 
-[] habit card form feedback
-  [] when user marks a day complete
+[x] habit card form feedback
+  [x] when user marks a day complete
   [x] err feedback when user tries to set a day in the future
+
+Search users 'Search page'
+  [] user types in name
+    [] display all users with that name
+    [] display all users with that email
+    [] display all users with that username
