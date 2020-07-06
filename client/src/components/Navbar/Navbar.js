@@ -34,6 +34,15 @@ const Navbar = () => {
               Test
           </NavLink>
         </NavItem>  
+
+        <NavItem>
+          <NavLink
+            className="Navbar__li"
+            tag={Link}
+            to="/search-users">
+              Find Users
+          </NavLink>
+        </NavItem>  
       </>)}
       
       {!isLogged && (<>

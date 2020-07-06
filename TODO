@@ -39,7 +39,9 @@ SERVER TODO:
   [] protect route
 
   Search users:
-    []
+    [] crud routes
+      [] read - return all users that match given params
+      [] add limit (pagination?)
 
 CLIENT TODO:
   Users:
@@ -75,6 +77,12 @@ CLIENT TODO:
 
   Calendar:
   [x] on click -> post req to create an entry in created_at
+
+  Search users 'Search page'
+  [] user types in name
+    [] display all users with that name
+    [] display all users with that email
+    [] display all users with that username
 
 
 Refactor tasks:

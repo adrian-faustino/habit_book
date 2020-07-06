@@ -3,12 +3,12 @@ import TestComponent from './components/TestComponent';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Views **/
-import { 
-  SignUpPage, 
-  HomePage, 
-  WelcomePage, 
-  LoginPage, 
-  LandingPage,  } from './views';
+import { SignUpPage, 
+         HomePage, 
+         WelcomePage, 
+         LoginPage, 
+         LandingPage, 
+         SearchPage } from './views';
 /** Components **/
 import { Navbar, ProtectedRoute } from './components';
 /** React router **/
@@ -43,6 +43,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/test">
           <TestComponent />
+        </ProtectedRoute>
+        <ProtectedRoute path="/search-users">
+          <SearchPage />
         </ProtectedRoute>
       </Router>
     </div>

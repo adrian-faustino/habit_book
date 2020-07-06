@@ -1,0 +1,29 @@
+/* .UserSearchBar__form {
+  position: relative;
+  top: 25vh;
+} */
+
+.UserSearchBar__input-group {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  width: 290px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.UserSearchBar__input-field,
+.UserSearchBar__button {
+  height: 100%;
+}
+
+.UserSearchBar__input-field {
+  border: none;
+  box-shadow: inset 0 0 5px black;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  padding: 0 10px;
+}
+
+.UserSearchBar__button {
+  border-radius: 0 5px 5px 0 !important; /* to overwrite reactstrap */
+}
