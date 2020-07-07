@@ -59,7 +59,7 @@ const isValidSubmission = values => {
   /** Validate if password matches **/
   values._password &&
     (values.password !== values._password) &&
-    (error._password = `Password does not match.;`);
+    (error._password = `Password does not match.`);
 
   return error;
 };

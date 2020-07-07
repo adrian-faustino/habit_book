@@ -30,3 +30,31 @@ export const handleDeleteCard = async (e, user_id, habit_id, dispatch) => {
     })
     .catch(err => console.log(err));
 };
+
+// get number of likes for each habit
+export const getLikes = async (user_id, habit_id, callback) => {
+  try {    
+    const endpoint = process.env.REACT_APP_API +
+      `habits/likes/${user_id}/${habit_id}`;
+    const likes = await axios.get(endpoint);
+    callback(likes.data[0].count);
+  } catch (err) {
+    console.log(err);
+  };
+};
+
+export const registerLike = (user, user_id, habit_id) => {
+  const liked_by = user.user_id;
+  const habit_by = user_id;
+  const _habit_id = habit_id;
+
+  const endpoint = process.env.REACT_APP_API +
+    `habits/likes/${liked_by}/${habit_by}/${_habit_id}`;
+  
+  axios
+    .post(endpoint)
+    .then(res => {
+      console.log('New like registered!', res);
+    })
+    .catch(err => console.log(err));
+};

@@ -8,7 +8,7 @@ import { Tooltip, Alert } from 'reactstrap';
 import './HabitCard.css';
 /** Helpers **/
 import { formatToWords } from '../../helpers/formatHelpers';
-import { handleDeleteCard } from '../../helpers/habitDataHelpers';
+import { handleDeleteCard, getLikes, registerLike } from '../../helpers/habitDataHelpers';
 /** Redux **/
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -64,21 +64,16 @@ const HabitCard = ({habit}) => {
     }
 
     // get likes
-    getLikes(user_id, habit_id);
+    getLikes(user_id, habit_id, setLikes);
   }, []);
 
-  const getLikes = async (user_id, habit_id) => {
-    console.log('Getting likes for habit:', habit_id);
-    const endpoint = process.env.REACT_APP_API +
-      `habits/likes/${user_id}/${habit_id}`;
 
-    axios
-      .get(endpoint)
-      .then(res => {
-        const likes = res.data[0].count;
-        setLikes(likes);
-      })
-      .catch(err => console.log(err));
+
+
+  const handleLikeBtn = e => {
+    e.preventDefault();
+
+    registerLike(user, user_id, habit_id);
   };
 
 
@@ -122,7 +117,7 @@ const HabitCard = ({habit}) => {
             className="HabitCard__likes-span">
               {`${likes} likes`}
           </span>)}
-        <button>like</button>
+        <button onClick={handleLikeBtn}>like</button>
         <button>comments</button>
       </footer>
 

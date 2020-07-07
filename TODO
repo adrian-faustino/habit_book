@@ -109,6 +109,7 @@ Bugs:
 [x] username/password shouldn't have white space
 [] when user marks days complete too fast, styling isnt applied (disabled until adding new completed_at is completed?)
 [] '_' is counting towards char count (wrong error message displayed in registration form)
+[] user search (make it case insensistive)
 
 Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
@@ -150,3 +151,4 @@ Search users 'Search page'
 [] Display total likes 
   [x] display each habit's likes
   [] like button functionality (create habit_like)
+  [] when deleting habit, make sure to delete all the likes associated with it

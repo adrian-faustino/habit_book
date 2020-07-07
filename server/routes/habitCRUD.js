@@ -57,6 +57,26 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
     });
 });
 
+// register a like on a habit
+// TODO: add auth
+router.post('/likes/:liked_by/:habit_by/:habit_id', async (req, res) => {
+  console.log('New like', req.params);
+  const { liked_by, habit_by, habit_id } = req.params;
+  const queryString = `
+    INSERT INTO ${HABIT_LIKES_TABLE}
+      (habit_id, habit_by, liked_by)
+    VALUES ($1, $2, $3);
+  `;
+
+    try {
+      const insert = await pool.query(queryString, [habit_id, habit_by, liked_by]);
+      res.json(insert);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ msg: err.message });
+    }
+});
+
 // READ habits
 /** Return all habits in db **/
 router.get('/', async (req, res) => {
@@ -67,7 +87,7 @@ router.get('/', async (req, res) => {
     const allHabits = (await pool.query(queryString)).rows;
     res.json(allHabits);  
   } catch (err) {
-    console.err(err);
+    console.error(err);
     res.status(500).json({ msg: err.message });
   }
 });
