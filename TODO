@@ -43,6 +43,11 @@ SERVER TODO:
       [x] read - return all users that match given params
       [] add limit (pagination?)
 
+  Like button:
+  [] create and seed likes table
+
+=========================================================================
+
 CLIENT TODO:
   Users:
 [x] set up redux
@@ -83,7 +88,7 @@ CLIENT TODO:
     [x] display all users with that name
     [x] display all users with that email
     [x] display all users with that username
-    [] on click, take user to that user's page
+    [x] on click, take user to that user's page
 
 
 Refactor tasks:
@@ -103,6 +108,7 @@ Refactor tasks:
 Bugs:
 [x] username/password shouldn't have white space
 [] when user marks days complete too fast, styling isnt applied (disabled until adding new completed_at is completed?)
+[] '_' is counting towards char count (wrong error message displayed in registration form)
 
 Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
@@ -140,4 +146,6 @@ Search users 'Search page'
     [x] display all users with that email
     [x] display all users with that username
 
-[] Display other user's profile
+[x] Display other user's profile
+[] Display total likes 
+  [] like button functionality
