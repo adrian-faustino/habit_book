@@ -10,7 +10,9 @@ const SearchPage = () => {
   // map for rendering
   const _queryHits = queryHits.map(userObj => {
     return (
-      <UserCard userObj={userObj}/>
+      <UserCard
+        key={userObj.user_id}
+        userObj={userObj}/>
     )
   });
 

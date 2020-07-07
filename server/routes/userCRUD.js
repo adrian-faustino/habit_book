@@ -97,6 +97,7 @@ router.post('/newUser', async (req, res) => {
 
 // ===> READ
 /** .com/users **/
+// get all users
 router.get('/', async (req, res) => {
   try {
     const getAllUsersQuery = `
@@ -109,6 +110,11 @@ router.get('/', async (req, res) => {
     console.error(err.message);
     res.status(500).json({ error: err.message });
   }
+});
+
+// get a user
+router.get('/:user_id', async (req, res) => {
+  console.log(req.params);
 });
 
 

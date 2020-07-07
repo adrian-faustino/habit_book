@@ -1,9 +1,12 @@
 import React from 'react'
 /** Styles **/
 import './UserCard.css';
+/** React router **/
+import { Link } from 'react-router-dom';
 
 const UserCard = ({ userObj }) => {
   const {
+    user_id,
     avatar_url,
     created_at,
     email,
@@ -29,7 +32,9 @@ const UserCard = ({ userObj }) => {
       <div className="UserCard__right-container">
         <span
           className="UserCard__full-name">
-            {first_name} {last_name}
+            <Link to={`/users/${user_id}`}>
+              {first_name} {last_name}
+            </Link>
         </span>
 
         <span
