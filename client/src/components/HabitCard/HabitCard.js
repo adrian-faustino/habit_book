@@ -8,7 +8,7 @@ import { Tooltip, Alert } from 'reactstrap';
 import './HabitCard.css';
 /** Helpers **/
 import { formatToWords, formatPlural } from '../../helpers/formatHelpers';
-import { handleDeleteCard, getLikes, registerLike } from '../../helpers/habitDataHelpers';
+import { handleDeleteCard, getLikes, registerLike, getComments } from '../../helpers/habitDataHelpers';
 /** Redux **/
 import { useSelector, useDispatch } from 'react-redux';
 /** Redux-actions **/
@@ -33,6 +33,7 @@ const HabitCard = ({habit}) => {
   const [likes, setLikes] = useState();
   const [err, setErr] = useState('');
   const [success, setSuccess] = useState('');
+  const [comments, setComments] = useState([]);
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -67,6 +68,9 @@ const HabitCard = ({habit}) => {
 
     // get likes
     getLikes(user_id, habit_id, setLikes);
+
+    // get comments
+    getComments(habit_id, setComments);
   }, [counter]);
 
 
@@ -79,6 +83,7 @@ const HabitCard = ({habit}) => {
     });
   };
 
+  console.log(comments);
 
   return (
     <div className="HabitCard__container">

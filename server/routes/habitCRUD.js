@@ -163,6 +163,7 @@ router.get('/likes/:user_id/:habit_id', async (req, res) => {
   const { user_id, habit_id } = req.params;
 
   console.log('Getting likes:', user_id, habit_id);
+  // TODO #1: remove AND ??
   const query = `
     SELECT count(*) FROM ${HABIT_LIKES_TABLE}
     WHERE habit_by = $1

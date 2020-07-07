@@ -44,6 +44,7 @@ export const getLikes = async (user_id, habit_id, callback) => {
   };
 };
 
+// register new like to DB (or delete if existing)
 export const registerLike = (user, user_id, habit_id, callback) => {
   const liked_by = user.user_id;
   const habit_by = user_id;
@@ -57,6 +58,20 @@ export const registerLike = (user, user_id, habit_id, callback) => {
     .then(res => {
       console.log('New like registered!', res);
       callback();
+    })
+    .catch(err => console.log(err));
+};
+
+// get all comments on a habit
+export const getComments = (habit_id, callback) => {
+  const endpoint = process.env.REACT_APP_API +
+    `comments/${habit_id}`;
+  
+  axios
+    .get(endpoint)
+    .then(res => {
+      console.log('setting comments', res.data)
+      callback(res.data);
     })
     .catch(err => console.log(err));
 };
