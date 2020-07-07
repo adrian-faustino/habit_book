@@ -114,7 +114,21 @@ router.get('/', async (req, res) => {
 
 // get a user
 router.get('/:user_id', async (req, res) => {
-  console.log(req.params);
+  const user_id = req.params.user_id;
+  console.log(`Fetching data for user: ${user_id}...`);
+  const query = `
+    SELECT avatar_url, created_at, email, first_name, last_name, user_id, username FROM ${USERS_TABLE}
+    WHERE user_id = $1;
+  `;
+
+  try {
+    const result = await pool.query(query, [user_id]);
+    const userData = result.rows;
+    res.json(userData);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: err.message });
+  }
 });
 
 

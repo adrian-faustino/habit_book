@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   const name = req.query.name.split(' ').join(''); // remove space
 
   const dbQuery = `
-    SELECT * FROM ${USERS_TABLE}
+    SELECT avatar_url, created_at, email, first_name, last_name, user_id, username FROM ${USERS_TABLE}
     WHERE username LIKE CONCAT('%', $1::text, '%')
     OR first_name LIKE CONCAT('%', $1::text, '%')
     OR last_name LIKE CONCAT('%', $1::text, '%')
@@ -28,9 +28,7 @@ router.get('/', async (req, res) => {
 
   try {
     const results = await pool.query(dbQuery, [name]);
-    const noPassword = results.rows.map(user => ({...user, password: null }));
-
-    res.json({ msg: 'Query results.', queryHits: noPassword });
+    res.json({ msg: 'Query results.', queryHits: results.rows });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: err.message });
