@@ -64,7 +64,8 @@ router.post('/newUser', async (req, res) => {
     /** If all validations passed, continue DB INSERT **/
     const created_at = formatToYYYYMMDD(new Date());
     const is_active = true;
-    const avatar_url = 'default';
+    /* STRETCH: allow user to choose their avatar */
+    const avatar_url = 'https://i.imgur.com/2WZtOD6.png';
 
     // hash and salt password
     const salt = await bcrypt.genSalt(10);

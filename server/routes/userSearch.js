@@ -28,7 +28,9 @@ router.get('/', async (req, res) => {
 
   try {
     const results = await pool.query(dbQuery, [name]);
-    res.json({ msg: 'Query results.', queryHits: results.rows });
+    const noPassword = results.rows.map(user => ({...user, password: null }));
+
+    res.json({ msg: 'Query results.', queryHits: noPassword });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: err.message });

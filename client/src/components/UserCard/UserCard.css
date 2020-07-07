@@ -1,0 +1,43 @@
+.UserCard__container {
+  background:peachpuff;
+  margin: 10px auto;
+  padding: 10px;
+  min-width: 290px;
+  max-width: 500px;
+  border-radius: 4px;
+  box-shadow: 0 0 3px black;
+
+  display: flex;
+}
+
+.UserCard__left-container {
+  display: grid;
+}
+
+.UserCard__right-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 0 auto;
+} 
+
+.UserCard__right-container > span {
+  display: block;
+}
+
+.UserCard__full-name {
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.UserCard__avatar {
+  background: white;
+  padding: 5px;
+  margin: auto;
+  border-radius: 5px;
+  box-shadow: 0 0 5px black;
+  width: 80px;
+  height: 80px;
+}

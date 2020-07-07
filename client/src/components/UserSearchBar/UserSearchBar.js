@@ -7,7 +7,10 @@ import './UserSearchBar.css';
 /** Custom hooks **/
 import useForm from '../../hooks/useFormHook';
 
-const UserSearchBar = () => {
+
+const UserSearchBar = props => {
+  const { setQueryHits } = props;
+
   /** State **/
   const [ values,
           handleChange,
@@ -27,6 +30,7 @@ const UserSearchBar = () => {
       .get(endpoint)
       .then(res => {
         console.log('Searching...', res.data.queryHits)
+        setQueryHits(res.data.queryHits);
       })
       .catch(err => console.log(err));
   }
