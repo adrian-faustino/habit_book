@@ -19,3 +19,11 @@ export const formatToWords = dateStr => {
   return `${MONTHS[month - 1]} ${day}, ${year}`;
   /* STRETCH: add 1st 2nd 3rd suffix on date */
 };
+
+/** Input: int, str. Output: str*/
+export const formatPlural = (num, str) => {
+  if (num > 1) {
+    return str + 's';
+  }
+  return str;
+}

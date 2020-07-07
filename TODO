@@ -91,9 +91,9 @@ CLIENT TODO:
     [x] on click, take user to that user's page
 
   Likes:
-    [] plural formatting 1 like -> 2 likes
-    [] remove likes when user already liked content
-    [] remove likes on delete of any habit
+    [x] plural formatting 1 like -> 2 likes
+    [x] remove likes when user already liked content
+    [x] remove likes on delete of any habit
 
 
 Refactor tasks:

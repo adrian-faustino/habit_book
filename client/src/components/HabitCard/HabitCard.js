@@ -7,7 +7,7 @@ import { Tooltip, Alert } from 'reactstrap';
 /** Styles **/
 import './HabitCard.css';
 /** Helpers **/
-import { formatToWords } from '../../helpers/formatHelpers';
+import { formatToWords, formatPlural } from '../../helpers/formatHelpers';
 import { handleDeleteCard, getLikes, registerLike } from '../../helpers/habitDataHelpers';
 /** Redux **/
 import { useSelector, useDispatch } from 'react-redux';
@@ -118,7 +118,7 @@ const HabitCard = ({habit}) => {
         {likes > 0 && 
           (<span
             className="HabitCard__likes-span">
-              {`${likes} likes`}
+              {`${likes} ${formatPlural(likes, 'like')}`}
           </span>)}
         <button onClick={handleLikeBtn}>like</button>
         <button>comments</button>

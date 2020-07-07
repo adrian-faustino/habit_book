@@ -62,19 +62,46 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
 router.post('/likes/:liked_by/:habit_by/:habit_id', async (req, res) => {
   console.log('New like', req.params);
   const { liked_by, habit_by, habit_id } = req.params;
-  const queryString = `
-    INSERT INTO ${HABIT_LIKES_TABLE}
-      (habit_id, habit_by, liked_by)
-    VALUES ($1, $2, $3);
-  `;
+  const VALUES = [habit_id, habit_by, liked_by];
 
+  // check if like already exists
+  const existsQuery = `
+    SELECT * FROM ${HABIT_LIKES_TABLE}
+    WHERE habit_id = $1
+    AND habit_by = $2
+    AND liked_by = $3;
+  `;
+  const exists = await pool.query(existsQuery, VALUES);
+
+  // if exists, make delete query instead
+  if (exists.rows.length > 0) {
     try {
-      const insert = await pool.query(queryString, [habit_id, habit_by, liked_by]);
-      res.json(insert);
+      const like_id = exists.rows[0].like_id;
+      const deleteQuery = `
+        DELETE FROM ${HABIT_LIKES_TABLE}
+        WHERE like_id = $1;
+      `;
+      await pool.query(deleteQuery, [like_id]);
+      res.json({ msg: 'Habit unliked.'});
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: err.message });
-    }
+    };
+  } else {
+    // ...else insert to db
+    try {
+      const insertQuery = `
+      INSERT INTO ${HABIT_LIKES_TABLE}
+      (habit_id, habit_by, liked_by)
+      VALUES ($1, $2, $3);
+      `;
+      await pool.query(insertQuery, VALUES);
+      res.json({ msg: 'Habit liked' });
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ msg: err.message });
+      };
+  };
 });
 
 // READ habits
@@ -165,6 +192,12 @@ router.delete('/:user_id/:habit_id', async (req, res) => {
       WHERE habit_id = $1
       AND user_id = $2;
     `;
+
+    // delete all habt_likes related to that habit
+    const deleteHabit_likes = `
+      DELETE FROM ${HABIT_LIKES_TABLE}
+      WHERE habit_id = $1;
+    `;
     
     const deleteHabit = `
       DELETE FROM ${HABITS_TABLE}
@@ -172,6 +205,7 @@ router.delete('/:user_id/:habit_id', async (req, res) => {
     `;
     
     await pool.query(deleteCompleted_at, [habit_id, user_id]);
+    await pool.query(deleteHabit_likes, [habit_id]);
     await pool.query(deleteHabit, [habit_id]);
     res.json({ msg: 'Successfully deleted habit.'});
   } catch (err) {
