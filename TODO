@@ -148,4 +148,5 @@ Search users 'Search page'
 
 [x] Display other user's profile
 [] Display total likes 
-  [] like button functionality
+  [x] display each habit's likes
+  [] like button functionality (create habit_like)
