@@ -8,6 +8,7 @@ const validateForm = require('../helpers/habitValidationHelpers');
 /** Constants **/
 const HABITS_TABLE = 'habits';
 const COMPLETED_AT_TABLE = 'completed_at';
+const HABIT_LIKES_TABLE = 'habit_likes';
 
 // @route   habits/~
 // @desc    handle habits CRUD requests
@@ -107,6 +108,26 @@ router.get('/:user_id/:habit_id', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: err.message });
+  }
+});
+
+/** Get all of a habit's likes **/
+router.get('/likes/:user_id/:habit_id', async (req, res) => {
+  const { user_id, habit_id } = req.params;
+
+  console.log('Getting likes:', user_id, habit_id);
+  const query = `
+    SELECT count(*) FROM ${HABIT_LIKES_TABLE}
+    WHERE habit_by = $1
+    AND habit_id = $2;
+  `;
+  
+  try {
+    const result = await pool.query(query, [user_id, habit_id]);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ err: err.message });
   }
 });
 

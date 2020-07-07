@@ -70,3 +70,10 @@
   box-shadow: 0 0 3px black;
   color: white;
 }
+
+.HabitCard__likes-span {
+  position: absolute;
+  left: 75px;
+  bottom: 12px;
+  font-weight: bold;
+}

@@ -53,7 +53,7 @@ const UserPage = () => {
 
   return (
     <section className="UserPage">
-      {userObj.map(user => (<UserCard userObj={user} />))}
+      {userObj.map(user => (<UserCard key={user_id} userObj={user} />))}
 
       <div className="UserPage__habits-container">
         {userHabits.map(habit => (

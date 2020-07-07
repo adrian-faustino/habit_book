@@ -28,6 +28,7 @@ const HabitCard = ({habit}) => {
   /** State **/
   const [completedAt, setCompletedAt] = useState([]);
   const [isMyHabit, setIsMyHabit] = useState(false);
+  const [likes, setLikes] = useState();
   const [err, setErr] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -61,7 +62,24 @@ const HabitCard = ({habit}) => {
     if (habit.user_id === _user_id) {
       setIsMyHabit(true);
     }
+
+    // get likes
+    getLikes(user_id, habit_id);
   }, []);
+
+  const getLikes = async (user_id, habit_id) => {
+    console.log('Getting likes for habit:', habit_id);
+    const endpoint = process.env.REACT_APP_API +
+      `habits/likes/${user_id}/${habit_id}`;
+
+    axios
+      .get(endpoint)
+      .then(res => {
+        const likes = res.data[0].count;
+        setLikes(likes);
+      })
+      .catch(err => console.log(err));
+  };
 
 
   return (
@@ -99,6 +117,11 @@ const HabitCard = ({habit}) => {
       </div>
 
       <footer className="HabitCard__footer">
+        {likes > 0 && 
+          (<span
+            className="HabitCard__likes-span">
+              {`${likes} likes`}
+          </span>)}
         <button>like</button>
         <button>comments</button>
       </footer>
