@@ -8,7 +8,7 @@ import { getDateYYYYMMDD } from '../../../helpers/dateObjHelpers';
 import { createCompletedAt } from '../../../helpers/CalendarHelpers';
 /** Redux **/
 import { useDispatch } from 'react-redux';
-/** Redux-actiosn **/
+/** Redux-actions **/
 import { increment } from '../../../actions';
 
 /** Calendar classnames constants **/

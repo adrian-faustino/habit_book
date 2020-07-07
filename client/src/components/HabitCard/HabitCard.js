@@ -11,6 +11,8 @@ import { formatToWords } from '../../helpers/formatHelpers';
 import { handleDeleteCard, getLikes, registerLike } from '../../helpers/habitDataHelpers';
 /** Redux **/
 import { useSelector, useDispatch } from 'react-redux';
+/** Redux-actions **/
+import { increment } from '../../actions';
 
 const HabitCard = ({habit}) => {
   /** Props **/
@@ -65,15 +67,16 @@ const HabitCard = ({habit}) => {
 
     // get likes
     getLikes(user_id, habit_id, setLikes);
-  }, []);
-
-
+  }, [counter]);
 
 
   const handleLikeBtn = e => {
     e.preventDefault();
 
-    registerLike(user, user_id, habit_id);
+    registerLike(user, user_id, habit_id, () => {
+      // trigger view change
+      dispatch(increment(1));
+    });
   };
 
 
@@ -127,7 +130,7 @@ const HabitCard = ({habit}) => {
           delete
       </button>)}
     </div>
-  )
-}
+  );
+};
 
-export default HabitCard
+export default HabitCard;

@@ -90,6 +90,11 @@ CLIENT TODO:
     [x] display all users with that username
     [x] on click, take user to that user's page
 
+  Likes:
+    [] plural formatting 1 like -> 2 likes
+    [] remove likes when user already liked content
+    [] remove likes on delete of any habit
+
 
 Refactor tasks:
 [x] set up res and status code on errors server side (CRUD files)
@@ -152,3 +157,4 @@ Search users 'Search page'
   [x] display each habit's likes
   [] like button functionality (create habit_like)
   [] when deleting habit, make sure to delete all the likes associated with it
+  [x] trigger update when likes when clicked
