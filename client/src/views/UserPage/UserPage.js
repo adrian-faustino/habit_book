@@ -54,9 +54,12 @@ const UserPage = () => {
   return (
     <section className="UserPage">
       {userObj.map(user => (<UserCard userObj={user} />))}
-      {userHabits.map(habit => (
-        <HabitCard key={habit.habit_id} habit={habit} />
-      ))}
+
+      <div className="UserPage__habits-container">
+        {userHabits.map(habit => (
+          <HabitCard key={habit.habit_id} habit={habit} />
+        ))}
+      </div>
     </section>
   )
 }

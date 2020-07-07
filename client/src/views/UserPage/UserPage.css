@@ -2,3 +2,8 @@
   position: relative;
   top: var(--navbar-height);
 }
+
+.UserPage {
+  width: 800px;
+  margin: 0 auto;
+}

@@ -1,0 +1,4 @@
+.HomePage {
+  position: relative;
+  top: var(--navbar-height);
+}

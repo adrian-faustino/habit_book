@@ -9,6 +9,9 @@ import { Redirect } from 'react-router-dom';
 import NewHabit from '../../components/NewHabit/NewHabit';
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
 import HabitCard from '../../components/HabitCard/HabitCard';
+import { UserCard } from '../../components/';
+/** Styles **/
+import './HomePage.css';
 
 const HomePage = () => {
   /** Redux **/
@@ -32,20 +35,15 @@ const HomePage = () => {
 
   if (!isLogged) return <Redirect to="/welcome"/>
   return (
-    <div>
+    <div className="HomePage">
       <h2>
-        Welcome to your dashboard {`${username}`}!
+        Welcome to your dashboard, {`${username}`}!
       </h2>
-      <h4>
-        Your stats:
-        <ul>
-          <li>First name: {first_name}</li>
-          <li>Last name: {last_name}</li>
-          <li>Username: {username}</li>
-          <li>Email: {email}</li>
-          <li>Refresh count: {refreshCount}</li>
-        </ul>
-      </h4>
+
+      {user && <UserCard userObj={user}/>}
+      <div>
+        Refresh count: {refreshCount}
+      </div>
 
       <NewHabit />
       {user_id && <CardsContainer />}

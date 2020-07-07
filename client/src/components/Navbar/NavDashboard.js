@@ -27,7 +27,7 @@ const NavDashboard = () => {
       className="NavDashboard__container">
       <span 
         className="NavDashboard__welcome-span">
-        {`Welcome ${first_name}`}
+        {`Welcome, ${first_name}`}
       </span>
 
       <Button
