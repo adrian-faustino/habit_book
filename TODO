@@ -40,7 +40,7 @@ SERVER TODO:
 
   Search users:
     [] crud routes
-      [] read - return all users that match given params
+      [x] read - return all users that match given params
       [] add limit (pagination?)
 
 CLIENT TODO:
@@ -79,10 +79,11 @@ CLIENT TODO:
   [x] on click -> post req to create an entry in created_at
 
   Search users 'Search page'
-  [] user types in name
-    [] display all users with that name
-    [] display all users with that email
-    [] display all users with that username
+  [x] user types in name
+    [x] display all users with that name
+    [x] display all users with that email
+    [x] display all users with that username
+    [] on click, take user to that user's page
 
 
 Refactor tasks:
@@ -96,10 +97,12 @@ Refactor tasks:
 [x] refresh page after all CRUD? (to show most updated version from DB)
 [x] when deleting a habit, delete all completed_at entries related to it
 [x] no dates in the future can be clicked for completed_at
+[] add feedback when searching for users
+[] user card on hover (over avatar, over full name)
 
 Bugs:
 [x] username/password shouldn't have white space
-
+[] when user marks days complete too fast, styling isnt applied (disabled until adding new completed_at is completed?)
 
 Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
@@ -132,7 +135,9 @@ Current task: (I set these when I end the night, to remind myself in the morning
   [x] err feedback when user tries to set a day in the future
 
 Search users 'Search page'
-  [] user types in name
-    [] display all users with that name
-    [] display all users with that email
-    [] display all users with that username
+  [x] user types in name
+    [x] display all users with that name
+    [x] display all users with that email
+    [x] display all users with that username
+
+[] Display other user's profile
