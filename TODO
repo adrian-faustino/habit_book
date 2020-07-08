@@ -104,6 +104,7 @@ CLIENT TODO:
     [x] display comments on a post
     [x] display user info of each comment
     [] time since comment was made (like fb)
+    [] username on click, link to user's profile
 
 Refactor tasks:
 [x] set up res and status code on errors server side (CRUD files)

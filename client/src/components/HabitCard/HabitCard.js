@@ -3,6 +3,7 @@ import axios from 'axios';
 /** Subcomponents **/
 import CalendarComponent from './CalendarComponent/CalendarComponent';
 import CommentsContainer from './CommentsContainer/CommentsContainer';
+import CommentForm from './CommentForm/CommentForm';
 /** Reactstrap **/
 import { Tooltip, Alert } from 'reactstrap';
 /** Styles **/
@@ -149,6 +150,7 @@ const HabitCard = ({habit}) => {
         </button>)}
       </div>
 
+      <CommentForm habit_id={habit_id} />
       {comments && <CommentsContainer comments={comments}/>}
     </div>
   );

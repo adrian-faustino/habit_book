@@ -18,7 +18,7 @@ const CommentsContainer = props => {
   return (
     <div className="CommentsContainer">
       <hr />
-      {_comments}      
+      {_comments}
     </div>
   );
 };
