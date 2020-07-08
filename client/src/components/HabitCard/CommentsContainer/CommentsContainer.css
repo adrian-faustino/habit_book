@@ -1,4 +1,4 @@
 .CommentsContainer {
-  height: 100px;
+  min-height: 50px;
   width: 100%;
 }

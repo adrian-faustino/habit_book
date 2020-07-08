@@ -8,9 +8,14 @@ import './CommentsContainer.css';
 // comments is an array of objects containing comment info
 const CommentsContainer = props => {
   const { comments } = props;
+
+  // spread for render
+  const _comments = comments.map(comment => {
+    return <CommentCard comment={comment} />
+  });
   return (
     <div className="CommentsContainer">
-      comment container
+      {_comments}      
     </div>
   );
 };
