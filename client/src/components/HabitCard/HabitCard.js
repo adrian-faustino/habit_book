@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 /** Subcomponents **/
 import CalendarComponent from './CalendarComponent/CalendarComponent';
+import CommentsContainer from './CommentsContainer/CommentsContainer';
 /** Reactstrap **/
 import { Tooltip, Alert } from 'reactstrap';
 /** Styles **/
@@ -33,7 +34,8 @@ const HabitCard = ({habit}) => {
   const [likes, setLikes] = useState();
   const [err, setErr] = useState('');
   const [success, setSuccess] = useState('');
-  const [comments, setComments] = useState([]);
+  // use null here for conditional rendering, instead of using empty array
+  const [comments, setComments] = useState(null);
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -69,8 +71,9 @@ const HabitCard = ({habit}) => {
     // get likes
     getLikes(user_id, habit_id, setLikes);
 
-    // get comments
-    getComments(habit_id, setComments);
+    /* STRETCH: fetch number of comments like fb */
+    // // get comments
+    // getComments(habit_id, setComments);
   }, [counter]);
 
 
@@ -83,57 +86,70 @@ const HabitCard = ({habit}) => {
     });
   };
 
-  console.log(comments);
+  const handleExpandComments = e => {
+    console.log('Fetching comments...');
+
+    // get comments
+    getComments(habit_id, comments => {
+      console.log('Comments:', comments);
+      setComments(comments);
+      // expand card
+    });
+  };
 
   return (
-    <div className="HabitCard__container">
-      <CalendarComponent
-        habit_id={habit_id}
-        user_id={user_id}
-        completedAt={completedAt}
-        setSuccess={setSuccess}
-        setErr={setErr}/>
-      <div className="HabitCard__data-container">
-        <h4 className="HabitCard__title">{title}</h4>
-        <span
-          className="HabitCard__description">
-          {description ? description : <i>No description provided.</i>}
-        </span>
-        <h5
-          className="HabitCard__created-at">
-          Created at {formatToWords(created_at)}
-        </h5>
+    <div className="HabitCard">
+      <div className="HabitCard__container">
+        <CalendarComponent
+          habit_id={habit_id}
+          user_id={user_id}
+          completedAt={completedAt}
+          setSuccess={setSuccess}
+          setErr={setErr}/>
+        <div className="HabitCard__data-container">
+          <h4 className="HabitCard__title">{title}</h4>
+          <span
+            className="HabitCard__description">
+            {description ? description : <i>No description provided.</i>}
+          </span>
+          <h5
+            className="HabitCard__created-at">
+            Created at {formatToWords(created_at)}
+          </h5>
 
-        {/* error feedback */}
-        {err && <Alert
-          color="danger"
-          className="HabitCard__err-msg">
-            {err}
-        </Alert>}
+          {/* error feedback */}
+          {err && <Alert
+            color="danger"
+            className="HabitCard__err-msg">
+              {err}
+          </Alert>}
 
-        {/* success feedback */}
-        {success && <Alert
-          color="success"
-          className="HabitCard__success-msg">
-            {success}
-        </Alert>}
+          {/* success feedback */}
+          {success && <Alert
+            color="success"
+            className="HabitCard__success-msg">
+              {success}
+          </Alert>}
+        </div>
+
+        <footer className="HabitCard__footer">
+          {likes > 0 && 
+            (<span
+              className="HabitCard__likes-span">
+                {`${likes} ${formatPlural(likes, 'like')}`}
+            </span>)}
+          <button onClick={handleLikeBtn}>like</button>
+          <button onClick={handleExpandComments}>comments</button>
+        </footer>
+
+        {isMyHabit && (<button
+          onClick={e => handleDeleteCard(e, _user_id, habit_id, dispatch)}
+          className="HabitCard__delete-card-btn">
+            delete
+        </button>)}
       </div>
 
-      <footer className="HabitCard__footer">
-        {likes > 0 && 
-          (<span
-            className="HabitCard__likes-span">
-              {`${likes} ${formatPlural(likes, 'like')}`}
-          </span>)}
-        <button onClick={handleLikeBtn}>like</button>
-        <button>comments</button>
-      </footer>
-
-      {isMyHabit && (<button
-        onClick={e => handleDeleteCard(e, _user_id, habit_id, dispatch)}
-        className="HabitCard__delete-card-btn">
-          delete
-      </button>)}
+      {comments && <CommentsContainer comments={comments}/>}
     </div>
   );
 };

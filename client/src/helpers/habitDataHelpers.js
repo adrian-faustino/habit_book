@@ -57,7 +57,7 @@ export const registerLike = (user, user_id, habit_id, callback) => {
     .post(endpoint)
     .then(res => {
       console.log('New like registered!', res);
-      callback();
+      callback(res);
     })
     .catch(err => console.log(err));
 };

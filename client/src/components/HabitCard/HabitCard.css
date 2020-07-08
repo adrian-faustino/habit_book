@@ -1,11 +1,14 @@
+.HabitCard {
+  background: salmon;
+  border-radius: 5px;
+  box-shadow: 0 0 4px black;
+}
+
 .HabitCard__container {
   position: relative;
-  background: salmon;
   width: 100%;
   margin: 10px 0;
   padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px black;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
