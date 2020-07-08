@@ -3,7 +3,7 @@ import axios from 'axios';
 /** Custom Hooks **/
 import useForm from '../../../hooks/useFormHook';
 /** Redux **/
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const CommentForm = props => {
   /** State **/
@@ -34,6 +34,7 @@ const CommentForm = props => {
         console.log('ok')
         // trigger view change
         handleReset();
+        props.handleExpandComments();
       })
       .catch(err => console.log(err));
   }

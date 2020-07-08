@@ -89,6 +89,7 @@ const HabitCard = ({habit}) => {
 
   const handleExpandComments = e => {
     console.log('Fetching comments...');
+    e && e.preventDefault();
 
     // get comments
     getComments(habit_id, comments => {
@@ -150,7 +151,9 @@ const HabitCard = ({habit}) => {
         </button>)}
       </div>
 
-      <CommentForm habit_id={habit_id} />
+      <CommentForm
+        handleExpandComments={handleExpandComments}
+        habit_id={habit_id} />
       {comments && <CommentsContainer comments={comments}/>}
     </div>
   );
