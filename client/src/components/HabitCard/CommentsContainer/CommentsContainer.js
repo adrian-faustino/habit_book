@@ -3,6 +3,8 @@ import React from 'react';
 import CommentCard from './CommentCard/CommentCard';
 /** Styles **/
 import './CommentsContainer.css';
+/** npm **/
+import { v4 as uuidv4 } from 'uuid';
 
 // Props notes: 
 // comments is an array of objects containing comment info
@@ -11,7 +13,7 @@ const CommentsContainer = props => {
 
   // spread for render
   const _comments = comments.map(comment => {
-    return <CommentCard comment={comment} />
+    return <CommentCard key={uuidv4()} comment={comment} />
   });
   return (
     <ul className="CommentsContainer">
