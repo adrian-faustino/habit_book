@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const CommentCard = ({ comment }) => {
@@ -19,7 +19,8 @@ const CommentCard = ({ comment }) => {
     axios
       .get(endpoint)
       .then(res => {
-        console.log('User data:', res.data);
+        console.log('User data:', res.data[0]);
+        setCommenter(res.data[0]);
       })
       .catch(err => console.log(err));
   }, []);
@@ -27,9 +28,30 @@ const CommentCard = ({ comment }) => {
 
   return (
     <li>
-      {content}
-    </li>
-  )
-}
+      <img 
+        src={commenter.avatar_url}/>
+      
+      <span>
+        {`${commenter.first_name} ${commenter.last_name}`}
+      </span>
 
-export default CommentCard
+      <span>
+        @{commenter.username}
+      </span>
+
+      <p>
+        {content}
+      </p>
+
+      {is_edited && (
+        <span>(edited)</span>
+      )}  
+
+      <span>
+        Created at {created_at}
+      </span>
+    </li>
+  );
+};
+
+export default CommentCard;
