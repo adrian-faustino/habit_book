@@ -102,7 +102,8 @@ CLIENT TODO:
   Comments
     [] write comments on a post
     [x] display comments on a post
-    [] display user info of each comment
+    [x] display user info of each comment
+    [] time since comment was made (like fb)
 
 Refactor tasks:
 [x] set up res and status code on errors server side (CRUD files)
@@ -171,4 +172,4 @@ Search users 'Search page'
 
 Comments
   [] write comments on a post
-  [] display comments on a post
+  [x] display comments on a post
