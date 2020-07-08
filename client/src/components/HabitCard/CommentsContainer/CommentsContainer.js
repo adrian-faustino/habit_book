@@ -3,7 +3,7 @@ import React from 'react';
 import CommentCard from './CommentCard/CommentCard';
 /** Styles **/
 import './CommentsContainer.css';
-/** npm **/
+/** Helpers **/
 import { v4 as uuidv4 } from 'uuid';
 
 // Props notes: 
@@ -16,9 +16,10 @@ const CommentsContainer = props => {
     return <CommentCard key={uuidv4()} comment={comment} />
   });
   return (
-    <ul className="CommentsContainer">
+    <div className="CommentsContainer">
+      <hr />
       {_comments}      
-    </ul>
+    </div>
   );
 };
 

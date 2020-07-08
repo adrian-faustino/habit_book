@@ -1,0 +1,41 @@
+.CommentCard {
+  display: flex;
+}
+
+.CommentCard__avatar-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.CommentCard__content-container {
+  background: rgba(128, 128, 128, 0.475);
+  border-radius: 20px;
+  display: flex;
+  padding: 10px 15px;
+  margin-top: 10px;
+}
+
+.CommentCard__buttons-container {
+}
+
+.CommentCard__avatar {
+  padding: 5px;
+  border-radius: 50%;
+  transform: scale(0.7);
+  background: white;
+}
+
+.CommentCard__username {
+  font-style: italic;
+  position: relative;
+  top: -10px;
+}
+
+.CommentCard__full-name {
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.vertical-split {
+  width: 100%;
+}

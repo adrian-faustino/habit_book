@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+/** Helpers **/
 import axios from 'axios';
+/** Styles **/
+import './CommentCard.css';
 
 const CommentCard = ({ comment }) => {
   const { comment_id,
@@ -27,30 +30,41 @@ const CommentCard = ({ comment }) => {
 
 
   return (
-    <li>
-      <img 
-        src={commenter.avatar_url}/>
-      
-      <span>
-        {`${commenter.first_name} ${commenter.last_name}`}
-      </span>
+    <div className="CommentCard">
+      <div className="CommentCard__avatar-container">
+        <img
+          className="CommentCard__avatar" 
+          src={commenter.avatar_url}/>
 
-      <span>
-        @{commenter.username}
-      </span>
+        <span className="CommentCard__username">
+          @{commenter.username}
+        </span>
+      </div>
 
-      <p>
-        {content}
-      </p>
+      <div className="vertical-split">
+        <div className="CommentCard__content-container">
+          <span className="CommentCard__full-name">
+            {`${commenter.first_name} ${commenter.last_name}`}
+          </span>
 
-      {is_edited && (
-        <span>(edited)</span>
-      )}  
+          <p className="CommentCard__content">
+            {content}
+          </p>
+        </div>
 
-      <span>
-        Created at {created_at}
-      </span>
-    </li>
+        <div className="CommentCard__buttons-container">
+          {is_edited && (
+            <span className="CommentCard__edited">
+              (edited)
+            </span>
+          )}  
+
+          <span className="CommentCard__created-at">
+            Created at {created_at}
+          </span>
+        </div>
+      </div>
+    </div>
   );
 };
 
