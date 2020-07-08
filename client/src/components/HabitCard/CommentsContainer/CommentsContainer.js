@@ -14,9 +14,9 @@ const CommentsContainer = props => {
     return <CommentCard comment={comment} />
   });
   return (
-    <div className="CommentsContainer">
+    <ul className="CommentsContainer">
       {_comments}      
-    </div>
+    </ul>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const CommentCard = ({ comment }) => {
   const { comment_id,
@@ -8,10 +8,12 @@ const CommentCard = ({ comment }) => {
           content,
           is_edited } = comment;
 
+
+
   return (
-    <div>
+    <li>
       {content}
-    </div>
+    </li>
   )
 }
 
