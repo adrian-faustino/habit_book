@@ -150,7 +150,7 @@ const HabitCard = ({habit}) => {
             delete
         </button>)}
       </div>
-
+        
       <CommentForm
         handleExpandComments={handleExpandComments}
         habit_id={habit_id} />

@@ -120,7 +120,7 @@ router.get('/', async (req, res) => {
 });
 
 /** Return all habits of a user **/
-// TODO: add auth
+// TODO: add auth, order by date, not ID
 router.get('/:user_id', async (req, res) => {
   try {
     const queryString = `

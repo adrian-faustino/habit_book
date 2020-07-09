@@ -3,7 +3,9 @@ import axios from 'axios';
 /** Custom Hooks **/
 import useForm from '../../../hooks/useFormHook';
 /** Redux **/
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+/** Styles **/
+import './CommentForm.css';
 
 const CommentForm = props => {
   /** State **/
@@ -13,7 +15,7 @@ const CommentForm = props => {
           handleReset ] = useForm(submitComment);
 
   /** Redux **/
-  const user_id = useSelector(state => state.user.user_id);
+  const user = useSelector(state => state.user);
 
   function submitComment() {
     console.log('submitting');
@@ -21,7 +23,7 @@ const CommentForm = props => {
     const endpoint = process.env.REACT_APP_API + 
       `comments/newComment`;
     const payload = {
-      comment_by: user_id,
+      comment_by: user.user_id,
       habit_id: props.habit_id,
       content: values.content,
       created_at: new Date(),
@@ -31,9 +33,8 @@ const CommentForm = props => {
     axios
       .post(endpoint, payload)
       .then(res => {
-        console.log('ok')
-        // trigger view change
         handleReset();
+        // trigger view change
         props.handleExpandComments();
       })
       .catch(err => console.log(err));
@@ -42,13 +43,17 @@ const CommentForm = props => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="HabitCard__form-container">
+      className="CommentForm__container">
+        <img
+          className="CommentForm__avatar"
+          src={user.avatar_url} />
         <input
+          autoComplete="off"
           name="content"
           value={values.content || ''}
           onChange={handleChange}
-          className="CommentsContainer__comment-input"
-          placeholder="Leave a comment"/>
+          className="CommentForm__comment-input"
+          placeholder="Leave a comment..."/>
     </form>
   );
 };

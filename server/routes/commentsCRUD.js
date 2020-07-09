@@ -40,7 +40,8 @@ router.get('/:habit_id', async (req, res) => {
 
   const query = `
     SELECT * FROM ${HABIT_COMMENTS_TABLE}
-    WHERE habit_id = $1;
+    WHERE habit_id = $1
+    ORDER BY created_at;
   `;
 
   try {
