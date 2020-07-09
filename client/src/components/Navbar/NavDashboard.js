@@ -1,11 +1,17 @@
 import React from 'react'
+/** Redux **/
 import { useSelector, useDispatch } from 'react-redux';
-import { Button } from 'reactstrap';
-import { logout } from '../../actions';
+/** Redux actions */
 import { clearUser } from '../../actions/userActions';
+import { logout } from '../../actions';
+/** Reactstrap */
+import { Button } from 'reactstrap';
+/** React router **/
+import { useHistory } from 'react-router';
+/** Styles **/
 import './NavDashboard.css';
 
-const NavDashboard = () => {
+const NavDashboard = props => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const {
@@ -15,11 +21,16 @@ const NavDashboard = () => {
     email
   } = user;
 
+  const { push } = useHistory();
+
   const handleLogout = e => {
     e.preventDefault();
     localStorage.clear();
     dispatch(logout());
     dispatch(clearUser());
+
+    // trigger view change
+    push('/');
   };
 
   return (
@@ -29,6 +40,7 @@ const NavDashboard = () => {
         className="NavDashboard__welcome-span">
         {`Welcome, ${first_name}`}
       </span>
+
 
       <Button
         className="NavDashboard__button"
