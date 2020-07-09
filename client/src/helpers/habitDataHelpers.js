@@ -46,15 +46,27 @@ export const getLikes = async (user_id, habit_id, callback) => {
 
 // register new like to DB (or delete if existing)
 export const registerLike = (user, user_id, habit_id, callback) => {
-  const liked_by = user.user_id;
-  const habit_by = user_id;
-  const _habit_id = habit_id;
+  // const liked_by = user.user_id;
+  // const habit_by = user_id;
+  // const _habit_id = habit_id;
 
   const endpoint = process.env.REACT_APP_API +
-    `habits/likes/${liked_by}/${habit_by}/${_habit_id}`;
+    `habits/likes`;
+
+  const payload = {
+    liked_by: user.user_id,
+    habit_by: user_id,
+    habit_id
+  };
+
+  const config = {
+    headers: {
+      authorization : `Bearer ${localStorage.accessToken}`
+    }
+  };
   
   axios
-    .post(endpoint)
+    .post(endpoint, payload, config)
     .then(res => {
       console.log('New like registered!', res);
       callback(res);

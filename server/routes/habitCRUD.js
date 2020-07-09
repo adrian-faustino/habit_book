@@ -58,9 +58,8 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
 
 // register a like on a habit
 // TODO: add auth
-router.post('/likes/:liked_by/:habit_by/:habit_id', async (req, res) => {
-  console.log('New like', req.params);
-  const { liked_by, habit_by, habit_id } = req.params;
+router.post('/likes', authenticateToken, async (req, res) => {
+  const { liked_by, habit_by, habit_id } = req.body;
   const VALUES = [habit_id, habit_by, liked_by];
 
   // check if like already exists
