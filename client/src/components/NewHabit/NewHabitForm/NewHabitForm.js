@@ -39,7 +39,9 @@ const NewHabitForm = props => {
     const endpoint = 
       process.env.REACT_APP_API + 'habits/newHabit';
 
-    const payload = { user, habit: validated.habit };
+    const payload = {
+      user_id: user.user_id, habit: validated.habit 
+    };
 
     const config = {
       headers: {

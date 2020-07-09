@@ -21,7 +21,7 @@ router.get('/test', authenticateToken, (req, res) => {
   res.json(posts.filter(post => post.username === req.user.name ));
 });
 
-
+// login
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
 

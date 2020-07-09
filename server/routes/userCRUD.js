@@ -11,11 +11,12 @@ const {
   isEmptyObj, 
   usernameExists, 
   emailExists } = require('../helpers/userValidationHelpers');
+const authenticateToken = require('../helpers/auth');
 
 /** Constants **/
 const USERS_TABLE = 'users';
 
-// @route   user/~
+// @route   users/~
 // @desc    handle user CRUD requests
 // @access  Private
 
@@ -101,7 +102,7 @@ router.post('/newUser', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const getAllUsersQuery = `
-      SELECT * FROM ${USERS_TABLE};
+      SELECT user_id, username, first_name, last_name, email, is_active, avatar_url FROM ${USERS_TABLE};
     `;
     const allUsers = (await pool.query(getAllUsersQuery)).rows;
     res.json(allUsers); // [{}, {}, {}]
