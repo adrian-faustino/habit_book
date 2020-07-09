@@ -1,10 +1,12 @@
 .CommentCard {
   display: flex;
+  min-height: 100px;
 }
 
 .CommentCard__avatar-container {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .CommentCard__content-container {
@@ -14,6 +16,7 @@
   padding: 8px 15px;
   margin-top: 10px;
   align-items: center;
+  /* width: max-content; */
 }
 
 .CommentCard__buttons-container {
@@ -28,8 +31,8 @@
 
 .CommentCard__username {
   font-style: italic;
-  position: relative;
-  top: -10px;
+  position: absolute;
+  top: 65px;
 }
 
 .CommentCard__content {

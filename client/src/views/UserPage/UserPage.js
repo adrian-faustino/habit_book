@@ -5,6 +5,8 @@ import { UserCard } from '../../components/';
 /** Styles **/
 import './UserPage.css';
 import HabitCard from '../../components/HabitCard/HabitCard';
+/** Redux **/
+import { useSelector } from 'react-redux';
 
 // This view is used to display another user's page (not current user)
 
@@ -13,13 +15,16 @@ const UserPage = () => {
   const [userObj, setUserObj] = useState([]);
   const [userHabits, setUserHabits] = useState([]);
 
+  /** Redux **/
+  const counter = useSelector(state => state.counter);
+
   // get user_id from browser window
   const user_id = window.location.href.split('users/')[1];
 
   useEffect(() => {
     getUserInfo(user_id);
     getHabits(user_id);
-  }, []);
+  }, [counter]);
 
   const getUserInfo = async user_id => {
     console.log('Fetching user data for:', user_id);

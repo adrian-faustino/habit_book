@@ -100,11 +100,12 @@ CLIENT TODO:
     [] display random users for users to 'explore'
 
   Comments
-    [] write comments on a post
+    [x] write comments on a post
     [x] display comments on a post
     [x] display user info of each comment
     [] time since comment was made (like fb)
     [] username on click, link to user's profile
+    [] delete comments
 
 Refactor tasks:
 [x] set up res and status code on errors server side (CRUD files)
@@ -172,5 +173,7 @@ Search users 'Search page'
   [x] trigger update when likes when clicked
 
 Comments
-  [] write comments on a post
+  [x] write comments on a post
   [x] display comments on a post
+  [] delete comments
+  [] user autnh

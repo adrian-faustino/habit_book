@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from 'react';
+/** React router **/
+import { Link } from 'react-router-dom';
+/** Redux **/
+import { useDispatch } from 'react-redux';
+/** Redux actions **/
+import { increment } from '../../../../actions';
 /** Helpers **/
 import axios from 'axios';
 /** Styles **/
@@ -15,6 +21,9 @@ const CommentCard = ({ comment }) => {
   /** State **/
   const [commenter, setCommenter] = useState({});
 
+  /** Redux **/
+  const dispatch = useDispatch();
+
   // get commenter's info (avatar, name etc)
   useEffect(() => {
     const endpoint = process.env.REACT_APP_API +
@@ -27,6 +36,11 @@ const CommentCard = ({ comment }) => {
       })
       .catch(err => console.log(err));
   }, []);
+
+  const triggerReload = () => {
+    dispatch(increment(1));
+    // window.location.reload();
+  };
 
 
   return (
@@ -44,7 +58,11 @@ const CommentCard = ({ comment }) => {
       <div className="vertical-split">
         <div className="CommentCard__content-container">
           <span className="CommentCard__full-name">
-            {`${commenter.first_name} ${commenter.last_name}`}
+            <Link
+              onClick={triggerReload}
+              to={`/users/${comment_by}`}>
+                {`${commenter.first_name} ${commenter.last_name}`}
+            </Link>
           </span>
 
           <p className="CommentCard__content">
