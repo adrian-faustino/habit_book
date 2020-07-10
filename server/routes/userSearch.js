@@ -36,4 +36,23 @@ router.get('/', async (req, res) => {
 });
 
 
+// get a random list of users
+router.get('/explore', async (req, res) => {
+  console.log('exploring...');
+  const query = `
+    SELECT avatar_url, created_at, email, first_name, last_name, user_id, username
+    FROM ${USERS_TABLE}
+    ORDER BY random()
+    LIMIT ${QUERY_RESULT_LIMIT};
+  `;
+
+  try {    
+    const users = await pool.query(query);
+    res.json(users.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ err: err.msg });
+  }
+});
+
 module.exports = router;

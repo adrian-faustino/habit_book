@@ -117,13 +117,12 @@ router.get('/', async (req, res) => {
 });
 
 /** Return all habits of a user **/
-// TODO: add auth, order by date, not ID
 router.get('/:user_id', async (req, res) => {
   try {
     const queryString = `
       SELECT * FROM ${HABITS_TABLE}
       WHERE user_id = $1
-      ORDER BY habit_id DESC;
+      ORDER BY created_at DESC;
     `;
     const allHabits = (
       await pool.query(queryString, [req.params.user_id])
@@ -159,16 +158,13 @@ router.get('/:user_id/:habit_id', async (req, res) => {
 router.get('/likes/:user_id/:habit_id', async (req, res) => {
   const { user_id, habit_id } = req.params;
 
-  console.log('Getting likes:', user_id, habit_id);
-  // TODO #1: remove AND ??
   const query = `
     SELECT count(*) FROM ${HABIT_LIKES_TABLE}
-    WHERE habit_by = $1
-    AND habit_id = $2;
+    WHERE habit_id = $1;
   `;
   
   try {
-    const result = await pool.query(query, [user_id, habit_id]);
+    const result = await pool.query(query, [habit_id]);
     res.json(result.rows);
   } catch (err) {
     console.error(err.message);
