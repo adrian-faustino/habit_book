@@ -1,0 +1,40 @@
+.DeleteConfirmation {
+  position: relative;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.42);
+  z-index: 20;
+  margin-top: 10px;
+  padding: 8px 30px;
+}
+
+.DeleteConfirmation__keyword {
+  color: red;
+  font-weight: bold;
+}
+
+.DeleteConfirmation__prompt {
+  font-weight: 600;
+  display: block;
+  font-size: 18px;
+}
+
+.DeleteConfirmation__input {
+  height: 100%;
+  border: none;
+  border-radius: 5px;
+  box-shadow: inset 0 0 4px black;
+  outline: none;
+  padding: 5px;
+}
+
+.DeleteConfirmation__button {
+  height: 100%;
+}
+
+.flush-height {
+  height: 30px;
+  width: 30%;
+  margin: 10px auto;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}

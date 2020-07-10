@@ -157,17 +157,17 @@ const HabitCard = ({habit}) => {
             delete
         </button>)}
       </div>
-        
-      <CommentForm
-        handleExpandComments={handleExpandComments}
-        habit_id={habit_id} />
-      {comments && <CommentsContainer comments={comments}/>}
 
       {deleteConfirm && <DeleteConfirmation
         user_id={user_id}
         habit_id={habit_id}
         dispatch={dispatch}
         title={title}/>}
+        
+      <CommentForm
+        handleExpandComments={handleExpandComments}
+        habit_id={habit_id} />
+      {comments && <CommentsContainer comments={comments}/>}
     </div>
   );
 };
