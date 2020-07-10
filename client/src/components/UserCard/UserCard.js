@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 /** Helpers **/
 import { getUserHabitCountAPIData } from '../../helpers/getDataHelpers';
+import { formatToWords } from '../../helpers/formatHelpers';
 /** Styles **/
 import './UserCard.css';
 /** React router **/
 import { Link } from 'react-router-dom';
+/** Redux **/
+import { useSelector } from 'react-redux';
 
 const UserCard = ({ userObj }) => {
   const {
@@ -21,11 +24,14 @@ const UserCard = ({ userObj }) => {
   /** State **/
   const [habitCount, setHabitCount] = useState('');
 
+  /** Redux **/
+  const counter = useSelector(state => state.counter);
+
   useEffect(() => {
     getUserHabitCountAPIData(user_id, data => {
       setHabitCount(data);
     });
-  }, []);
+  }, [counter]);
 
   return (
     <div className="UserCard__container">
@@ -60,7 +66,7 @@ const UserCard = ({ userObj }) => {
 
         <span
           className="UserCard__created-at">
-            Member since {created_at}
+            Member since {formatToWords(created_at)}
         </span>
       </div>
     </div>
