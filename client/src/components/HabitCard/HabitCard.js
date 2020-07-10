@@ -4,6 +4,7 @@ import axios from 'axios';
 import CalendarComponent from './CalendarComponent/CalendarComponent';
 import CommentsContainer from './CommentsContainer/CommentsContainer';
 import CommentForm from './CommentForm/CommentForm';
+import DeleteConfirmation from './DeleteConfirmation/DeleteConfirmation';
 /** Reactstrap **/
 import { Tooltip, Alert } from 'reactstrap';
 /** Styles **/
@@ -37,6 +38,7 @@ const HabitCard = ({habit}) => {
   const [success, setSuccess] = useState('');
   // use null here for conditional rendering, instead of using empty array
   const [comments, setComments] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -86,6 +88,11 @@ const HabitCard = ({habit}) => {
       dispatch(increment(1));
     });
   };
+
+  const confirmDelete = e => {
+    e.preventDefault();
+    setDeleteConfirm(true);
+  }
 
   const handleExpandComments = e => {
     console.log('Fetching comments...');
@@ -145,7 +152,7 @@ const HabitCard = ({habit}) => {
         </footer>
 
         {isMyHabit && (<button
-          onClick={e => handleDeleteCard(e, _user_id, habit_id, dispatch)}
+          onClick={confirmDelete}
           className="HabitCard__delete-card-btn">
             delete
         </button>)}
@@ -155,6 +162,12 @@ const HabitCard = ({habit}) => {
         handleExpandComments={handleExpandComments}
         habit_id={habit_id} />
       {comments && <CommentsContainer comments={comments}/>}
+
+      {deleteConfirm && <DeleteConfirmation
+        user_id={user_id}
+        habit_id={habit_id}
+        dispatch={dispatch}
+        title={title}/>}
     </div>
   );
 };

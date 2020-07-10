@@ -132,6 +132,7 @@ Bugs:
 [] '_' is counting towards char count (wrong error message displayed in registration form)
 [] user search (make it case insensistive)
 [x] deal with TODO #1 (search file for this comment)
+[] include time in db? new habits being posted but since they are being sorted by day and not time, it's not accurate
 
 Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
