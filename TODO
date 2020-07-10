@@ -13,7 +13,7 @@ SERVER TODO:
       [x] validation
         [x] no same users
     [x] DELETE users from db
-      [] validation? => require user to enter password to delete. see if matches
+      [x] validation? => require user to enter password to delete. see if matches
 
   Habits:
 [] habit crud routes
@@ -182,3 +182,7 @@ Comments
   [x] display comments on a post
   [] delete comments
   [x] user autnh
+
+[] allow user to update habit
+  [] change db to indicate if habit has been edited
+  [] change color if edited?

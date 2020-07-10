@@ -159,6 +159,7 @@ const HabitCard = ({habit}) => {
       </div>
 
       {deleteConfirm && <DeleteConfirmation
+        closeModal={() => setDeleteConfirm(false)}
         user_id={user_id}
         habit_id={habit_id}
         dispatch={dispatch}

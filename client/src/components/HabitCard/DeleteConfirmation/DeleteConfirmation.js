@@ -12,6 +12,7 @@ const DeleteConfirmation = props => {
   const { user_id,
           habit_id,
           dispatch,
+          closeModal,
           title } = props;
 
   /** State **/
@@ -20,6 +21,9 @@ const DeleteConfirmation = props => {
 
   return (
     <div className="DeleteConfirmation">
+      <Button close
+        onClick={closeModal}/>
+        
       <span className="DeleteConfirmation__prompt">
         Are you sure you want to delete?
         <i className="DeleteConfirmation__prompt">
