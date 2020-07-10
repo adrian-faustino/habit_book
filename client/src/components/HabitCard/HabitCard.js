@@ -148,7 +148,7 @@ const HabitCard = ({habit}) => {
                 {`${likes} ${formatPlural(likes, 'like')}`}
             </span>)}
           <button onClick={handleLikeBtn}>like</button>
-          <button onClick={handleExpandComments}>comments</button>
+          <button onClick={handleExpandComments}>view comments</button>
         </footer>
 
         {isMyHabit && (<button

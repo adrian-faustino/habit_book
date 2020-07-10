@@ -18,6 +18,8 @@ const CommentsContainer = props => {
   return (
     <div className="CommentsContainer">
       <hr />
+      {comments.length === 0 && 'There are no comments on this post. Be the first to comment!'}
+
       {_comments}
     </div>
   );
