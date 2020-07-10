@@ -57,7 +57,6 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
 });
 
 // register a like on a habit
-// TODO: add auth
 router.post('/likes', authenticateToken, async (req, res) => {
   const { liked_by, habit_by, habit_id } = req.body;
   const VALUES = [habit_id, habit_by, liked_by];
@@ -180,9 +179,8 @@ router.get('/likes/:user_id/:habit_id', async (req, res) => {
 // EDIT habits
 
 // DELETE habits
-router.delete('/:user_id/:habit_id', async (req, res) => {
+router.delete('/delete/:user_id/:habit_id', authenticateToken, async (req, res) => {
   const { user_id, habit_id } = req.params;
-  // authent
 
   try {
     // delete all completed_at related to that habit

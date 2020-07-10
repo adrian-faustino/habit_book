@@ -20,10 +20,14 @@ export const handleDeleteCard = async (e, user_id, habit_id, dispatch) => {
 
   const endpoint =
     process.env.REACT_APP_API + 
-    `habits/${user_id}/${habit_id}`
+    `habits/delete/${user_id}/${habit_id}`
+
+  const headers = {
+    authorization: `Bearer ${localStorage.accessToken}`
+  };
   
   axios
-    .delete(endpoint)
+    .delete(endpoint, {headers})
     .then(res => {
       // trigger fetch data after crud operation
       dispatch(increment(1));
@@ -46,10 +50,6 @@ export const getLikes = async (user_id, habit_id, callback) => {
 
 // register new like to DB (or delete if existing)
 export const registerLike = (user, user_id, habit_id, callback) => {
-  // const liked_by = user.user_id;
-  // const habit_by = user_id;
-  // const _habit_id = habit_id;
-
   const endpoint = process.env.REACT_APP_API +
     `habits/likes`;
 
@@ -61,7 +61,7 @@ export const registerLike = (user, user_id, habit_id, callback) => {
 
   const config = {
     headers: {
-      authorization : `Bearer ${localStorage.accessToken}`
+      authorization: `Bearer ${localStorage.accessToken}`
     }
   };
   
