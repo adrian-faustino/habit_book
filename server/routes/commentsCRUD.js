@@ -11,7 +11,6 @@ const HABIT_COMMENTS_TABLE = 'habit_comments';
 // @access  Private
 
 // CREATE
-// TODO: auth
 router.post('/newComment', authenticateToken, async (req, res) => {
   const { comment_by, habit_id, content, created_at, is_edited } = req.body;
   
