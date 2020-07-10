@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
+const authenticateToken = require('../helpers/auth');
 const { getDateYYYYMMDD } = require('../helpers/formatHelpers');
 
 /** Constants **/
 const CREATED_AT_TABLE = 'completed_at';
 
-// @route   user/~
+// @route   completed_at/~
 // @desc    handle user CRUD requests
 // @access  Private
 
 
-router.post('/:date/:user_id/:habit_id', async (req, res) => {
-  const { date, user_id, habit_id } = req.params;
-
+router.post('/', authenticateToken, async (req, res) => {
+  const { date, user_id, habit_id } = req.body;
+  
   try {
     // check if a completed_at entry from this habit and date and user already exists
     const checkQuery = `
