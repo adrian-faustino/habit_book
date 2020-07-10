@@ -11,6 +11,7 @@ import { Tooltip, Alert } from 'reactstrap';
 import './HabitCard.css';
 /** Helpers **/
 import { formatToWords, formatPlural } from '../../helpers/formatHelpers';
+import { getCompleted_atAPIData } from '../../helpers/getDataHelpers';
 import { handleDeleteCard, getLikes, registerLike, getComments } from '../../helpers/habitDataHelpers';
 /** Redux **/
 import { useSelector, useDispatch } from 'react-redux';
@@ -49,19 +50,9 @@ const HabitCard = ({habit}) => {
   
   // When each habit loads, get a list of completed days
   useEffect(() => {
-    const endpoint =
-    process.env.REACT_APP_API +
-    `habits/${user_id}/${habit_id}`;
-    
-    axios
-    .get(endpoint)
-    .then(res => {
-      const dates = res.data.map(date => {
-        return date.completed_at.split('T')[0];
-      });
-      setCompletedAt(dates);
-    })
-    .catch(err => console.log(err));
+    getCompleted_atAPIData(user_id, habit_id, data => {
+      setCompletedAt(data);
+    });
   }, [counter]);
   
   // If this habit belongs to this user, display delete btn

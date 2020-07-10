@@ -14,3 +14,20 @@ export const getUserAPIData = async (user_id, callback) => {
     })
     .catch(err => console.log(err));
 };
+
+// Get a [] list of completed days for a habit
+export const getCompleted_atAPIData = async (user_id, habit_id, callback) => {
+  const endpoint =
+  process.env.REACT_APP_API +
+  `habits/${user_id}/${habit_id}`;
+  
+  axios
+    .get(endpoint)
+    .then(res => {
+      const dates = res.data.map(date => {
+        return date.completed_at.split('T')[0];
+      });
+      callback(dates);
+    })
+    .catch(err => console.log(err));
+};
