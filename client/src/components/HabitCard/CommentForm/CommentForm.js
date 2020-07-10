@@ -18,10 +18,9 @@ const CommentForm = props => {
   const user = useSelector(state => state.user);
 
   function submitComment() {
-    console.log('submitting');
-    console.log(values.content);
     const endpoint = process.env.REACT_APP_API + 
       `comments/newComment`;
+
     const payload = {
       comment_by: user.user_id,
       habit_id: props.habit_id,
@@ -29,9 +28,15 @@ const CommentForm = props => {
       created_at: new Date(),
       is_edited: false
     };
+
+    const config = {
+      headers: {
+        authorization : `Bearer ${localStorage.accessToken}`
+      }
+    };
     
     axios
-      .post(endpoint, payload)
+      .post(endpoint, payload, config)
       .then(res => {
         handleReset();
         // trigger view change

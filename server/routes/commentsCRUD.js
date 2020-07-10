@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
+const authenticateToken = require('../helpers/auth');
 
 /** Constants **/
 const HABIT_COMMENTS_TABLE = 'habit_comments';
@@ -11,7 +12,7 @@ const HABIT_COMMENTS_TABLE = 'habit_comments';
 
 // CREATE
 // TODO: auth
-router.post('/newComment', async (req, res) => {
+router.post('/newComment', authenticateToken, async (req, res) => {
   const { comment_by, habit_id, content, created_at, is_edited } = req.body;
   
   // insert into db
