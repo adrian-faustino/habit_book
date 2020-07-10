@@ -30,13 +30,13 @@ SERVER TODO:
   [x] post a new habit
   [] update habit
   [x] delete habit
-    [] auth (make sure only logged in user can delete their OWN habits)
+    [x] auth (make sure only logged in user can delete their OWN habits)
 [] add a limit to requests (pagination? inf scroll etc)
 
 
   created_at:
   [] crud routes
-  [] protect route
+  [x] protect route
 
   Search users:
     [] crud routes
@@ -149,7 +149,7 @@ Current task: (I set these when I end the night, to remind myself in the morning
   [x] delete habit
 [x] habit cards to display user habits
   [x] learn about children props
-[] auth (make sure only logged in user can delete their OWN habits) 
+[x] auth (make sure only logged in user can delete their OWN habits) 
 [x] refresh displayed when new habit is added or when its deleted
 [x] when user clicks current day, update DB 
   [x] set compeleted_at
@@ -176,4 +176,4 @@ Comments
   [x] write comments on a post
   [x] display comments on a post
   [] delete comments
-  [] user autnh
+  [x] user autnh
