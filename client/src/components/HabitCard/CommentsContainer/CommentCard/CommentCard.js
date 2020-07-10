@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 /** Redux actions **/
 import { increment } from '../../../../actions';
 /** Helpers **/
-import axios from 'axios';
+import { getUserAPIData } from '../../../../helpers/getDataHelpers';
 /** Styles **/
 import './CommentCard.css';
 
@@ -26,15 +26,9 @@ const CommentCard = ({ comment }) => {
 
   // get commenter's info (avatar, name etc)
   useEffect(() => {
-    const endpoint = process.env.REACT_APP_API +
-      `users/${comment_by}`;
-    axios
-      .get(endpoint)
-      .then(res => {
-        console.log('User data:', res.data[0]);
-        setCommenter(res.data[0]);
-      })
-      .catch(err => console.log(err));
+    getUserAPIData(comment_by, (data) => {
+      setCommenter(data);
+    });
   }, []);
 
   const triggerReload = () => {
