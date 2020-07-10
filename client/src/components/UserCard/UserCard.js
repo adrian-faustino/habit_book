@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+/** Helpers **/
+import { getUserHabitCountAPIData } from '../../helpers/getDataHelpers';
 /** Styles **/
 import './UserCard.css';
 /** React router **/
@@ -15,6 +17,15 @@ const UserCard = ({ userObj }) => {
     is_active,
     username
   } = userObj;
+
+  /** State **/
+  const [habitCount, setHabitCount] = useState('');
+
+  useEffect(() => {
+    getUserHabitCountAPIData(user_id, data => {
+      setHabitCount(data);
+    });
+  }, []);
 
   return (
     <div className="UserCard__container">
@@ -40,6 +51,11 @@ const UserCard = ({ userObj }) => {
         <span
           className="UserCard__email">
           Email: {email}
+        </span>
+
+        <span
+          className="UserCard__habit-count">
+            Habits: {habitCount}
         </span>
 
         <span

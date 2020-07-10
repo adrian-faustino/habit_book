@@ -9,10 +9,24 @@ export const getUserAPIData = async (user_id, callback) => {
   axios
     .get(endpoint)
     .then(res => {
-      console.log('User data:', res.data[0]);
       callback(res.data[0]);
     })
     .catch(err => console.log(err));
+};
+
+// Get user habit count
+export const getUserHabitCountAPIData = async (user_id, callback) => {
+  const endpoint =
+  process.env.REACT_APP_API +
+  `habits/${user_id}`;
+  
+  axios
+    .get(endpoint)
+    .then(res => {
+      callback(res.data.length);
+    })
+    .catch(err => console.log(err));
+
 };
 
 // Get a [] list of completed days for a habit

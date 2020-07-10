@@ -11,7 +11,7 @@ import { Tooltip, Alert } from 'reactstrap';
 import './HabitCard.css';
 /** Helpers **/
 import { formatToWords, formatPlural } from '../../helpers/formatHelpers';
-import { getCompleted_atAPIData } from '../../helpers/getDataHelpers';
+import { getCompleted_atAPIData, getUserAPIData } from '../../helpers/getDataHelpers';
 import { handleDeleteCard, getLikes, registerLike, getComments } from '../../helpers/habitDataHelpers';
 /** Redux **/
 import { useSelector, useDispatch } from 'react-redux';
@@ -36,6 +36,7 @@ const HabitCard = ({habit}) => {
   const [isMyHabit, setIsMyHabit] = useState(false);
   const [likes, setLikes] = useState();
   const [err, setErr] = useState('');
+  const [habit_by, setHabitBy] = useState('');
   const [success, setSuccess] = useState('');
   // use null here for conditional rendering, instead of using empty array
   const [comments, setComments] = useState(null);
@@ -69,6 +70,13 @@ const HabitCard = ({habit}) => {
     // // get comments
     // getComments(habit_id, setComments);
   }, [counter]);
+
+  // get name of user who created habit
+  useEffect(() => {
+    getUserAPIData(user_id, data => {
+      setHabitBy(data.username);
+    });
+  });
 
 
   const handleLikeBtn = e => {
@@ -114,7 +122,7 @@ const HabitCard = ({habit}) => {
           </span>
           <h5
             className="HabitCard__created-at">
-            Created at {formatToWords(created_at)}
+            Created at {formatToWords(created_at)} by @{habit_by}
           </h5>
 
           {/* error feedback */}
