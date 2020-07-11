@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { increment } from '../../../../actions';
 /** Helpers **/
 import { getUserAPIData } from '../../../../helpers/getDataHelpers';
+import { getTimeSince, timeSince } from '../../../../helpers/dateObjHelpers';
 /** Styles **/
 import './CommentCard.css';
 
@@ -35,7 +36,6 @@ const CommentCard = ({ comment }) => {
     dispatch(increment(1));
     // window.location.reload();
   };
-
 
   return (
     <div className="CommentCard">
@@ -72,7 +72,7 @@ const CommentCard = ({ comment }) => {
           )}  
 
           <span className="CommentCard__created-at">
-            Created at {created_at}
+            {timeSince(new Date(created_at))} ago
           </span>
         </div>
       </div>

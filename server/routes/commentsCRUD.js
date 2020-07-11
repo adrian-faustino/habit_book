@@ -34,6 +34,21 @@ router.post('/newComment', authenticateToken, async (req, res) => {
 });
 
 // READ
+// get all comments
+router.get('/', async (req, res) => {
+  const query = `
+    SELECT * FROM ${HABIT_COMMENTS_TABLE};
+  `;
+
+  try {
+    const result = await pool.query(query);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ err: err.message });
+  };
+});
+
 // get all comments on a habit
 router.get('/:habit_id', async (req, res) => {
   const { habit_id } = req.params;
