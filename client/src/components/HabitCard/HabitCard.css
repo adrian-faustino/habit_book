@@ -36,6 +36,10 @@
 .HabitCard__description {
   font-size: 20px;
   font-weight: 500;
+  min-height: 0;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: scroll;
 }
 
 .HabitCard__created-at {
@@ -63,15 +67,25 @@
   top: 35%;
 }
 
-.HabitCard__delete-card-btn {
+.HabitCard__delete-btn,
+.HabitCard__edit-btn {
   position: absolute;
   top: 2px;
   right: 2px;
   border: none;
   border-radius: 3px;
-  background: red;
   box-shadow: 0 0 3px black;
   color: white;
+  width: 55px;
+}
+
+.HabitCard__delete-btn {
+  background: red;
+}
+
+.HabitCard__edit-btn {
+  background: blue;
+  top: 30px;
 }
 
 .HabitCard__likes-span {

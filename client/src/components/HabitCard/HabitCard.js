@@ -5,8 +5,9 @@ import CalendarComponent from './CalendarComponent/CalendarComponent';
 import CommentsContainer from './CommentsContainer/CommentsContainer';
 import CommentForm from './CommentForm/CommentForm';
 import DeleteConfirmation from './DeleteConfirmation/DeleteConfirmation';
+import EditHabitForm from './EditHabitForm/EditHabitForm';
 /** Reactstrap **/
-import { Tooltip, Alert } from 'reactstrap';
+import { Tooltip, Alert, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 /** Styles **/
 import './HabitCard.css';
 /** Helpers **/
@@ -41,6 +42,7 @@ const HabitCard = ({habit}) => {
   // use null here for conditional rendering, instead of using empty array
   const [comments, setComments] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -105,6 +107,11 @@ const HabitCard = ({habit}) => {
     });
   };
 
+  const handleEditToggle = e => {
+    e.preventDefault();
+    setEditMode(true);
+  }
+
   return (
     <div className="HabitCard">
       <div className="HabitCard__container">
@@ -118,6 +125,9 @@ const HabitCard = ({habit}) => {
           <h4 className="HabitCard__title">{title}</h4>
           <span
             className="HabitCard__description">
+            {editMode && (<EditHabitForm
+              description={description}
+              title={title}/>)}
             {description ? description : <i>No description provided.</i>}
           </span>
           <h5
@@ -149,12 +159,19 @@ const HabitCard = ({habit}) => {
           <button onClick={handleLikeBtn}>like</button>
           <button onClick={handleExpandComments}>view comments</button>
         </footer>
-
+            
         {isMyHabit && (<button
           onClick={confirmDelete}
-          className="HabitCard__delete-card-btn">
+          className="HabitCard__delete-btn">
             delete
         </button>)}
+
+        {isMyHabit && (<button
+          onClick={handleEditToggle}
+          className="HabitCard__edit-btn">
+            edit
+          </button>
+        )}
       </div>
 
       {deleteConfirm && <DeleteConfirmation
