@@ -25,7 +25,6 @@ const CommentForm = props => {
       comment_by: user.user_id,
       habit_id: props.habit_id,
       content: values.content,
-      created_at: new Date(),
       is_edited: false
     };
 

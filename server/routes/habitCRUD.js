@@ -25,7 +25,7 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
   });
 
   // if validation passes, insert into DB
-  const created_at = formatToYYYYMMDD(new Date());
+  const created_at = new Date();
 
   const VALUES = [
     validated.habit.title,

@@ -12,7 +12,9 @@ const HABIT_COMMENTS_TABLE = 'habit_comments';
 
 // CREATE
 router.post('/newComment', authenticateToken, async (req, res) => {
-  const { comment_by, habit_id, content, created_at, is_edited } = req.body;
+  const { comment_by, habit_id, content, is_edited } = req.body;
+
+  const created_at = new Date();
   
   // insert into db
   const VALUES = [comment_by, habit_id, content, created_at, is_edited];
