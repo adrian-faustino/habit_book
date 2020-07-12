@@ -14,6 +14,7 @@ const EditHabitForm = props => {
   const [_title, titleBind, resetTitle] = useInput(title);
   const [_description, descriptionBind, resetDescription] = useInput(description);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleEditSubmit = e => {
     e.preventDefault();
@@ -25,7 +26,6 @@ const EditHabitForm = props => {
     const validated = validateForm(values);
     if (validated.err) return setError(validated.err);
     
-
     // if validation passes submit for update
     const habit = {
       title: _title,
