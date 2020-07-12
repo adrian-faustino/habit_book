@@ -126,6 +126,7 @@ const HabitCard = ({habit}) => {
           <span
             className="HabitCard__description">
             {editMode && (<EditHabitForm
+              setEditMode={setEditMode}
               description={description}
               title={title}/>)}
             {description ? description : <i>No description provided.</i>}
@@ -160,13 +161,13 @@ const HabitCard = ({habit}) => {
           <button onClick={handleExpandComments}>view comments</button>
         </footer>
             
-        {isMyHabit && (<button
+        {isMyHabit && !editMode && (<button
           onClick={confirmDelete}
           className="HabitCard__delete-btn">
             delete
         </button>)}
 
-        {isMyHabit && (<button
+        {isMyHabit && !editMode && (<button
           onClick={handleEditToggle}
           className="HabitCard__edit-btn">
             edit

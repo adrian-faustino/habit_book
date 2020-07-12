@@ -10,6 +10,7 @@
   border-radius: 5px;
   width: 100%;
   transform: translateX(-50%);
+  padding: 2px 5px;
 }
 
 .EditHabitForm__title {
@@ -21,5 +22,19 @@
   position: absolute;
   min-height: 155px;
   height: 100px;
-  background: white; 
+  background: white;
+  resize: none;
+}
+
+.EditHabitForm__save-btn {
+  position: absolute;
+  top: 120px;
+  bottom: 0;
+  width: 100%;
+  height: min-content;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px black;
+  background: lightblue;
 }
