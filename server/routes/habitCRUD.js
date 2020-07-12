@@ -172,7 +172,16 @@ router.get('/likes/:user_id/:habit_id', async (req, res) => {
   }
 });
 
-// EDIT habits
+// UPDATE habits
+router.put('/', authenticateToken, async (req, res) => {
+  console.log('updating habit...', req.body);
+  const { habit_id, habit} = req.body;
+
+  // validate new habit
+
+
+  // update habit
+});
 
 // DELETE habits
 router.delete('/delete/:user_id/:habit_id', authenticateToken, async (req, res) => {

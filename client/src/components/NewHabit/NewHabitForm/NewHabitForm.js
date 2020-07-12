@@ -36,7 +36,6 @@ const NewHabitForm = props => {
     if (validated.err) return setError(validated.err);
 
     // if validation passes, send post request
-    console.log('Submitting new habit...');
     setLoading(true);
     submitHabit_API(user.user_id, validated.habit, res => {
       console.log(res.data.msg);

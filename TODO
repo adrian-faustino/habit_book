@@ -186,3 +186,9 @@ Comments
 [] allow user to update habit
   [] change db to indicate if habit has been edited
   [] change color if edited?
+
+
+  [] updating new habits  
+    [] validate habits client side
+    [] validate habits server side
+    [] update habit
