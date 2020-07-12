@@ -177,10 +177,38 @@ router.put('/', authenticateToken, async (req, res) => {
   console.log('updating habit...', req.body);
   const { habit_id, habit} = req.body;
 
-  // validate new habit
+  // ensure no empty title, and trim text for whitespace
+  const validated = validateForm(habit);
+  if (validated.err) return res.status(500).json({
+    err: validated.err
+  });
 
+  // if validation passes, insert into DB
+  const VALUES = [
+    validated.habit.title,
+    validated.habit.description,
+    habit_id
+  ];
 
-  // update habit
+  const query = `
+    UPDATE ${HABITS_TABLE}
+    SET title = $1, description = $2
+    WHERE habit_id = $3;
+  `;
+  
+  pool
+    .query(query, VALUES)
+    .then(data => {
+      const jsonRes = {
+        msg: 'Habit updated!',
+        habit: data.data
+      };
+      res.json(jsonRes);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ msg: err.message });
+    });
 });
 
 // DELETE habits

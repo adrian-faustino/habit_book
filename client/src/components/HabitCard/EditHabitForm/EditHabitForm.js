@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 /** Custom Hooks **/
 import useInput from '../../../hooks/useInput';
 /** Styles **/
 import './EditHabitForm.css';
 /** Helpers **/
 import { updateHabit_API } from '../../../helpers/postDataHelpers';
+import { validateForm } from '../../../helpers/habitFormHelpers';
 
 const EditHabitForm = props => {
   const { description, title, setEditMode, habit_id } = props;
@@ -12,27 +13,35 @@ const EditHabitForm = props => {
   /** State **/
   const [_title, titleBind, resetTitle] = useInput(title);
   const [_description, descriptionBind, resetDescription] = useInput(description);
+  const [error, setError] = useState('');
 
   const handleEditSubmit = e => {
     e.preventDefault();
-    // validate form
+    // ensure no empty title, and trim text for whitespace
+    const values = {
+      title: _title,
+      description: _description
+    };
+    const validated = validateForm(values);
+    if (validated.err) return setError(validated.err);
     
 
-    // submit for update
+    // if validation passes submit for update
     const habit = {
       title: _title,
       description: _description
     };
     updateHabit_API(habit_id, habit, res => {
-
+      console.log('Habit updated :)', res);
+      
+      // close form
+      setEditMode(false);
     });
-
-    // close form
-    // setEditMode(false);
   };
 
   return (
     <div className="EditHabitForm">
+      {error}
       <form
         autoComplete="off"
         type="submit"
