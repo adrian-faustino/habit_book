@@ -8,6 +8,7 @@ import { increment } from '../../../actions';
 import { Button, Form, FormGroup, Label, Input, FormText, Alert, Spinner } from 'reactstrap';
 /** Helpers **/
 import useForm from '../../../hooks/useFormHook';
+import { submitHabit_API } from '../../../helpers/postDataHelpers';
 import { validateForm } from '../../../helpers/habitFormHelpers';
 /** Styles **/
 import './NewHabitForm.css';
@@ -36,43 +37,24 @@ const NewHabitForm = props => {
 
     // if validation passes, send post request
     console.log('Submitting new habit...');
-    const endpoint = 
-      process.env.REACT_APP_API + 'habits/newHabit';
-
-    const payload = {
-      user_id: user.user_id, habit: validated.habit 
-    };
-
-    const config = {
-      headers: {
-        authorization : `Bearer ${localStorage.accessToken}`
-      }
-    };
-    // set loading to display spinner
     setLoading(true);
-    axios
-      .post(endpoint, payload, config)
-      .then(res => {
-        console.log(res.data.msg);
-        // reset form, set form feedback, and clear spinner
-        handleReset();
-        setFormFeedback(res.data.msg);
-        setLoading(false);
-        setError('');
-
-        // trigger fetch data after crud operation
-        dispatch(increment(1));
-
-        // remove form feedback after 2 seconds
-        setTimeout(() => {
-          setFormFeedback('');
-        }, 2000);
-      })
-      .catch(err => {
-        setLoading(false);
-        setError(err.response.data.err)
-      });
-    }
+    submitHabit_API(user.user_id, validated.habit, res => {
+      console.log(res.data.msg);
+      // reset form, set form feedback, and clear spinner
+      handleReset();
+      setFormFeedback(res.data.msg);
+      setLoading(false);
+      setError('');
+  
+      // trigger fetch data after crud operation
+      dispatch(increment(1));
+  
+      // remove form feedback after 2 seconds
+      setTimeout(() => {
+        setFormFeedback('');
+      }, 2000);
+    });
+  }
 
   return (
     <div className="NewHabitForm__container">
