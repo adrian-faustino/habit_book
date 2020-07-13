@@ -8,13 +8,11 @@ import { updateHabit_API } from '../../../helpers/postDataHelpers';
 import { validateForm } from '../../../helpers/habitFormHelpers';
 
 const EditHabitForm = props => {
-  const { description, title, setEditMode, habit_id } = props;
+  const { description, title, setEditMode, habit_id, setErr, setSuccess } = props;
 
   /** State **/
   const [_title, titleBind, resetTitle] = useInput(title);
   const [_description, descriptionBind, resetDescription] = useInput(description);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
   const handleEditSubmit = e => {
     e.preventDefault();
@@ -24,7 +22,16 @@ const EditHabitForm = props => {
       description: _description
     };
     const validated = validateForm(values);
-    if (validated.err) return setError(validated.err);
+    if (validated.err) {
+      setErr(validated.err);
+
+      // fade out err after 2 seconds
+      setTimeout(() => {
+        setErr('');
+      }, 2000);
+
+      return;
+    };
     
     // if validation passes submit for update
     const habit = {
@@ -32,7 +39,12 @@ const EditHabitForm = props => {
       description: _description
     };
     updateHabit_API(habit_id, habit, res => {
-      console.log('Habit updated :)', res);
+      setSuccess(res.data.msg);
+
+      // fade out success feedback
+      setTimeout(() => {
+        setSuccess('');
+      }, 2000);
       
       // close form
       setEditMode(false);
@@ -41,7 +53,6 @@ const EditHabitForm = props => {
 
   return (
     <div className="EditHabitForm">
-      {error}
       <form
         autoComplete="off"
         type="submit"

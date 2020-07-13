@@ -126,6 +126,8 @@ const HabitCard = ({habit}) => {
           <span
             className="HabitCard__description">
             {editMode && (<EditHabitForm
+              setSuccess={setSuccess}
+              setErr={setErr}
               habit_id={habit_id}
               setEditMode={setEditMode}
               description={description}
