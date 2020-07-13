@@ -103,7 +103,7 @@ CLIENT TODO:
     [x] write comments on a post
     [x] display comments on a post
     [x] display user info of each comment
-    [] time since comment was made (like fb)
+    [x] time since comment was made (like fb)
     [x] username on click, link to user's profile
     [] delete comments
 
@@ -125,6 +125,7 @@ Refactor tasks:
 [] add feedback when searching for users
 [] user card on hover (over avatar, over full name)
 [] set created_at on server side with GETDATE() SQL?
+[] add loading spinners where there is a request
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -147,10 +148,10 @@ Current task: (I set these when I end the night, to remind myself in the morning
 [x] login/logout feature
 [x]  usebcrypt to hash and salt passwords
   [x] new register page -> redirect to login page -> login page enter username and password -> check DB if there, return JWT token :)
-[] habit crud routes
+[x] habit crud routes
   [x] create habit
   [x] read habit
-  [] update habit (edit)
+  [x] update habit (edit)
   [x] delete habit
 [x] habit cards to display user habits
   [x] learn about children props
@@ -183,14 +184,14 @@ Comments
   [] delete comments
   [x] user autnh
 
-[] allow user to update habit
-  [] change db to indicate if habit has been edited
+[x] allow user to update habit
+  [x] change db to indicate if habit has been edited
   [] change color if edited?
 
 
-  [] updating new habits  
+  [x] updating new habits  
     [x] validate habits client side
     [x] validate habits server side
     [x] update habit
-      [] set error messages 
-      [] set success messages
+      [x] set error messages 
+      [x] set success messages
