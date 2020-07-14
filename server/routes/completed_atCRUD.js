@@ -5,13 +5,13 @@ const authenticateToken = require('../helpers/auth');
 const { getDateYYYYMMDD } = require('../helpers/formatHelpers');
 
 /** Constants **/
-const CREATED_AT_TABLE = 'completed_at';
+const COMPLETED_AT_TABLE = 'completed_at';
 
 // @route   completed_at/~
 // @desc    handle user CRUD requests
 // @access  Private
 
-
+// CREATE completed_at
 router.post('/', authenticateToken, async (req, res) => {
   const { date, user_id, habit_id } = req.body;
   
@@ -24,7 +24,7 @@ router.post('/', authenticateToken, async (req, res) => {
   try {
     // check if a completed_at entry from this habit and date and user already exists
     const checkQuery = `
-      SELECT * FROM ${CREATED_AT_TABLE}
+      SELECT * FROM ${COMPLETED_AT_TABLE}
       WHERE user_id = $1
       AND habit_id = $2
       AND CAST(completed_at AS text) LIKE '${date}%';
@@ -45,7 +45,7 @@ router.post('/', authenticateToken, async (req, res) => {
     // if validation passed
     console.log('inserting new completed_at...');
     const insertQuery = `
-      INSERT INTO ${CREATED_AT_TABLE}
+      INSERT INTO ${COMPLETED_AT_TABLE}
         (user_id, habit_id, completed_at)
       VALUES ($1, $2, $3);
     `;
@@ -60,6 +60,25 @@ router.post('/', authenticateToken, async (req, res) => {
     console.error(err);
     res.status(500).json({ err: err.message });
   };
+});
+
+// READ
+// return all completed_at
+// TODO: add limit, pagination
+router.get('/', (req, res) => {
+  const query = `
+    SELECT * FROM ${COMPLETED_AT_TABLE};
+  `;
+
+  pool
+    .query(query)
+    .then(data => {
+      res.json(data.rows[0]);
+    })
+    .catch(err => {
+      console.error(err.message);
+      res.status(500).json({ err: err.message });
+    })
 });
 
 module.exports = router;

@@ -19,7 +19,7 @@ SERVER TODO:
 [x] habit crud routes
   [x] create habit
   [x] read habit
-  [] update habit (show is edited)
+  [x] update habit (show is edited)
   [x] delete habit
   [x] habit validation before submission
   [x] validation:
@@ -34,7 +34,7 @@ SERVER TODO:
 [] add a limit to requests (pagination? inf scroll etc)
 
 
-  created_at: (habit)
+  completed_at: (habit)
   [] crud routes
   [x] protect route
 
