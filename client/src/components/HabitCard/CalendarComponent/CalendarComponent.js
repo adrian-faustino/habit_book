@@ -5,7 +5,7 @@ import Calendar from 'react-calendar';
 import './CalendarComponent.css';
 /** Helpers **/
 import { getDateYYYYMMDD } from '../../../helpers/dateObjHelpers';
-import { createCompletedAt } from '../../../helpers/CalendarHelpers';
+import { createCompletedAt, deleteCompletedAt } from '../../../helpers/CalendarHelpers';
 /** Redux **/
 import { useDispatch, useSelector } from 'react-redux';
 /** Redux-actions **/
@@ -40,8 +40,9 @@ const CalendarComponent = props => {
 
   // when user clicks a tile on the calendar...
   const handleClickDay = async (value, e) => {
-    setValue(value);
+    // setValue(value);
     if (isLoading) return;
+    const date = getDateYYYYMMDD(value);
 
     // check if habit belongs to user
     if (user.user_id !== props.user_id) {
@@ -50,8 +51,17 @@ const CalendarComponent = props => {
     }
     
     // check if day is not in completedAt[]
+    // if day is already marked, unmark it
     const isSelected = (e.target.className).includes(CALENDAR_SELECTED);
-    if (isSelected) return console.log('Already marked blue.');
+    if (isSelected) {
+      setIsLoading(true);
+      deleteCompletedAt(habit_id, date, res => {
+        setIsLoading(false);
+        // trigger view update
+        dispatch(increment(1));
+      });
+      return console.log('Already marked blue.');
+    }
 
     // check if day is not in future
     if (getDateYYYYMMDD(value) > getDateYYYYMMDD(new Date())) {
@@ -69,7 +79,6 @@ const CalendarComponent = props => {
     // request to create completed_at
     // TODO: change this to .ISOSstring
     console.log('Requesting new completed_at...');
-    const date = getDateYYYYMMDD(value);
 
     setIsLoading(true);
     createCompletedAt(date, user_id, habit_id, (success, err) => {

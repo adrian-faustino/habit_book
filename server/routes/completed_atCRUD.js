@@ -81,4 +81,47 @@ router.get('/', (req, res) => {
     });
 });
 
+// UPDATE
+
+
+
+// DELETE compelted_at
+router.delete('/:habit_id/:date', authenticateToken, async (req, res) => {
+  const { habit_id, date } = req.params;
+  const VALUES = [habit_id, date];
+  const searchQuery = `
+    SELECT completed_at_id, user_id FROM ${COMPLETED_AT_TABLE}
+    WHERE habit_id = $1
+    AND completed_at = $2
+    LIMIT 1;
+  `;
+
+  try {
+    const exists = await pool.query(searchQuery, VALUES);
+    // check if it exists
+    if (exists.rows.length === 0) {
+      return res.status(500).json({ msg: `completed at doesn't exist.` });
+    };
+
+    // check if habit belongs to user
+    const { completed_at_id, user_id } = exists.rows[0];
+    if (user_id !== req.user.user_id) {
+      return res.status(500).json({ msg: 'This completed_at does not belong to you.'});
+    };
+
+    // if validation passes, delete
+    const deleteQuery = `
+      DELETE FROM ${COMPLETED_AT_TABLE}
+      WHERE completed_at_id = $1;
+    `;
+
+    await pool.query(deleteQuery, [completed_at_id]);
+    res.json({ msg: 'Deleted completed_at.' });
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ err: err.message });
+  }
+});
+
 module.exports = router;

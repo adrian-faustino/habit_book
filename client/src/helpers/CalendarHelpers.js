@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 // Input: Date YYYY-MM-DD. Ask server to insert new created_at into db
-// todo: auth (THIS NEEDS TO BE A PROTECTED ROUTE)
 export const createCompletedAt = async (date, user_id, habit_id, callback) => {
   const endpoint = process.env.REACT_APP_API +
     `completed_at`;
@@ -26,4 +25,21 @@ export const createCompletedAt = async (date, user_id, habit_id, callback) => {
     console.log(err.message);
     callback(null, err);
   }
+};
+
+// Delete (untoggle) completed at
+export const deleteCompletedAt = (habit_id, date, callback) => {
+  const endpoint = process.env.REACT_APP_API + 
+    `completed_at/${habit_id}/${date}`;
+  
+  const headers = {
+    authorization: `Bearer ${localStorage.accessToken}`
+  };
+
+  axios
+    .delete(endpoint, {headers})
+    .then(res => {
+      callback(res);
+    })
+    .catch(err => console.log(err));
 };
