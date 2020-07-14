@@ -15,6 +15,12 @@ const CREATED_AT_TABLE = 'completed_at';
 router.post('/', authenticateToken, async (req, res) => {
   const { date, user_id, habit_id } = req.body;
   
+  // validate to see if this habit belongs to this user
+  if (req.user.user_id !== user_id) {
+    console.log('This habit does not belong to you.');
+    return res.status(500).json({ msg: 'Habit does not belong to this user '});
+  };
+  
   try {
     // check if a completed_at entry from this habit and date and user already exists
     const checkQuery = `

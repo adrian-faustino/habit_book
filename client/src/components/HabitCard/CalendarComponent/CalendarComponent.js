@@ -7,7 +7,7 @@ import './CalendarComponent.css';
 import { getDateYYYYMMDD } from '../../../helpers/dateObjHelpers';
 import { createCompletedAt } from '../../../helpers/CalendarHelpers';
 /** Redux **/
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 /** Redux-actions **/
 import { increment } from '../../../actions';
 
@@ -32,10 +32,16 @@ const CalendarComponent = props => {
   const [value, setValue] = useState(new Date());
   /** Redux **/
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
   // when user clicks a tile on the calendar...
   const handleClickDay = async (value, e) => {
     setValue(value);
+    // check if habit belongs to user
+    if (user.user_id !== props.user_id) {
+      setErr('This habit does not belong to you.');
+      return console.log('This habit does not belong to you.');
+    }
     
     // check if day is not in completedAt[]
     const isSelected = (e.target.className).includes(CALENDAR_SELECTED);
@@ -56,6 +62,7 @@ const CalendarComponent = props => {
     // request to create completed_at
     console.log('Requesting new completed_at...');
     const date = getDateYYYYMMDD(value);
+    // TODO#2: fix this to be a callback because it triggers the success days when a user marks other user's calendars
     createCompletedAt(date, user_id, habit_id);
 
     // trigger view update
@@ -83,9 +90,15 @@ const CalendarComponent = props => {
     }
   };
 
+  // if habit card doesn't belong to use, disable mouse events
+  let unclickable;
+  if (user.user_id !== props.user_id) {
+    unclickable = 'unclickable'
+  };
+
   return (
     <section
-      className="CalendarComponent">
+      className={`CalendarComponent ${unclickable}`}>
       <Calendar
         value={value}
         onClickDay={handleClickDay}

@@ -85,6 +85,7 @@ CLIENT TODO:
 
   Calendar:
   [x] on click -> post req to create an entry in created_at
+  [] refactor calendar component (clean up functions and modularize. Fix TODO#2)
 
   Search users 'Search page'
   [x] user types in name

@@ -12,3 +12,7 @@
 .CalendarComponent__today {
   background: green;
 }
+
+.unclickable {
+  pointer-events: none;
+}
