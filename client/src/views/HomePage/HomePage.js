@@ -33,7 +33,7 @@ const HomePage = () => {
     getUserData(dispatch);
   }, []);
 
-  if (!isLogged) return <Redirect to="/welcome"/>
+  if (!isLogged) return <Redirect to="/"/>
   return (
     <div className="HomePage">
       <h2>

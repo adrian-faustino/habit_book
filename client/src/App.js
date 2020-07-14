@@ -34,7 +34,7 @@ function App() {
       <Router>
         <Navbar />
 
-        <Route exact path="/" component={LandingPage}/>
+        <Route exact path="/" component={WelcomePage}/>
         <Route exact path="/welcome" component={WelcomePage}/>
         <Route exact path="/signup" component={SignUpPage}/>
         <Route exact path="/login" component={LoginPage}/>

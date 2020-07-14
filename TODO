@@ -39,7 +39,7 @@ SERVER TODO:
     [x] create (when clicking calendar)
     [x] read (fetch all)
     [] update (might need this when determining if completed at was marked at that day)
-    [] delete (unmarking)
+    [x] delete (unmarking)
   [x] protect route
 
   Search users:
@@ -138,6 +138,8 @@ Refactor tasks:
 [] fix x minutes ago going over 60 mintes (i.e. 100 minutes ago)
 [] add 'comment deleted' placeholder after deleting comment
 [x] dont allow others to edit other users completed days ** IMPORTANT
+[] debounce mouse clicks (like on calendar etc)
+[] have an offset class that offsets all the view by the nav bar height (apply it to sign up page, register page, home page, etc)
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -211,7 +213,7 @@ Comments
       [x] set success messages
 
 [] refactor DO TODO #2
-[] if logged in and on welcome page, do not show log in/ registration forms
+[x] if logged in and on welcome page, do not show log in/ registration forms
 [] refresh button on find user page to refresh list of random users
 [] indicate if you liked a habit
 [] view 'x' comments

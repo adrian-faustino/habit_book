@@ -1,14 +1,23 @@
 import React from 'react';
-
+/** Redux **/
+import { useSelector } from 'react-redux';
 /** Subcomponents **/
 import { RegistrationForm } from '../../components';
 /** Styles **/
 import './SignUpPage.css';
 
-
 const SignUpPage = () => {
+  /** Redux **/
+  const isLogged = useSelector(state => state.isLogged);
 
-
+  if (isLogged) {
+    return (
+      <div className="SignUpPage">
+        You are already logged in!
+      </div>
+      // stretch: logout button
+    );
+  }
   return (
     <section
       className="SignUpPage">

@@ -1,3 +1,8 @@
+.WelcomePage {
+  position: relative;
+  top: var(--navbar-height);
+}
+
 .WelcomePage__site-banner {
   text-align: center;
   font-weight: bold;

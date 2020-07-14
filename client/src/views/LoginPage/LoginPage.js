@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+/** Redux **/
+import { useDispatch, useSelector } from 'react-redux';
+/** Redux actions */
 import { login } from '../../actions';
-
 /** Reactstrap **/
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 /** Styles **/
@@ -10,24 +11,38 @@ import './LoginPage.css';
 import useForm from '../../hooks/useFormHook';
 import { Redirect } from 'react-router-dom';
 import { loginReq } from '../../helpers/LoginHelpers';
+import { getUserData } from '../../helpers/protectedRouteOnMount';
 
 const LoginPage = () => {
+  /** State **/
   const [redirectURL, setRedirectURL] = useState(null);
-  const dispatch = useDispatch();
-
   const [
     userLogin, 
     handleChange, 
     handleSubmit, 
     handleReset] = useForm(requestLogin);
+  
+  /** Redux **/
+  const dispatch = useDispatch();
+  const isLogged = useSelector(state => state.isLogged);
 
   function requestLogin() {
     loginReq(userLogin, () => {
       dispatch(login());
+
+      //sync local storage user info with redux
+      getUserData(dispatch);
       setRedirectURL('/home')
     });
   };
-
+  
+  // if logged in do not show login form
+  if (isLogged) {
+    return (
+      <div className="LoginPage">You are already logged in!</div>
+      // stretch: logout button
+    )
+  };
   return (
     redirectURL ? (
       <Redirect to={redirectURL} />
