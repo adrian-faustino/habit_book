@@ -113,6 +113,10 @@ CLIENT TODO:
     [] have a 'longest streak' of habits etc
     [] on each habit card, display longest streak
 
+  SECTION: My following
+  [] on each user card, have a follow button
+  [] display list of users you follow
+
 Refactor tasks:
 [x] set up res and status code on errors server side (CRUD files)
 [x] userCrud.js handle all catch (in try catch)
@@ -186,12 +190,13 @@ Search users 'Search page'
 Comments
   [x] write comments on a post
   [x] display comments on a post
-  [] delete comments
+  [x] delete comments
   [x] user autnh
+  [] add delete confirmation
 
 [x] allow user to update habit
   [x] change db to indicate if habit has been edited
-  [] change color if edited?
+  [x] indicator if habit is edited
 
 
   [x] updating new habits  
@@ -203,3 +208,6 @@ Comments
 
 [] refactor DO TODO #2
 [] if logged in and on welcome page, do not show log in/ registration forms
+[] refresh button on find user page to refresh list of random users
+[] indicate if you liked a habit
+[] view 'x' comments
