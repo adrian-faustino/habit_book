@@ -2,12 +2,12 @@
 import axios from 'axios';
 
 // post new habit
-export const submitHabit_API = async (user_id, habit, callback) => {
+export const submitHabit_API = async (habit, callback) => {
   const endpoint = 
   process.env.REACT_APP_API + 'habits/newHabit';
 
   const payload = {
-    user_id, habit
+    habit
   };
 
   const config = {

@@ -17,7 +17,8 @@ const HABIT_LIKES_TABLE = 'habit_likes';
 
 // CREATE Habit
 router.post('/newHabit', authenticateToken, async (req, res) => {
-  const { user_id, habit } = req.body;
+  const { habit } = req.body;
+  const user_id = req.user.user_id;
   // ensure no empty title, and trim text for whitespace
   const validated = validateForm(habit);
   if (validated.err) return res.status(500).json({
@@ -25,20 +26,17 @@ router.post('/newHabit', authenticateToken, async (req, res) => {
   });
 
   // if validation passes, insert into DB
-  const created_at = new Date();
-
   const VALUES = [
     validated.habit.title,
     validated.habit.description,
-    created_at,
     null,
     null,
     false,
     user_id
   ];
   const queryString = `
-    INSERT INTO ${HABITS_TABLE} (title, description, created_at, last_completed_at, last_broken_at, is_edited, user_id)
-    VALUES ($1, $2, $3, $4, $5, $6, $7);
+    INSERT INTO ${HABITS_TABLE} (title, description, last_completed_at, last_broken_at, is_edited, user_id)
+    VALUES ($1, $2, $3, $4, $5, $6);
   `;
 
   pool

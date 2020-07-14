@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 /** Redux **/
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 /** Redux - actions **/
 import { increment } from '../../../actions';
 /** Reactstrap **/
@@ -27,7 +27,6 @@ const NewHabitForm = props => {
   const [error, setError] = useState('');
 
   /** Redux **/
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   function submitHabit() {
@@ -37,7 +36,7 @@ const NewHabitForm = props => {
 
     // if validation passes, send post request
     setLoading(true);
-    submitHabit_API(user.user_id, validated.habit, res => {
+    submitHabit_API(validated.habit, res => {
       console.log(res.data.msg);
       // reset form, set form feedback, and clear spinner
       handleReset();

@@ -63,7 +63,6 @@ router.post('/newUser', async (req, res) => {
      * BEGIN: New user insert into DB /
      * ===============================/
     /** If all validations passed, continue DB INSERT **/
-    const created_at = formatToYYYYMMDD(new Date());
     const is_active = true;
     /* STRETCH: allow user to choose their avatar */
     const avatar_url = 'https://i.imgur.com/2WZtOD6.png';
@@ -72,10 +71,10 @@ router.post('/newUser', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt); 
 
-    const VALUES = [username, first_name, last_name, email, hashedPassword, created_at, is_active, avatar_url];
+    const VALUES = [username, first_name, last_name, email, hashedPassword, is_active, avatar_url];
     const createUserQuery = `
-      INSERT INTO ${USERS_TABLE} (username, first_name, last_name, email, password, created_at, is_active, avatar_url)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+      INSERT INTO ${USERS_TABLE} (username, first_name, last_name, email, password, is_active, avatar_url)
+      VALUES ($1, $2, $3, $4, $5, $6, $7);
     `;
 
     const newUser = await pool.query(createUserQuery, VALUES);
@@ -102,7 +101,7 @@ router.post('/newUser', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const getAllUsersQuery = `
-      SELECT user_id, username, first_name, last_name, email, is_active, avatar_url FROM ${USERS_TABLE};
+      SELECT user_id, username, first_name, last_name, email, is_active, avatar_url, created_at FROM ${USERS_TABLE};
     `;
     const allUsers = (await pool.query(getAllUsersQuery)).rows;
     res.json(allUsers); // [{}, {}, {}]
