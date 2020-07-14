@@ -147,7 +147,7 @@ const RegistrationForm = () => {
             {values.username &&
             isValidUsername(values.username) ? 
               `Remaining characters: ${USERNAME_MAX_LENGTH - values.username.length}` :
-              `Usernames must be within ${USERNAME_MAX_LENGTH} characters`}
+              `Usernames must be within ${USERNAME_MAX_LENGTH} alphanumeric characters`}
           </FormText>
         </FormGroup>
 

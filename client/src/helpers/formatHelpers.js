@@ -11,6 +11,8 @@ export const formatZeros = (string, length) => {
 
 /** Input: string. Output: 'Month Day, Year' */
 export const formatToWords = dateStr => {
+  if (!dateStr) return;
+  
   const date = dateStr.split('T')[0].split('-');
   const [year, month, day] = date;
 
