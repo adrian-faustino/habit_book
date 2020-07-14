@@ -51,6 +51,7 @@
 }
 
 .HabitCard__footer {
+  position: relative;
   margin-top: 10px;
 }
 
@@ -90,6 +91,6 @@
 
 .HabitCard__likes-span {
   position: absolute;
-  left: 75px;
+  left: 30px;
   font-weight: bold;
 }
