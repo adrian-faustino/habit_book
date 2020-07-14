@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { increment } from '../../../actions';
 /** Custom Hooks **/
 import useInput from '../../../hooks/useInput';
+/** Reacstrap **/
+import { Button } from 'reactstrap';
 /** Styles **/
 import './EditHabitForm.css';
 /** Helpers **/
@@ -62,6 +64,11 @@ const EditHabitForm = props => {
 
   return (
     <div className="EditHabitForm">
+      <Button
+        className="EditHabitForm__close-btn"
+        onClick={() => setEditMode(false)}
+        close />
+
       <form
         autoComplete="off"
         type="submit"

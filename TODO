@@ -124,7 +124,7 @@ Refactor tasks:
 [x] when deleting a habit, delete all completed_at entries related to it
 [x] no dates in the future can be clicked for completed_at
 [x] add feedback when searching for users
-[] user card on hover (over avatar, over full name)
+[x] user card on hover (over avatar, over full name)
 [] set created_at on server side with GETDATE() SQL?
 [] add loading spinners where there is a request
 [] fix x minutes ago going over 60 mintes (i.e. 100 minutes ago)

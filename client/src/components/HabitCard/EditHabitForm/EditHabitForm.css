@@ -38,3 +38,10 @@
   box-shadow: 0 0 5px black;
   background: lightblue;
 }
+
+.EditHabitForm__close-btn {
+  position: absolute;
+  top: -33px;
+  right: 8px;
+  z-index: 90;
+}
