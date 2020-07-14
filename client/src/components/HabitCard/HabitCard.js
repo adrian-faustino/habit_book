@@ -65,7 +65,7 @@ const HabitCard = ({habit}) => {
       setIsMyHabit(true);
     }
 
-    // get likes
+    // get number of likes
     getLikes(user_id, habit_id, setLikes);
 
     /* STRETCH: fetch number of comments like fb */
@@ -138,6 +138,12 @@ const HabitCard = ({habit}) => {
             className="HabitCard__created-at">
             Created at {formatToWords(created_at)} by @{habit_by}
           </h5>
+
+          {is_edited && (
+            <span className="HabitCard__edited-span">
+              (edited)
+            </span>
+          )}
 
           {/* error feedback */}
           {err && <Alert

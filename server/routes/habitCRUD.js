@@ -192,7 +192,7 @@ router.put('/', authenticateToken, async (req, res) => {
 
   const query = `
     UPDATE ${HABITS_TABLE}
-    SET title = $1, description = $2
+    SET title = $1, description = $2, is_edited = true
     WHERE habit_id = $3;
   `;
   

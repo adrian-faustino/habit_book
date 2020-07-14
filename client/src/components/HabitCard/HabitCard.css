@@ -94,3 +94,11 @@
   left: 30px;
   font-weight: bold;
 }
+
+.HabitCard__edited-span {
+  position: absolute;
+  bottom: 42px;
+  right: 22px;
+  font-weight: 500;
+  font-style: italic;
+}

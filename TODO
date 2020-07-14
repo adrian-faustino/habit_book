@@ -202,3 +202,4 @@ Comments
       [x] set success messages
 
 [] refactor DO TODO #2
+[] if logged in and on welcome page, do not show log in/ registration forms
