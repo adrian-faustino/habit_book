@@ -129,7 +129,7 @@ Refactor tasks:
 [] add loading spinners where there is a request
 [] fix x minutes ago going over 60 mintes (i.e. 100 minutes ago)
 [] add 'comment deleted' placeholder after deleting comment
-[] dont allow others to edit other users completed days ** IMPORTANT
+[x] dont allow others to edit other users completed days ** IMPORTANT
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -200,3 +200,5 @@ Comments
     [x] update habit
       [x] set error messages 
       [x] set success messages
+
+[] refactor DO TODO #2
