@@ -34,7 +34,7 @@ SERVER TODO:
 [] add a limit to requests (pagination? inf scroll etc)
 
 
-  created_at:
+  created_at: (habit)
   [] crud routes
   [x] protect route
 
@@ -109,7 +109,7 @@ CLIENT TODO:
     [x] delete comments
 
   User Experience:
-    [] when visiting someone's profile, have feedback when they don't have any habits
+    [x] when visiting someone's profile, have feedback when they don't have any habits
     [] have a 'longest streak' of habits etc
     [] on each habit card, display longest streak
 

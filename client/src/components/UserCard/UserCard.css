@@ -11,6 +11,7 @@
 }
 
 .UserCard__left-container {
+  position: relative;
   display: grid;
 }
 
@@ -33,6 +34,8 @@
 }
 
 .UserCard__avatar {
+  position: absolute;
+  left: 0;
   background: white;
   padding: 5px;
   margin: auto;
@@ -40,4 +43,9 @@
   box-shadow: 0 0 5px black;
   width: 80px;
   height: 80px;
+}
+
+.UserCard__username {
+  position: absolute;
+  bottom: -5px;
 }
