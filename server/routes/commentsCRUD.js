@@ -12,17 +12,16 @@ const HABIT_COMMENTS_TABLE = 'habit_comments';
 
 // CREATE
 router.post('/newComment', authenticateToken, async (req, res) => {
-  const { comment_by, habit_id, content, is_edited } = req.body;
-
-  const created_at = new Date();
+  const { habit_id, content, is_edited } = req.body;
+  const comment_by = req.user.user_id;
   
   // insert into db
-  const VALUES = [comment_by, habit_id, content, created_at, is_edited];
+  const VALUES = [comment_by, habit_id, content, is_edited];
   const insertQuery = `
     INSERT INTO ${HABIT_COMMENTS_TABLE}
-      (comment_by, habit_id, content, created_at, is_edited)
+      (comment_by, habit_id, content, is_edited)
     VALUES
-      ($1, $2, $3, $4, $5);
+      ($1, $2, $3, $4);
   `;
 
   try {

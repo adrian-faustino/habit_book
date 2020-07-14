@@ -22,7 +22,6 @@ const CommentForm = props => {
       `comments/newComment`;
 
     const payload = {
-      comment_by: user.user_id,
       habit_id: props.habit_id,
       content: values.content,
       is_edited: false
