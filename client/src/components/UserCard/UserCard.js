@@ -35,16 +35,19 @@ const UserCard = ({ userObj }) => {
 
   return (
     <div className="UserCard__container">
-      <div className="UserCard__left-container">
-        <img
-          className="UserCard__avatar"
-          src={avatar_url}/>
 
-        <span
-          className="UserCard__username">
-            @{username}
-        </span>
-      </div>
+      <Link to={`/users/${user_id}`}>
+        <div className="UserCard__left-container">
+          <img
+            className="UserCard__avatar"
+            src={avatar_url}/>
+
+          <span
+            className="UserCard__username">
+              @{username}
+          </span>
+        </div>
+      </Link>
 
       <div className="UserCard__right-container">
         <span
