@@ -9,11 +9,11 @@ import { v4 as uuidv4 } from 'uuid';
 // Props notes: 
 // comments is an array of objects containing comment info
 const CommentsContainer = props => {
-  const { comments } = props;
+  const { comments, setComments } = props;
 
   // spread for render
   const _comments = comments.map(comment => {
-    return <CommentCard key={uuidv4()} comment={comment} />
+    return <CommentCard key={uuidv4()} comment={comment} setComments={setComments}/>
   });
   return (
     <div className="CommentsContainer">

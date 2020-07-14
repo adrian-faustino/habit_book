@@ -10,10 +10,12 @@ import { Button } from 'reactstrap';
 /** Helpers **/
 import { getUserAPIData } from '../../../../helpers/getDataHelpers';
 import { getTimeSince, timeSince } from '../../../../helpers/dateObjHelpers';
+import { getComments } from '../../../../helpers/habitDataHelpers';
+import { deleteComment } from '../../../../helpers/commentDataHelpers';
 /** Styles **/
 import './CommentCard.css';
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment, setComments }) => {
   const { comment_id,
           comment_by,
           habit_id,
@@ -41,9 +43,20 @@ const CommentCard = ({ comment }) => {
     }
   }, []);
 
+  // TODO: refactor - use this function to trigger view reload on other components?
   const triggerReload = () => {
     dispatch(increment(1));
     // window.location.reload();
+  };
+
+  const handleDeleteComment = e => {
+    e.preventDefault();
+
+    deleteComment(comment_id, res => {
+      getComments(habit_id, data => {
+        setComments(data);
+      })
+    });
   };
 
   return (
@@ -86,6 +99,7 @@ const CommentCard = ({ comment }) => {
 
           {isMyComment && (
             <Button
+              onClick={handleDeleteComment}
               color="danger"
               className="CommentCard__delete-comment">
                 delete

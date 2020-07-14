@@ -72,6 +72,22 @@ router.get('/:habit_id', async (req, res) => {
 
 // UPDATE
 
-// DELETE
+// DELETE comments
+router.delete('/delete/:comment_id', authenticateToken, async (req, res) => {
+  const { comment_id } = req.params;
+
+  const query = `
+    DELETE FROM ${HABIT_COMMENTS_TABLE}
+    WHERE comment_id = $1;
+  `;
+
+  try {
+    await pool.query(query, [comment_id]);
+    res.json({ msg: 'Successfully deleted comment. '});
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ err: err.message });
+  }
+});
 
 module.exports = router;

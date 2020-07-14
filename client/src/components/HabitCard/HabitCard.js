@@ -188,7 +188,9 @@ const HabitCard = ({habit}) => {
       <CommentForm
         handleExpandComments={handleExpandComments}
         habit_id={habit_id} />
-      {comments && <CommentsContainer comments={comments}/>}
+      {comments && <CommentsContainer
+        setComments={setComments}
+        comments={comments}/>}
     </div>
   );
 };
