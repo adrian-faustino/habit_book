@@ -30,6 +30,8 @@ const CalendarComponent = props => {
 
   /** State **/
   const [value, setValue] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(false);
+
   /** Redux **/
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -60,22 +62,25 @@ const CalendarComponent = props => {
     }
 
     // request to create completed_at
+    // TODO: change this to .ISOSstring
     console.log('Requesting new completed_at...');
     const date = getDateYYYYMMDD(value);
-    // TODO#2: fix this to be a callback because it triggers the success days when a user marks other user's calendars
-    createCompletedAt(date, user_id, habit_id);
 
-    // trigger view update
-    dispatch(increment(1));
+    setIsLoading(true);
+    createCompletedAt(date, user_id, habit_id, res => {
+      // trigger view update
+      dispatch(increment(1));
 
-    // clear present feedback and set new feedback
-    setErr('');
-    setSuccess('');
-    setSuccess('Day marked complete!');
-    setTimeout(() => {
+      // clear present feedback and set new feedback
+      setErr('');
       setSuccess('');
-    }, ERR_TIMEOUT_FADE);
-  }
+      setSuccess('Day marked complete!');
+      setIsLoading(false);
+      setTimeout(() => {
+        setSuccess('');
+      }, ERR_TIMEOUT_FADE);
+    });
+  };
 
   // this sets the color on completed days
   const highlightRange = ({ date, view }) => {
@@ -93,7 +98,9 @@ const CalendarComponent = props => {
   // if habit card doesn't belong to use, disable mouse events
   let unclickable;
   if (user.user_id !== props.user_id) {
-    unclickable = 'unclickable'
+    unclickable = 'unclickable';
+  } else if (isLoading) {
+    unclickable = 'unclickable';
   };
 
   return (
