@@ -23,6 +23,7 @@ export const createCompletedAt = async (date, user_id, habit_id, callback) => {
     const newEntry = request.data;
     callback(newEntry);
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
+    callback(null, err);
   }
 };

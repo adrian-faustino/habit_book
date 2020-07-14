@@ -72,13 +72,15 @@ const CalendarComponent = props => {
     const date = getDateYYYYMMDD(value);
 
     setIsLoading(true);
-    createCompletedAt(date, user_id, habit_id, res => {
+    createCompletedAt(date, user_id, habit_id, (success, err) => {
+      if (err) return setIsLoading(false);
+
       // trigger view update
       dispatch(increment(1));
 
       // clear present feedback and set new feedback
-      setErr('');
-      setSuccess('');
+      // setErr('');
+      // setSuccess('');
       setSuccess('Day marked complete!');
       setIsLoading(false);
       setTimeout(() => {
@@ -103,8 +105,6 @@ const CalendarComponent = props => {
   // if habit card doesn't belong to use, disable mouse events
   let unclickable;
   if (user.user_id !== props.user_id) {
-    unclickable = 'unclickable';
-  } else if (isLoading) {
     unclickable = 'unclickable';
   };
 
