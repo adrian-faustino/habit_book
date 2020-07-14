@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 /** React router **/
 import { Link } from 'react-router-dom';
 /** Redux **/
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 /** Redux actions **/
 import { increment } from '../../../../actions';
+/** React strap **/
+import { Button } from 'reactstrap';
 /** Helpers **/
 import { getUserAPIData } from '../../../../helpers/getDataHelpers';
 import { getTimeSince, timeSince } from '../../../../helpers/dateObjHelpers';
@@ -21,15 +23,22 @@ const CommentCard = ({ comment }) => {
 
   /** State **/
   const [commenter, setCommenter] = useState({});
+  const [isMyComment, setIsMyComment] = useState(false);
 
   /** Redux **/
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
   // get commenter's info (avatar, name etc)
   useEffect(() => {
     getUserAPIData(comment_by, (data) => {
       setCommenter(data);
     });
+
+    // if this comment is user's show option to delete button
+    if (comment_by === user.user_id) {
+      setIsMyComment(true);
+    }
   }, []);
 
   const triggerReload = () => {
@@ -74,6 +83,13 @@ const CommentCard = ({ comment }) => {
           <span className="CommentCard__created-at">
             {timeSince(new Date(created_at))} ago
           </span>
+
+          {isMyComment && (
+            <Button
+              color="danger"
+              className="CommentCard__delete-comment">
+                delete
+            </Button>)}
         </div>
       </div>
     </div>

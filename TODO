@@ -126,6 +126,7 @@ Refactor tasks:
 [] user card on hover (over avatar, over full name)
 [] set created_at on server side with GETDATE() SQL?
 [] add loading spinners where there is a request
+[] fix x minutes ago going over 60 mintes (i.e. 100 minutes ago)
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -134,6 +135,7 @@ Bugs:
 [] user search (make it case insensistive)
 [x] deal with TODO #1 (search file for this comment)
 [] include time in db? new habits being posted but since they are being sorted by day and not time, it's not accurate
+[] bug when creating new account (cannot split null when getting created_at for user)
 
 Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
