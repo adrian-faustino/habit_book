@@ -7,3 +7,10 @@
   width: 800px;
   margin: 0 auto;
 }
+
+.UserPage__no-habits {
+  font-weight: bold;
+  font-size: 20px;
+  font-style: italic;
+  color: grey;
+}

@@ -65,6 +65,12 @@ const UserPage = () => {
           <HabitCard key={habit.habit_id} habit={habit} />
         ))}
       </div>
+
+      {userHabits.length === 0 && (
+        <span className="UserPage__no-habits">
+          This user has no habits yet.
+        </span>
+      )}
     </section>
   )
 }
