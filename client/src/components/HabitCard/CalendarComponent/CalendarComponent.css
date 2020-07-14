@@ -1,4 +1,5 @@
 .CalendarComponent {
+  position: relative;
   height: 200px;
   min-width: 300px;
   width: 100%;
@@ -11,6 +12,14 @@
 
 .CalendarComponent__today {
   background: green;
+}
+
+.CalendarComponent__spinner {
+  position: absolute;
+  background: grey;
+  box-shadow: 0 0 3px 5px grey;
+  right: 46%;
+  top: 56%;
 }
 
 .unclickable {

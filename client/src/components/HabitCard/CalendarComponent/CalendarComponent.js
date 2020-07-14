@@ -10,6 +10,8 @@ import { createCompletedAt } from '../../../helpers/CalendarHelpers';
 import { useDispatch, useSelector } from 'react-redux';
 /** Redux-actions **/
 import { increment } from '../../../actions';
+/** React strap **/
+import { Spinner } from 'reactstrap';
 
 /** Calendar classnames constants **/
 const CALENDAR_SELECTED = 'CalendarComponent__selected';
@@ -39,6 +41,8 @@ const CalendarComponent = props => {
   // when user clicks a tile on the calendar...
   const handleClickDay = async (value, e) => {
     setValue(value);
+    if (isLoading) return;
+
     // check if habit belongs to user
     if (user.user_id !== props.user_id) {
       setErr('This habit does not belong to you.');
@@ -56,9 +60,10 @@ const CalendarComponent = props => {
       setErr('');
       setSuccess('');
       setErr('Cannot set future date.');
-      return setTimeout(() => {
+      setTimeout(() => {
         setErr('');
       }, ERR_TIMEOUT_FADE);
+      return;
     }
 
     // request to create completed_at
@@ -105,19 +110,17 @@ const CalendarComponent = props => {
 
   return (
     <section
-      className={`CalendarComponent ${unclickable}`}>
+      className={`CalendarComponent ${unclickable} ${isLoading && 'unclickable'}`}>
       <Calendar
         value={value}
         onClickDay={handleClickDay}
         tileClassName={highlightRange}
       />
 
-      {/* <hr />
-      <button onClick={e => {
-        e.preventDefault();
-      }}>
-        stats
-      </button> */}
+      {isLoading && (
+        <Spinner
+          className="CalendarComponent__spinner"/>
+      )}
     </section>
   );
 };
