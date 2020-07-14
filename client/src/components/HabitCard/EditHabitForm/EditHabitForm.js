@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+/** Redux **/
+import { useDispatch } from 'react-redux';
+/** Redux actions **/
+import { increment } from '../../../actions';
 /** Custom Hooks **/
 import useInput from '../../../hooks/useInput';
 /** Styles **/
@@ -13,6 +17,9 @@ const EditHabitForm = props => {
   /** State **/
   const [_title, titleBind, resetTitle] = useInput(title);
   const [_description, descriptionBind, resetDescription] = useInput(description);
+
+  /** Redux **/
+  const dispatch = useDispatch();
 
   const handleEditSubmit = e => {
     e.preventDefault();
@@ -39,9 +46,11 @@ const EditHabitForm = props => {
       description: _description
     };
     updateHabit_API(habit_id, habit, res => {
-      setSuccess(res.data.msg);
+      // trigger view update
+      dispatch(increment(1));
 
-      // fade out success feedback
+      // trigger and fade out success feedback
+      setSuccess(res.data.msg);
       setTimeout(() => {
         setSuccess('');
       }, 2000);
