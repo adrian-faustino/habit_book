@@ -36,6 +36,10 @@ SERVER TODO:
 
   completed_at: (habit)
   [] crud routes
+    [x] create (when clicking calendar)
+    [x] read (fetch all)
+    [] update (might need this when determining if completed at was marked at that day)
+    [] delete (unmarking)
   [x] protect route
 
   Search users:
