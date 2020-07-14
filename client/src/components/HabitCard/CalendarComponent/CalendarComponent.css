@@ -11,7 +11,14 @@
 }
 
 .CalendarComponent__today {
-  background: green;
+  background: red;
+}
+
+.CalendarComponent__today.CalendarComponent__selected {
+  background: blue;
+  box-shadow: inset 0 0 0 3px red;
+  z-index: 3;
+  border: none;
 }
 
 .CalendarComponent__spinner {

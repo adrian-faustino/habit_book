@@ -95,6 +95,10 @@ const CalendarComponent = props => {
       const _date = getDateYYYYMMDD(date);
       const today = getDateYYYYMMDD(new Date());
 
+      // highlight today when it is also selected
+      if (_date === today && completedAt.includes(_date)) {
+        return `${CALENDAR_TODAY} ${CALENDAR_SELECTED}`;
+      }
       // highlight completed days in the past
       if (completedAt.includes(_date)) return CALENDAR_SELECTED;
       // highlight today
