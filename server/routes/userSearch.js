@@ -18,16 +18,16 @@ router.get('/', async (req, res) => {
 
   const dbQuery = `
     SELECT avatar_url, created_at, email, first_name, last_name, user_id, username FROM ${USERS_TABLE}
-    WHERE username LIKE CONCAT('%', $1::text, '%')
-    OR first_name LIKE CONCAT('%', $1::text, '%')
-    OR last_name LIKE CONCAT('%', $1::text, '%')
-    OR email LIKE CONCAT('%', $1::text, '%')
-    OR CONCAT(${USERS_TABLE}.first_name, ${USERS_TABLE}.last_name) LIKE CONCAT('%', $1::text, '%')
+    WHERE UPPER(username) LIKE CONCAT('%', $1::text, '%')
+    OR UPPER(first_name) LIKE CONCAT('%', $1::text, '%')
+    OR UPPER(last_name) LIKE CONCAT('%', $1::text, '%')
+    OR UPPER(email) LIKE CONCAT('%', $1::text, '%')
+    OR UPPER(CONCAT(${USERS_TABLE}.first_name, ${USERS_TABLE}.last_name)) LIKE CONCAT('%', $1::text, '%')
     LIMIT ${QUERY_RESULT_LIMIT};
   `;
 
   try {
-    const results = await pool.query(dbQuery, [name]);
+    const results = await pool.query(dbQuery, [name.toUpperCase()]);
     res.json({ msg: 'Query results.', queryHits: results.rows });
   } catch (err) {
     console.error(err);

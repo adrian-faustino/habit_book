@@ -133,7 +133,7 @@ Refactor tasks:
 
 Bugs:
 [x] username/password shouldn't have white space
-[] when user marks days complete too fast, styling isnt applied (disabled until adding new completed_at is completed?)
+[x] when user marks days complete too fast, styling isnt applied (disabled until adding new completed_at is completed?)
 [] '_' is counting towards char count (wrong error message displayed in registration form)
 [] user search (make it case insensistive)
 [x] deal with TODO #1 (search file for this comment)
