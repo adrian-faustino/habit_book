@@ -123,7 +123,7 @@ Refactor tasks:
 [x] refresh page after all CRUD? (to show most updated version from DB)
 [x] when deleting a habit, delete all completed_at entries related to it
 [x] no dates in the future can be clicked for completed_at
-[] add feedback when searching for users
+[x] add feedback when searching for users
 [] user card on hover (over avatar, over full name)
 [] set created_at on server side with GETDATE() SQL?
 [] add loading spinners where there is a request
@@ -138,7 +138,7 @@ Bugs:
 [x] user search (make it case insensistive)
 [x] deal with TODO #1 (search file for this comment)
 [x] include time in db? new habits being posted but since they are being sorted by day and not time, it's not accurate
-[] bug when creating new account (cannot split null when getting created_at for user)
+[x] bug when creating new account (cannot split null when getting created_at for user)
 
 Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }

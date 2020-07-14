@@ -9,7 +9,7 @@ import useForm from '../../hooks/useFormHook';
 
 
 const UserSearchBar = props => {
-  const { setQueryHits } = props;
+  const { setQueryHits, setIsLoading } = props;
 
   /** State **/
   const [ values,
@@ -26,10 +26,12 @@ const UserSearchBar = props => {
     const name = values.query;
     const endpoint = process.env.REACT_APP_API + 
       `search?name=${name}`
+
+    setIsLoading(true);
     axios
       .get(endpoint)
       .then(res => {
-        console.log('Searching...', res.data.queryHits)
+        setIsLoading(false);
         setQueryHits(res.data.queryHits);
       })
       .catch(err => console.log(err));

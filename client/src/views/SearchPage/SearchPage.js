@@ -4,14 +4,19 @@ import axios from 'axios';
 import { UserSearchBar, UserCard } from '../../components/';
 /** Styles **/
 import './SearchPage.css';
+/** Reactstrap **/
+import { Spinner } from 'reactstrap';
 
 const SearchPage = () => {
   const [queryHits, setQueryHits] = useState([]);
   const [randomUsers, setRandomUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // on render, load a list of random users
   useEffect(() => {
+    setIsLoading(true);
     getRandomUsers(users => {
+      setIsLoading(false);
       setRandomUsers(users);
     });
   }, []);
@@ -49,7 +54,11 @@ const SearchPage = () => {
     <section className="SearchPage">
       <h3>Search for other users to follow</h3>
       <UserSearchBar
+        setIsLoading={setIsLoading}
         setQueryHits={setQueryHits}/>
+
+      {isLoading && <Spinner 
+        className="SearchPage__spinner"/>}
 
           {_queryHits}
           {_queryHits.length === 0 && _randomUsers}
