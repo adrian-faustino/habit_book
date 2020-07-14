@@ -16,10 +16,10 @@ SERVER TODO:
       [x] validation? => require user to enter password to delete. see if matches
 
   Habits:
-[] habit crud routes
+[x] habit crud routes
   [x] create habit
   [x] read habit
-  [] update habit (edit)
+  [] update habit (show is edited)
   [x] delete habit
   [x] habit validation before submission
   [x] validation:
@@ -28,7 +28,7 @@ SERVER TODO:
   [x] list all Habits /habits
   [x] list a user's own Habits /habits/:userID
   [x] post a new habit
-  [] update habit
+  [x] update habit
   [x] delete habit
     [x] auth (make sure only logged in user can delete their OWN habits)
 [] add a limit to requests (pagination? inf scroll etc)
@@ -105,7 +105,7 @@ CLIENT TODO:
     [x] display user info of each comment
     [x] time since comment was made (like fb)
     [x] username on click, link to user's profile
-    [] delete comments
+    [x] delete comments
 
   User Experience:
     [] when visiting someone's profile, have feedback when they don't have any habits
@@ -127,6 +127,7 @@ Refactor tasks:
 [] set created_at on server side with GETDATE() SQL?
 [] add loading spinners where there is a request
 [] fix x minutes ago going over 60 mintes (i.e. 100 minutes ago)
+[] add 'comment deleted' placeholder after deleting comment
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -134,7 +135,7 @@ Bugs:
 [] '_' is counting towards char count (wrong error message displayed in registration form)
 [] user search (make it case insensistive)
 [x] deal with TODO #1 (search file for this comment)
-[] include time in db? new habits being posted but since they are being sorted by day and not time, it's not accurate
+[x] include time in db? new habits being posted but since they are being sorted by day and not time, it's not accurate
 [] bug when creating new account (cannot split null when getting created_at for user)
 
 Notes:
