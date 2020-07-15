@@ -31,7 +31,10 @@ export const getUserFollowers = (user_id, callback) => {
     .then(data => {
       callback(data);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      callback(null, err);
+    });
 };
 
 

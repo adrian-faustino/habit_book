@@ -75,4 +75,6 @@ export default App;
   * - Have a file that contains all endpoints in the
   * event I want to change endpoints
   * - Have a file with all CRUD functions on client
-  * - AND server side */
+  * AND server side 
+  * - Have clearer error messages with more info about
+  * where an error came from */

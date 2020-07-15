@@ -8,7 +8,9 @@ import './UserCard.css';
 /** React router **/
 import { Link } from 'react-router-dom';
 /** Redux **/
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+/** Redux actions */
+import { increment } from '../../actions';
 /** Reactstrap **/
 import { Button } from 'reactstrap';
 import { followUser } from '../../helpers/followDataHelpers';
@@ -28,10 +30,12 @@ const UserCard = ({ userObj }) => {
   /** State **/
   const [habitCount, setHabitCount] = useState('');
   const [followerCount, setFollowerCount] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   /** Redux **/
   const counter = useSelector(state => state.counter);
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // get user # of habits
@@ -47,10 +51,15 @@ const UserCard = ({ userObj }) => {
 
   const handleFollowUser = e => {
     e.preventDefault();
+    if (isLoading) return;
 
-    console.log('following user...');
-    followUser(user_id, res => {
+    setIsLoading(true);
+    followUser(user_id, (res, err) => {
+      setIsLoading(false);
+      
+      if (err) return;
       // trigger view change
+      dispatch(increment(1));
     });
   }
 
@@ -100,6 +109,7 @@ const UserCard = ({ userObj }) => {
 
         {user.user_id !== user_id && (
           <Button
+            disabled={isLoading}
             onClick={handleFollowUser}
             className="UserCard__follow-button">
               Follow user

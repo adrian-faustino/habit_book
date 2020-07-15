@@ -16,7 +16,22 @@ router.post('/', authenticateToken, (req, res) => {
   const { target_user_id } = req.body;
   const follower_id = req.user.user_id;
 
+  const query = `
+    INSERT INTO ${FOLLOWS_TABLE}
+      (target_user_id, follower_id)
+    VALUES
+      ($1, $2);
+  `;
 
+  pool
+    .query(query, [target_user_id, follower_id])
+    .then(data => {
+      res.json({ msg: 'Successfully liked user. '});
+    })
+    .catch(err => {
+      console.error(err.message);
+      res.status(500).json({ err: err.message });
+    })
 });
 
 
