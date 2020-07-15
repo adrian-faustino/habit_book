@@ -41,7 +41,7 @@ const UserCard = ({ userObj }) => {
   // check if the current user is a follower of the current card
   useEffect(() => {
     getMyFollows(users => {
-      for (let obj of users.data) {
+      for (let obj of users) {
         if (obj.target_user_id === user_id) {
           return setIsFollowedByMe(true);
         };
@@ -65,8 +65,6 @@ const UserCard = ({ userObj }) => {
   const handleFollowUser = e => {
     e.preventDefault();
     if (isLoading) return;
-
-    // spinner for axaj requests below
     setIsLoading(true);
 
     // ==> UNFOLLOW user

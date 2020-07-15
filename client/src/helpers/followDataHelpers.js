@@ -43,8 +43,8 @@ export const getMyFollows = (callback) => {
 
   axios
     .get(endpoint, config)
-    .then(data => {
-      callback(data);
+    .then(users => {
+      callback(users.data);
     })
     .catch(err => {
       console.log(err);
