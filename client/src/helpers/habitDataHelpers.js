@@ -1,6 +1,8 @@
 import axios from 'axios';
 /** Redux - actions **/
 import { increment } from '../actions';
+/** Auth **/
+import { config, headers } from '../util/config';
 
 // given user_id, get all habits
 export const getUserHabits = (user_id, callback) => {
@@ -21,10 +23,6 @@ export const handleDeleteCard = async (e, user_id, habit_id, dispatch) => {
   const endpoint =
     process.env.REACT_APP_API + 
     `habits/delete/${user_id}/${habit_id}`
-
-  const headers = {
-    authorization: `Bearer ${localStorage.accessToken}`
-  };
   
   axios
     .delete(endpoint, {headers})
@@ -57,12 +55,6 @@ export const registerLike = (user, user_id, habit_id, callback) => {
     liked_by: user.user_id,
     habit_by: user_id,
     habit_id
-  };
-
-  const config = {
-    headers: {
-      authorization: `Bearer ${localStorage.accessToken}`
-    }
   };
   
   axios

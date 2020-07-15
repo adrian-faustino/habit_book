@@ -26,7 +26,6 @@ export const loadUser = () => (dispatch, getState) => {
     }
   };
 
-
   // If token exists, add to headers
   if (token) { 
     config.headers['x-auth-token'] = token;

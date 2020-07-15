@@ -1,5 +1,6 @@
 /** All the functions in this file are for posting specific information to the API **/
 import axios from 'axios';
+import { config } from '../util/config';
 
 // post new habit
 export const submitHabit_API = async (habit, callback) => {
@@ -8,12 +9,6 @@ export const submitHabit_API = async (habit, callback) => {
 
   const payload = {
     habit
-  };
-
-  const config = {
-    headers: {
-      authorization : `Bearer ${localStorage.accessToken}`
-    }
   };
 
   try {
@@ -30,12 +25,6 @@ export const updateHabit_API = async (habit_id, habit, callback) => {
 
   const payload = {
     habit_id, habit
-  };
-
-  const config = {
-    headers: {
-      authorization : `Bearer ${localStorage.accessToken}`
-    }
   };
 
   try {
