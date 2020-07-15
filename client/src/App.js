@@ -9,7 +9,8 @@ import { SignUpPage,
          LoginPage, 
          LandingPage, 
          SearchPage,
-         UserPage } from './views';
+         UserPage,
+        FollowingPage } from './views';
 /** Components **/
 import { Navbar, ProtectedRoute } from './components';
 /** React router **/
@@ -48,8 +49,11 @@ function App() {
         <ProtectedRoute path="/search-users">
           <SearchPage />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/">
+        <ProtectedRoute path="/users">
           <UserPage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/following">
+          <FollowingPage />
         </ProtectedRoute>
       </Router>
     </div>

@@ -68,6 +68,7 @@ const SearchPage = () => {
           setQueryHits={setQueryHits}/>
 
         <Button
+          color="warning"
           onClick={handleRefresh}
           className="SearchPage__refresh-button">
             refresh

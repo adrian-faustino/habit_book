@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.navbar-offset {
+  position: relative;
+  top: var(--navbar-height);
+}
+
 /* CONSTANTS */
 :root {
   --navbar-height: 45px;

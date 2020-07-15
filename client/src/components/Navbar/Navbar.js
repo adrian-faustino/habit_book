@@ -42,7 +42,25 @@ const Navbar = () => {
             to="/search-users">
               Find Users
           </NavLink>
-        </NavItem>  
+        </NavItem>
+
+        <NavItem>
+          <NavLink
+            className="Navbar__li"
+            tag={Link}
+            to="/search-users">
+              My Followers
+          </NavLink>
+        </NavItem>
+
+        <NavItem>
+          <NavLink
+            className="Navbar__li"
+            tag={Link}
+            to="/following">
+              Following
+          </NavLink>
+        </NavItem>
       </>)}
       
       {!isLogged && (<>

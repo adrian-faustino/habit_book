@@ -215,7 +215,7 @@ Comments
 
 [] refactor DO TODO #2
 [x] if logged in and on welcome page, do not show log in/ registration forms
-[] refresh button on find user page to refresh list of random users
+[x] refresh button on find user page to refresh list of random users
 [] indicate if you liked a habit
 [] view 'x' comments
 
