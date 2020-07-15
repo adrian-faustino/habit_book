@@ -2,6 +2,7 @@
   background: salmon;
   border-radius: 5px;
   box-shadow: 0 0 4px black;
+  padding-bottom: 8px;
 }
 
 .HabitCard__container {
