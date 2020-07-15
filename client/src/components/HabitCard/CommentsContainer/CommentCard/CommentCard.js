@@ -10,7 +10,7 @@ import { Button } from 'reactstrap';
 /** Helpers **/
 import { getUserAPIData } from '../../../../helpers/getDataHelpers';
 import { getTimeSince, timeSince } from '../../../../helpers/dateObjHelpers';
-import { getComments } from '../../../../helpers/habitDataHelpers';
+import { getComments, handleDeleteCard } from '../../../../helpers/habitDataHelpers';
 import { deleteComment } from '../../../../helpers/commentDataHelpers';
 /** Styles **/
 import './CommentCard.css';
@@ -52,17 +52,18 @@ const CommentCard = ({ comment, setComments }) => {
     // window.location.reload();
   };
 
-  const handleDeleteComment = e => {
-    e.preventDefault();
-
-    setIsDeleteMode(true);
-
-    // deleteComment(comment_id, res => {
-    //   getComments(habit_id, data => {
-    //     setComments(data);
-    //   })
-    // });
+  const handleDeleteComment = () => {
+    deleteComment(comment_id, res => {
+      getComments(habit_id, data => {
+        setComments(data);
+      })
+    });
   };
+
+  const toggleConfirmDelete = e => {
+    e.preventDefault();
+    setIsDeleteMode(true);
+  }
 
   return (
     <div className="CommentCard">
@@ -104,7 +105,7 @@ const CommentCard = ({ comment, setComments }) => {
 
           {isMyComment && !isDeleteMode && (
             <Button
-              onClick={handleDeleteComment}
+              onClick={toggleConfirmDelete}
               color="danger"
               className="CommentCard__delete-comment">
                 delete
@@ -113,7 +114,9 @@ const CommentCard = ({ comment, setComments }) => {
       </div>
 
       {isDeleteMode && (
-        <CommentDeleteConfimration />
+        <CommentDeleteConfimration
+          handleDeleteComment={handleDeleteComment}
+          setIsDeleteMode={setIsDeleteMode}/>
       )}
     </div>
   );
