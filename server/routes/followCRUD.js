@@ -52,6 +52,28 @@ router.get('/', (req, res) => {
     })
 });
 
+
+// get all the accounts a user follows
+router.get('/myFollows', authenticateToken, (req, res) => {
+  const user_id = req.user.user_id;
+  
+  const query = `
+  SELECT * FROM ${FOLLOWS_TABLE}
+  WHERE follower_id = $1;
+  `;
+  
+  pool
+  .query(query, [user_id])
+  .then(data => {
+    res.json(data.rows);
+  })
+  .catch(err => {
+    console.error(err.message);
+    res.json({ err: err.message });
+  });
+});
+
+
 // get a user's followers
 router.get('/:user_id', (req, res) => {
   const { user_id } = req.params;
@@ -75,5 +97,10 @@ router.get('/:user_id', (req, res) => {
 // UPDATE
 
 // DELETE
+// unfollow a user
+router.delete('/:user_id', authenticateToken, (req, res) => {
+  console.log('unfollowing...', req.user.user_id);
+  console.log('params', req.params);
+});
 
 module.exports = router;

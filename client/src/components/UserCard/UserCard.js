@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 /** Helpers **/
 import { getUserHabitCountAPIData } from '../../helpers/getDataHelpers';
 import { formatToWords } from '../../helpers/formatHelpers';
-import { getUserFollowers } from '../../helpers/followDataHelpers';
+import { getUserFollowers, getMyFollows } from '../../helpers/followDataHelpers';
 /** Styles **/
 import './UserCard.css';
 /** React router **/
@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { increment } from '../../actions';
 /** Reactstrap **/
 import { Button } from 'reactstrap';
-import { followUser } from '../../helpers/followDataHelpers';
+import { followUser, unfollowUser } from '../../helpers/followDataHelpers';
 
 const UserCard = ({ userObj }) => {
   const {
@@ -31,11 +31,24 @@ const UserCard = ({ userObj }) => {
   const [habitCount, setHabitCount] = useState('');
   const [followerCount, setFollowerCount] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isFollowedByMe, setIsFollowedByMe] = useState(false);
 
   /** Redux **/
   const counter = useSelector(state => state.counter);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+
+  // on mount, check if current user follows this person
+  useEffect(() => {
+    getMyFollows(users => {
+      for (let obj of users.data) {
+        if (obj.target_user_id === user_id) {
+          console.log('I follow this person');
+          return setIsFollowedByMe(true);
+        };
+      };
+    });
+  }, [counter]);
 
   useEffect(() => {
     // get user # of habits
@@ -53,10 +66,15 @@ const UserCard = ({ userObj }) => {
     e.preventDefault();
     if (isLoading) return;
 
+    // if user is already followed, unfollow
+    if (isFollowedByMe) return unfollowUser(user_id, () => {
+      dispatch(increment(1));
+    });
+
     setIsLoading(true);
     followUser(user_id, (res, err) => {
       setIsLoading(false);
-      
+
       if (err) return;
       // trigger view change
       dispatch(increment(1));
@@ -109,10 +127,11 @@ const UserCard = ({ userObj }) => {
 
         {user.user_id !== user_id && (
           <Button
+            color={isFollowedByMe ? 'info' : 'secondary'}
             disabled={isLoading}
             onClick={handleFollowUser}
             className="UserCard__follow-button">
-              Follow user
+              {isFollowedByMe ? 'Unfollow' : 'Follow'}
           </Button>
         )}
       </div>

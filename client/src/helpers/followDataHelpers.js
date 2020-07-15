@@ -1,6 +1,6 @@
 /** All the functions in this file are for follows CRUD requests **/
 import axios from 'axios';
-import { config } from '../util/config';
+import { config, headers } from '../util/config';
 
 // create a new follow relation between users
 /* param notes: follower_id refers to the   * user clicking follow button
@@ -37,8 +37,36 @@ export const getUserFollowers = (user_id, callback) => {
     });
 };
 
+// get all the accounts a user follows
+export const getMyFollows = (callback) => {
+  const endpoint = process.env.REACT_APP_API + `follows/myFollows`;
+
+  axios
+    .get(endpoint, config)
+    .then(data => {
+      callback(data);
+    })
+    .catch(err => {
+      console.log(err);
+      callback(null, err);
+    });
+};
 
 // update
 
 
 // delete
+// unfollow a user
+export const unfollowUser = (user_id, callback) => {
+  const endpoint = process.env.REACT_APP_API + `follows/${user_id}`;
+
+  axios
+    .delete(endpoint, {headers})
+    .then(data => {
+      callback(data);
+    })
+    .catch(err => {
+      console.log(err.message);
+      callback(null, err);
+    })
+};
