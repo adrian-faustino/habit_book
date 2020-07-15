@@ -14,6 +14,8 @@ import { getComments } from '../../../../helpers/habitDataHelpers';
 import { deleteComment } from '../../../../helpers/commentDataHelpers';
 /** Styles **/
 import './CommentCard.css';
+/** Subcomponents **/
+import CommentDeleteConfimration from '../CommentDeleteConfirmation/CommentDeleteConfimration';
 
 const CommentCard = ({ comment, setComments }) => {
   const { comment_id,
@@ -26,6 +28,7 @@ const CommentCard = ({ comment, setComments }) => {
   /** State **/
   const [commenter, setCommenter] = useState({});
   const [isMyComment, setIsMyComment] = useState(false);
+  const [isDeleteMode, setIsDeleteMode] = useState(false);
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -52,11 +55,13 @@ const CommentCard = ({ comment, setComments }) => {
   const handleDeleteComment = e => {
     e.preventDefault();
 
-    deleteComment(comment_id, res => {
-      getComments(habit_id, data => {
-        setComments(data);
-      })
-    });
+    setIsDeleteMode(true);
+
+    // deleteComment(comment_id, res => {
+    //   getComments(habit_id, data => {
+    //     setComments(data);
+    //   })
+    // });
   };
 
   return (
@@ -97,7 +102,7 @@ const CommentCard = ({ comment, setComments }) => {
             {timeSince(new Date(created_at))} ago
           </span>
 
-          {isMyComment && (
+          {isMyComment && !isDeleteMode && (
             <Button
               onClick={handleDeleteComment}
               color="danger"
@@ -106,6 +111,10 @@ const CommentCard = ({ comment, setComments }) => {
             </Button>)}
         </div>
       </div>
+
+      {isDeleteMode && (
+        <CommentDeleteConfimration />
+      )}
     </div>
   );
 };

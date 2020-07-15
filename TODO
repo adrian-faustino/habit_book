@@ -221,3 +221,5 @@ Comments
 
 follow user:
 [] display a list of people you follow
+[] display a list of people who follow you  
+  [] on user cards, when you click 'followers' link to ^
