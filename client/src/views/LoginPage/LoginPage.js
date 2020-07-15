@@ -30,7 +30,7 @@ const LoginPage = () => {
     loginReq(userLogin, () => {
       dispatch(login());
 
-      //sync local storage user info with redux
+      // sync local storage user info with redux
       getUserData(dispatch);
       setRedirectURL('/home')
     });

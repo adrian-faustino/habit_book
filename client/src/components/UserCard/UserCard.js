@@ -8,6 +8,8 @@ import './UserCard.css';
 import { Link } from 'react-router-dom';
 /** Redux **/
 import { useSelector } from 'react-redux';
+/** Reactstrap **/
+import { Button } from 'reactstrap';
 
 const UserCard = ({ userObj }) => {
   const {
@@ -26,12 +28,19 @@ const UserCard = ({ userObj }) => {
 
   /** Redux **/
   const counter = useSelector(state => state.counter);
+  const user = useSelector(state => state.user);
 
   useEffect(() => {
     getUserHabitCountAPIData(user_id, data => {
       setHabitCount(data);
     });
   }, [counter]);
+
+  const handleFollowUser = e => {
+    e.preventDefault();
+
+    console.log('following user...');
+  }
 
   return (
     <div className="UserCard__container">
@@ -71,6 +80,14 @@ const UserCard = ({ userObj }) => {
           className="UserCard__created-at">
             Member since {formatToWords(created_at)}
         </span>
+
+        {user.user_id !== user_id && (
+          <Button
+            onClick={handleFollowUser}
+            className="UserCard__follow-button">
+              Follow user
+          </Button>
+        )}
       </div>
     </div>
   )

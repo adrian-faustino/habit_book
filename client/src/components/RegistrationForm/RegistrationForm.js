@@ -16,6 +16,8 @@ import useRegistrationFormData from '../../hooks/useRegistrationFormData';
 import userValidationHelpers from '../../helpers/userValidationHelpers';
 import constants from '../../constants';
 import { loginReq } from '../../helpers/LoginHelpers';
+/** Helpers **/
+import { getUserData } from '../../helpers/protectedRouteOnMount';
 
 const {
   USERNAME_MAX_LENGTH, 
@@ -72,6 +74,9 @@ const RegistrationForm = () => {
         }
         loginReq(user, () => {
           dispatch(login());
+
+          // sync local storage user info with redux
+          getUserData(dispatch);
           setRedirectURL('/home')
         });
       })
