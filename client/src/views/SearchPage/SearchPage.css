@@ -6,3 +6,13 @@
 .SearchPage__spinner {
   margin-top: 10px;
 }
+
+.SearchPage__top-div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.SearchPage__refresh-button {
+  margin-left: 5px;
+}

@@ -5,7 +5,7 @@ import { UserSearchBar, UserCard } from '../../components/';
 /** Styles **/
 import './SearchPage.css';
 /** Reactstrap **/
-import { Spinner } from 'reactstrap';
+import { Spinner, Button } from 'reactstrap';
 
 const SearchPage = () => {
   const [queryHits, setQueryHits] = useState([]);
@@ -33,6 +33,15 @@ const SearchPage = () => {
       .catch(err => console.log(err));
   };
 
+  const handleRefresh = e => {
+    e.preventDefault();
+    setIsLoading(true);
+    getRandomUsers(users => {
+      setIsLoading(false);
+      setRandomUsers(users);
+    });
+  };
+
   // map for rendering
   const _queryHits = queryHits.map(userObj => {
     return (
@@ -53,15 +62,24 @@ const SearchPage = () => {
   return (
     <section className="SearchPage">
       <h3>Search for other users to follow</h3>
-      <UserSearchBar
-        setIsLoading={setIsLoading}
-        setQueryHits={setQueryHits}/>
+      <div className="SearchPage__top-div">
+        <UserSearchBar
+          setIsLoading={setIsLoading}
+          setQueryHits={setQueryHits}/>
+
+        <Button
+          onClick={handleRefresh}
+          className="SearchPage__refresh-button">
+            refresh
+        </Button>
+      </div>
 
       {isLoading && <Spinner 
         className="SearchPage__spinner"/>}
 
           {_queryHits}
           {_queryHits.length === 0 && _randomUsers}
+
     </section>
   )
 }
