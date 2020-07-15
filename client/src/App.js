@@ -70,3 +70,9 @@ export default App;
  * I'll be leaving notes throughout the code regarding things
  * that I've learned while building this project. Search for
  * 'notes' to browse through them. */
+
+ /* For next project notes:
+  * - Have a file that contains all endpoints in the
+  * event I want to change endpoints
+  * - Have a file with all CRUD functions on client
+  * - AND server side */

@@ -1,4 +1,6 @@
 import axios from 'axios';
+/** Auth **/
+import { config, headers } from '../util/config';
 
 // Input: Date YYYY-MM-DD. Ask server to insert new created_at into db
 export const createCompletedAt = async (date, user_id, habit_id, callback) => {
@@ -9,12 +11,6 @@ export const createCompletedAt = async (date, user_id, habit_id, callback) => {
     date,
     user_id,
     habit_id
-  };
-
-  const config = {
-    headers: {
-      authorization : `Bearer ${localStorage.accessToken}`
-    }
   };
 
   try {
@@ -31,10 +27,6 @@ export const createCompletedAt = async (date, user_id, habit_id, callback) => {
 export const deleteCompletedAt = (habit_id, date, callback) => {
   const endpoint = process.env.REACT_APP_API + 
     `completed_at/${habit_id}/${date}`;
-  
-  const headers = {
-    authorization: `Bearer ${localStorage.accessToken}`
-  };
 
   axios
     .delete(endpoint, {headers})

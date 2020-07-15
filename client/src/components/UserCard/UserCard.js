@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 /** Helpers **/
 import { getUserHabitCountAPIData } from '../../helpers/getDataHelpers';
 import { formatToWords } from '../../helpers/formatHelpers';
+import { getUserFollowers } from '../../helpers/followDataHelpers';
 /** Styles **/
 import './UserCard.css';
 /** React router **/
@@ -10,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 /** Reactstrap **/
 import { Button } from 'reactstrap';
+import { followUser } from '../../helpers/followDataHelpers';
 
 const UserCard = ({ userObj }) => {
   const {
@@ -25,21 +27,31 @@ const UserCard = ({ userObj }) => {
 
   /** State **/
   const [habitCount, setHabitCount] = useState('');
+  const [followerCount, setFollowerCount] = useState('');
 
   /** Redux **/
   const counter = useSelector(state => state.counter);
   const user = useSelector(state => state.user);
 
   useEffect(() => {
+    // get user # of habits
     getUserHabitCountAPIData(user_id, data => {
       setHabitCount(data);
     });
+
+    // get user # of followers
+    getUserFollowers(user_id, users => {
+      setFollowerCount(users.data.length);
+    })
   }, [counter]);
 
   const handleFollowUser = e => {
     e.preventDefault();
 
     console.log('following user...');
+    followUser(user_id, res => {
+      // trigger view change
+    });
   }
 
   return (
@@ -74,6 +86,11 @@ const UserCard = ({ userObj }) => {
         <span
           className="UserCard__habit-count">
             Habits: {habitCount}
+        </span>
+        
+        <span
+          className="UserCard__follower-count">
+            Followers: {followerCount}
         </span>
 
         <span
