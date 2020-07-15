@@ -99,8 +99,25 @@ router.get('/:user_id', (req, res) => {
 // DELETE
 // unfollow a user
 router.delete('/:user_id', authenticateToken, (req, res) => {
-  console.log('unfollowing...', req.user.user_id);
-  console.log('params', req.params);
+  const VALUES = [
+    req.user.user_id,
+    req.params.user_id
+  ];
+  const query = `
+    DELETE FROM ${FOLLOWS_TABLE}
+    WHERE follower_id = $1
+    AND target_user_id = $2;
+  `;
+
+  pool
+    .query(query, VALUES)
+    .then(data => {
+      res.json({ msg: 'Unfollowed user.' });
+    })
+    .catch(err => {
+      console.error(err.message)
+      res.status(500).json({ err: err.message });
+    });
 });
 
 module.exports = router;

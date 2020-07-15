@@ -38,15 +38,15 @@ const UserCard = ({ userObj }) => {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  // on mount, check if current user follows this person
+  // check if the current user is a follower of the current card
   useEffect(() => {
     getMyFollows(users => {
       for (let obj of users.data) {
         if (obj.target_user_id === user_id) {
-          console.log('I follow this person');
           return setIsFollowedByMe(true);
         };
       };
+      setIsFollowedByMe(false);
     });
   }, [counter]);
 
@@ -66,20 +66,28 @@ const UserCard = ({ userObj }) => {
     e.preventDefault();
     if (isLoading) return;
 
-    // if user is already followed, unfollow
-    if (isFollowedByMe) return unfollowUser(user_id, () => {
-      dispatch(increment(1));
-    });
-
+    // spinner for axaj requests below
     setIsLoading(true);
-    followUser(user_id, (res, err) => {
-      setIsLoading(false);
 
-      if (err) return;
-      // trigger view change
-      dispatch(increment(1));
-    });
-  }
+    // ==> UNFOLLOW user
+    if (isFollowedByMe) {
+      unfollowUser(user_id, (res, err) => {
+        setIsLoading(false);
+        if (err) return;
+        // trigger view change
+        dispatch(increment(1));
+        return;
+      });
+    } else {
+      // ==> FOLLOW user
+      followUser(user_id, (res, err) => {
+        setIsLoading(false);
+        if (err) return;
+        // trigger view change
+        dispatch(increment(1));
+      });
+    };
+  };
 
   return (
     <div className="UserCard__container">
