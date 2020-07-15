@@ -1,11 +1,12 @@
 import React from 'react';
-import axios from 'axios';
 /** Custom Hooks **/
 import useForm from '../../../hooks/useFormHook';
 /** Redux **/
 import { useSelector } from 'react-redux';
 /** Styles **/
 import './CommentForm.css';
+/** Helpers **/
+import { createComment } from '../../../helpers/commentDataHelpers';
 
 const CommentForm = props => {
   /** State **/
@@ -18,30 +19,17 @@ const CommentForm = props => {
   const user = useSelector(state => state.user);
 
   function submitComment() {
-    const endpoint = process.env.REACT_APP_API + 
-      `comments/newComment`;
-
-    const payload = {
-      habit_id: props.habit_id,
-      content: values.content,
-      is_edited: false
-    };
-
-    const config = {
-      headers: {
-        authorization : `Bearer ${localStorage.accessToken}`
-      }
-    };
-    
-    axios
-      .post(endpoint, payload, config)
-      .then(res => {
+    createComment(
+      props.habit_id,
+      values.content,
+      false, // is_edited = false
+      () => {
+        // reset form
         handleReset();
-        // trigger view change
+        //trigger view change
         props.handleExpandComments();
-      })
-      .catch(err => console.log(err));
-  }
+      });
+  };
 
   return (
     <form
