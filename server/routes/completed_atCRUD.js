@@ -73,7 +73,7 @@ router.get('/', (req, res) => {
   pool
     .query(query)
     .then(data => {
-      res.json(data.rows[0]);
+      res.json(data.rows);
     })
     .catch(err => {
       console.error(err.message);
