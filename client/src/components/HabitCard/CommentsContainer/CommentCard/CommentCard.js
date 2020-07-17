@@ -96,6 +96,9 @@ const CommentCard = ({ comment, setComments }) => {
 
           <p className="CommentCard__content">
             {content}
+            {isEditMode && (
+        <CommentEditForm />
+      )}
           </p>
         </div>
 
@@ -135,10 +138,6 @@ const CommentCard = ({ comment, setComments }) => {
         <CommentDeleteConfimration
           handleDeleteComment={handleDeleteComment}
           setIsDeleteMode={setIsDeleteMode}/>
-      )}
-
-      {isEditMode && (
-        <CommentEditForm />
       )}
     </div>
   );

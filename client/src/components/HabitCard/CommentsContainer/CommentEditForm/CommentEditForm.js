@@ -1,10 +1,13 @@
 import React from 'react'
+/** Styles **/
+import './CommentEditForm.css';
 
 const CommentEditForm = () => {
   return (
-    <div>
-      comment edit!
-    </div>
+    <form className="CommentEditForm">
+      <input
+        className="CommentEditForm__input"/>
+    </form>
   )
 }
 
