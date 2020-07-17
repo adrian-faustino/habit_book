@@ -200,6 +200,7 @@ Comments
   [x] delete comments
   [x] user autnh
   [x] add delete confirmation
+  [] edit comments
 
 [x] allow user to update habit
   [x] change db to indicate if habit has been edited
@@ -223,4 +224,4 @@ follow user:
 [x] display a list of people you follow
 [x] display a list of people who follow you  
   [] on user cards, when you click 'followers' link to ^
-  [] if no one follows you, have feedback
+  [x] if no one follows you, have feedback

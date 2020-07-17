@@ -102,7 +102,8 @@ const CommentCard = ({ comment, setComments }) => {
           <span className="CommentCard__created-at">
             {timeSince(new Date(created_at))} ago
           </span>
-
+          
+          {/* delete comment button  */}
           {isMyComment && !isDeleteMode && (
             <Button
               onClick={toggleConfirmDelete}
@@ -110,6 +111,15 @@ const CommentCard = ({ comment, setComments }) => {
               className="CommentCard__delete-comment">
                 delete
             </Button>)}
+
+          {/* edit comment button */}
+          {isMyComment && (
+            <Button
+              className="CommentCard__edit-comment"
+              color="primary">
+                edit
+            </Button>
+          )}
         </div>
       </div>
 

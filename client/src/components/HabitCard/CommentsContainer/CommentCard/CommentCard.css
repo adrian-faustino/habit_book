@@ -46,14 +46,20 @@
   margin-right: 15px;
 }
 
-.CommentCard__delete-comment {
+.CommentCard__delete-comment,
+.CommentCard__edit-comment {
   position: absolute;
   right: 0;
   transform: scale(0.8);
   box-shadow: 0 0 2px black;
+  text-align: center;
 }
 
+.CommentCard__edit-comment {
+  right: 65px;  
+}
 
+/* need to comment better. */
 .vertical-split {
   width: 100%;
 }
