@@ -16,6 +16,7 @@ import { deleteComment } from '../../../../helpers/commentDataHelpers';
 import './CommentCard.css';
 /** Subcomponents **/
 import CommentDeleteConfimration from '../CommentDeleteConfirmation/CommentDeleteConfimration';
+import CommentEditForm from '../CommentEditForm/CommentEditForm';
 
 const CommentCard = ({ comment, setComments }) => {
   const { comment_id,
@@ -29,6 +30,7 @@ const CommentCard = ({ comment, setComments }) => {
   const [commenter, setCommenter] = useState({});
   const [isMyComment, setIsMyComment] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -63,6 +65,11 @@ const CommentCard = ({ comment, setComments }) => {
   const toggleConfirmDelete = e => {
     e.preventDefault();
     setIsDeleteMode(true);
+  }
+
+  const toggleEditMode = e => {
+    e.preventDefault();
+    setIsEditMode(true);
   }
 
   return (
@@ -115,6 +122,7 @@ const CommentCard = ({ comment, setComments }) => {
           {/* edit comment button */}
           {isMyComment && (
             <Button
+              onClick={toggleEditMode}
               className="CommentCard__edit-comment"
               color="primary">
                 edit
@@ -127,6 +135,10 @@ const CommentCard = ({ comment, setComments }) => {
         <CommentDeleteConfimration
           handleDeleteComment={handleDeleteComment}
           setIsDeleteMode={setIsDeleteMode}/>
+      )}
+
+      {isEditMode && (
+        <CommentEditForm />
       )}
     </div>
   );
