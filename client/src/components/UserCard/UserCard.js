@@ -58,7 +58,7 @@ const UserCard = ({ userObj }) => {
 
     // get user # of followers
     getUserFollowers(user_id, users => {
-      setFollowerCount(users.data.length);
+      setFollowerCount(users.length);
     })
   }, [counter]);
 

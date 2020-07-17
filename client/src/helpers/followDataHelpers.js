@@ -28,8 +28,8 @@ export const getUserFollowers = (user_id, callback) => {
 
   axios
     .get(endpoint)
-    .then(data => {
-      callback(data);
+    .then(users => {
+      callback(users.data);
     })
     .catch(err => {
       console.log(err);
