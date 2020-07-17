@@ -48,7 +48,7 @@ const Navbar = () => {
           <NavLink
             className="Navbar__li"
             tag={Link}
-            to="/search-users">
+            to="/my-followers">
               My Followers
           </NavLink>
         </NavItem>

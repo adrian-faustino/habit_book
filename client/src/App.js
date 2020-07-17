@@ -10,7 +10,8 @@ import { SignUpPage,
          LandingPage, 
          SearchPage,
          UserPage,
-        FollowingPage } from './views';
+         FollowingPage,
+         FollowersPage } from './views';
 /** Components **/
 import { Navbar, ProtectedRoute } from './components';
 /** React router **/
@@ -54,6 +55,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/following">
           <FollowingPage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/my-followers">
+          <FollowersPage />
         </ProtectedRoute>
       </Router>
     </div>
