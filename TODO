@@ -199,7 +199,7 @@ Comments
   [x] display comments on a post
   [x] delete comments
   [x] user autnh
-  [] add delete confirmation
+  [x] add delete confirmation
 
 [x] allow user to update habit
   [x] change db to indicate if habit has been edited
@@ -220,6 +220,6 @@ Comments
 [] view 'x' comments
 
 follow user:
-[] display a list of people you follow
+[x] display a list of people you follow
 [] display a list of people who follow you  
   [] on user cards, when you click 'followers' link to ^

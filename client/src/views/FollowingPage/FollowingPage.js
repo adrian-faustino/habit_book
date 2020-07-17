@@ -4,16 +4,12 @@ import { getMyFollows, getUserFollowers } from '../../helpers/followDataHelpers'
 import { getUserAPIData } from '../../helpers/getDataHelpers';
 /** Subcomponents **/
 import { UserCard } from '../../components';
-/** Redux **/
-import { useSelector } from 'react-redux';
 
 
 const FollowingPage = () => {
   /** State **/
   const [users, setUsers] = useState([]);
 
-  /** Redux **/
-  const counter = useSelector(state => state.counter);
 
   // get a list of users the user follows
   useEffect(() => {
@@ -26,7 +22,7 @@ const FollowingPage = () => {
         });
       });
     });
-  }, [counter]);
+  }, []);
 
   // map for rendering
   const _users = users.map(userObj => {
@@ -40,7 +36,7 @@ const FollowingPage = () => {
   return (
     <div className="FollowingPage navbar-offset">
       <h5>
-        Here are the users you follow!
+        {users.length === 0 ? 'You are not following anyone.' : 'Here are the users you follow!'}
       </h5>
 
       {_users}
