@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+/** Redux **/
+import { useSelector } from 'react-redux';
 /** Subcomponents **/
 import { UserCard } from '../../components';
 /** Helpers **/
@@ -11,13 +13,16 @@ const FollowersPage = () => {
   /** State **/
   const [users, setUsers] = useState([]);
 
+  /** Redux **/
+  const user = useSelector(state => state.user);
+
   useEffect(() => {
-    getUserFollowers(1, (data, err) => {
+    getUserFollowers(user.user_id, (data, err) => {
       if (err) return console.log(err);
 
       // take follower ID and get full user info
       data.forEach(user => {
-        getUserAPIData(user.target_user_id, userObj => {
+        getUserAPIData(user.follower_id, userObj => {
           setUsers(prev => [...prev, userObj]);
         })
       });

@@ -82,7 +82,7 @@ router.get('/:user_id', (req, res) => {
     SELECT * FROM ${FOLLOWS_TABLE}
     WHERE target_user_id = $1;
   `;
-
+  
   pool
     .query(query, [user_id])
     .then(data => {
