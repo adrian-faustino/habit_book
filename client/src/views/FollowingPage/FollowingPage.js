@@ -35,9 +35,9 @@ const FollowingPage = () => {
 
   return (
     <div className="FollowingPage navbar-offset">
-      <h5>
+      <h3>
         {users.length === 0 ? 'You are not following anyone.' : 'Here are the users you follow!'}
-      </h5>
+      </h3>
 
       {_users}
     </div>

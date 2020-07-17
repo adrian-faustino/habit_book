@@ -40,7 +40,9 @@ const FollowersPage = () => {
 
   return (
     <section className="navbar-offset">
-      followers page
+      <h3>
+        {users.length === 0 ? 'You do not have any followers yet.' : 'Here are your followers!'}
+      </h3>
       {_users}
     </section>
   )
