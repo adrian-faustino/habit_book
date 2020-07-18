@@ -43,7 +43,7 @@ const HabitCard = ({habit}) => {
   const [habit_by, setHabitBy] = useState('');
   const [success, setSuccess] = useState('');
   // use null here for conditional rendering, instead of using empty array
-  const [comments, setComments] = useState(null);
+  const [comments, setComments] = useState([]);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
@@ -217,7 +217,7 @@ const HabitCard = ({habit}) => {
       <CommentForm
         handleExpandComments={handleExpandComments}
         habit_id={habit_id} />
-      {comments && <CommentsContainer
+      {comments.length !== 0 && <CommentsContainer
         setComments={setComments}
         comments={comments}/>}
     </div>
