@@ -1,19 +1,12 @@
 import React, { useState } from 'react'
-/** Redux **/
-import { useDispatch } from 'react-redux';
-/** Redux actions **/
-import { increment } from '../../../../actions';
 /** Helpers */
 import { updateComment } from '../../../../helpers/commentDataHelpers';
 /** Styles **/
 import './CommentEditForm.css';
 
-const CommentEditForm = ({ comment, setIsEditMode }) => {
+const CommentEditForm = ({ comment, setIsEditMode, setTempComment }) => {
   /** State **/
   const [value, setValue] = useState(comment.content);
-
-  /** Redux **/
-  const dispatch = useDispatch();
 
   const handleChange = e => {
     setValue(e.target.value);
@@ -21,13 +14,11 @@ const CommentEditForm = ({ comment, setIsEditMode }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    updateComment(value, comment.comment_id, (success, err) => {
+    updateComment(value, comment.comment_id, (content, err) => {
       if (err) return;
-      // trigger view change
-      dispatch(increment(1));
-      
+
       // close edit component
-      console.log(success)
+      setTempComment(content);
       setIsEditMode(false);
     });
   }

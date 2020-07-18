@@ -96,9 +96,10 @@ const CommentCard = ({ comment, setComments }) => {
           </span>
 
           <div className="CommentCard__content">
-            {content}
+            {tempComment}
             {isEditMode && (
               <CommentEditForm
+                setTempComment={setTempComment}
                 setIsEditMode={setIsEditMode}
                 comment={comment}/>
             )}

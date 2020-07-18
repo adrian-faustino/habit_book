@@ -49,8 +49,8 @@ export const updateComment = (content, comment_id, callback) => {
 
   axios
     .put(endpoint, payload, config)
-    .then(data => {
-      callback(data);
+    .then(res => {
+      callback(res.data.content);
     })
     .catch(err => {
       console.error(err.message)

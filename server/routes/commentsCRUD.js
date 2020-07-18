@@ -83,7 +83,7 @@ router.put('/updateComment', authenticateToken, (req, res) => {
   pool
     .query(query, VALUES)
     .then(data => {
-      res.json({ msg: 'Updated comment.' });
+      res.json({ content });
     })
     .catch(err => {
       console.error(err.message);
