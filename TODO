@@ -119,7 +119,7 @@ CLIENT TODO:
 
   SECTION: My following
   [x] on each user card, have a follow button
-  [] display list of users you follow
+  [x] display list of users you follow
 
 Refactor tasks:
 [x] set up res and status code on errors server side (CRUD files)
@@ -139,7 +139,7 @@ Refactor tasks:
 [x] add 'comment deleted' placeholder after deleting comment
 [x] dont allow others to edit other users completed days ** IMPORTANT
 [] debounce mouse clicks (like on calendar, follow, like btn etc)
-[] have an offset class that offsets all the view by the nav bar height (apply it to sign up page, register page, home page, etc)
+[x] have an offset class that offsets all the view by the nav bar height (apply it to sign up page, register page, home page, etc)
 [] feedback when trying to log in with a non existing account
 
 Bugs:
@@ -150,6 +150,7 @@ Bugs:
 [x] deal with TODO #1 (search file for this comment)
 [x] include time in db? new habits being posted but since they are being sorted by day and not time, it's not accurate
 [x] bug when creating new account (cannot split null when getting created_at for user)
+[] when clicking like, it triggers a view change on comments
 
 Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
@@ -221,7 +222,7 @@ Comments
 [] refactor DO TODO #2
 [x] if logged in and on welcome page, do not show log in/ registration forms
 [x] refresh button on find user page to refresh list of random users
-[] indicate if you liked a habit
+[x] indicate if you liked a habit
 [] view 'x' comments
 
 follow user:
