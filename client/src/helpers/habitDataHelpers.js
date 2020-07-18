@@ -39,7 +39,7 @@ export const getLikes = async (user_id, habit_id, callback) => {
     const endpoint = process.env.REACT_APP_API +
       `habits/likes/${user_id}/${habit_id}`;
     const likes = await axios.get(endpoint);
-    callback(likes.data[0].count);
+    callback(likes.data);
 
   } catch (err) {
     console.log(err);

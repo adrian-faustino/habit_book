@@ -35,7 +35,7 @@ const HabitCard = ({habit}) => {
   /** State **/
   const [completedAt, setCompletedAt] = useState([]);
   const [isMyHabit, setIsMyHabit] = useState(false);
-  const [likes, setLikes] = useState();
+  const [likes, setLikes] = useState([]);
   const [err, setErr] = useState('');
   const [habit_by, setHabitBy] = useState('');
   const [success, setSuccess] = useState('');
@@ -66,7 +66,10 @@ const HabitCard = ({habit}) => {
     }
 
     // get number of likes
-    getLikes(user_id, habit_id, setLikes);
+    getLikes(user_id, habit_id, likes => {
+      console.log('Likes:', likes);
+      setLikes(likes);
+    });
 
     /* STRETCH: fetch number of comments like fb */
     // // get comments
@@ -161,10 +164,10 @@ const HabitCard = ({habit}) => {
         </div>
 
         <footer className="HabitCard__footer">
-          {likes > 0 && 
+          {likes.length > 0 && 
             (<span
               className="HabitCard__likes-span">
-                {`${likes} ${formatPlural(likes, 'like')}`}
+                {`${likes.length} ${formatPlural(likes.length, 'like')}`}
             </span>)}
           <button onClick={handleLikeBtn}>like</button>
           <button onClick={handleExpandComments}>view comments</button>

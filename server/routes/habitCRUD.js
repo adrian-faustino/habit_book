@@ -157,7 +157,7 @@ router.get('/likes/:user_id/:habit_id', async (req, res) => {
   const { user_id, habit_id } = req.params;
 
   const query = `
-    SELECT count(*) FROM ${HABIT_LIKES_TABLE}
+    SELECT * FROM ${HABIT_LIKES_TABLE}
     WHERE habit_id = $1;
   `;
   
