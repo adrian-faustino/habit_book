@@ -30,6 +30,7 @@ const CommentEditForm = ({ comment, setIsEditMode, setTempComment, setTempEdited
       onSubmit={handleSubmit}
       className="CommentEditForm">
         <input
+          autoFocus
           onChange={handleChange}
           value={value}
           className="CommentEditForm__input"/>

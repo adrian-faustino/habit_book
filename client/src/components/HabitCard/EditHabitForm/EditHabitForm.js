@@ -74,6 +74,7 @@ const EditHabitForm = props => {
         type="submit"
         onSubmit={handleEditSubmit}>
         <input 
+          autoFocus
           name="title"
           onChange={titleBind.onChange}
           value={_title}

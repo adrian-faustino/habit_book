@@ -72,7 +72,7 @@ const CommentCard = ({ comment, setComments }) => {
 
   const toggleEditMode = e => {
     e.preventDefault();
-    setIsEditMode(true);
+    setIsEditMode(!isEditMode);
   }
 
   return (
@@ -134,8 +134,8 @@ const CommentCard = ({ comment, setComments }) => {
             <Button
               onClick={toggleEditMode}
               className="CommentCard__edit-comment"
-              color="primary">
-                edit
+              color={isEditMode ? 'light' : 'primary'}>
+                {isEditMode ? 'cancel' : 'edit'}
             </Button>
           )}
         </div>
