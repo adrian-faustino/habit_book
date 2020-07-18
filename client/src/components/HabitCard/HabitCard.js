@@ -42,10 +42,11 @@ const HabitCard = ({habit}) => {
   const [err, setErr] = useState('');
   const [habit_by, setHabitBy] = useState('');
   const [success, setSuccess] = useState('');
-  // use null here for conditional rendering, instead of using empty array
+  // use null here for conditional rendering, instead of using empty array?
   const [comments, setComments] = useState([]);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [commentsExpanded, setCommentsExpanded] = useState(false);
 
   /** useRef **/
   const commentField = useRef();
@@ -127,12 +128,17 @@ const HabitCard = ({habit}) => {
   const handleExpandComments = e => {
     console.log('Fetching comments...');
     e && e.preventDefault();
+    if (commentsExpanded) {
+      // close comments
+      return setCommentsExpanded(false);
+    }
 
     // get comments
     getComments(habit_id, comments => {
       console.log('Comments:', comments);
       setComments(comments);
-      // expand card
+      // expand comments
+      setCommentsExpanded(true);
     });
   };
 
@@ -206,8 +212,11 @@ const HabitCard = ({habit}) => {
             onClick={handleLikeBtn}>
               {isMyLike ? 'unlike' : 'like'}
           </button>
+          {/* if comments expanded, show 'close comments', else show number of comments viewable */}
           <button onClick={comments.length === 0 ? focusCommentField : handleExpandComments}>
-            {comments.length === 0 ? 'comment' : `view ${comments.length} ${formatPlural(comments.length, 'comment')}`}
+            {commentsExpanded ? 'close comments' : (
+              comments.length === 0 ? 'comment' : `view ${comments.length} ${formatPlural(comments.length, 'comment')}`
+            )}
           </button>
         </footer>
             
@@ -236,7 +245,7 @@ const HabitCard = ({habit}) => {
         commentField={commentField}
         handleExpandComments={handleExpandComments}
         habit_id={habit_id} />
-      {comments.length !== 0 && <CommentsContainer
+      {commentsExpanded && <CommentsContainer
         setComments={setComments}
         comments={comments}/>}
     </div>
