@@ -35,6 +35,7 @@ const HabitCard = ({habit}) => {
   /** State **/
   const [completedAt, setCompletedAt] = useState([]);
   const [isMyHabit, setIsMyHabit] = useState(false);
+  const [isMyLike, setIsMyLike] = useState(false);
   const [likes, setLikes] = useState([]);
   const [err, setErr] = useState('');
   const [habit_by, setHabitBy] = useState('');
@@ -69,6 +70,16 @@ const HabitCard = ({habit}) => {
     getLikes(user_id, habit_id, likes => {
       console.log('Likes:', likes);
       setLikes(likes);
+
+      // check if this user liked this habit
+      for (let like of likes) {
+        if (like.liked_by === user.user_id) {
+          setIsMyLike(true);
+          return;
+        }
+      }
+
+      setIsMyLike(false);
     });
 
     /* STRETCH: fetch number of comments like fb */
