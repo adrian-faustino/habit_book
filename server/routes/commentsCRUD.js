@@ -70,6 +70,26 @@ router.get('/:habit_id', async (req, res) => {
 });
 
 // UPDATE
+router.put('/updateComment', authenticateToken, (req, res) => {
+  const { content, comment_id } = req.body;
+
+  const VALUES = [content, comment_id]
+  const query = `
+    UPDATE ${HABIT_COMMENTS_TABLE}
+    SET content = $1
+    WHERE comment_id = $2
+  `;
+
+  pool
+    .query(query, VALUES)
+    .then(data => {
+      res.json({ msg: 'Updated comment.' });
+    })
+    .catch(err => {
+      console.error(err.message);
+      res.status(500).json({ err: err.message });
+    })
+});
 
 // DELETE comments
 router.delete('/delete/:comment_id', authenticateToken, async (req, res) => {

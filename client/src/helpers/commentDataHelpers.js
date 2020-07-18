@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { config, headers } from '../util/config';
 
+// CREATE
 export const createComment = (habit_id, content, is_edited, callback) => {
   const endpoint = process.env.REACT_APP_API + 
       `comments/newComment`;
@@ -33,3 +34,28 @@ export const deleteComment = (comment_id, callback) => {
     })
     .catch(err => console.log(err));
 };
+
+// READ
+
+// UPDATE
+export const updateComment = (content, comment_id, callback) => {
+  const endpoint = process.env.REACT_APP_API + 
+    `comments/updateComment`;
+
+  const payload = {
+    content,
+    comment_id
+  }
+
+  axios
+    .put(endpoint, payload, config)
+    .then(data => {
+      callback(data);
+    })
+    .catch(err => {
+      console.error(err.message)
+      callback(null, err.message);
+    })
+};
+
+// DELETE

@@ -31,6 +31,7 @@ const CommentCard = ({ comment, setComments }) => {
   const [isMyComment, setIsMyComment] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [tempComment, setTempComment] = useState(content);
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -94,12 +95,14 @@ const CommentCard = ({ comment, setComments }) => {
             </Link>
           </span>
 
-          <p className="CommentCard__content">
+          <div className="CommentCard__content">
             {content}
             {isEditMode && (
-        <CommentEditForm />
-      )}
-          </p>
+              <CommentEditForm
+                setIsEditMode={setIsEditMode}
+                comment={comment}/>
+            )}
+          </div>
         </div>
 
         <div className="CommentCard__buttons-container">

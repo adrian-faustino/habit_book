@@ -201,6 +201,7 @@ Comments
   [x] user autnh
   [x] add delete confirmation
   [] edit comments
+    [] validate route
 
 [x] allow user to update habit
   [x] change db to indicate if habit has been edited
