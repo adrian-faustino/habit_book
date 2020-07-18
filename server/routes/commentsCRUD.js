@@ -76,8 +76,8 @@ router.put('/updateComment', authenticateToken, (req, res) => {
   const VALUES = [content, comment_id]
   const query = `
     UPDATE ${HABIT_COMMENTS_TABLE}
-    SET content = $1
-    WHERE comment_id = $2
+    SET content = $1, is_edited = true
+    WHERE comment_id = $2;
   `;
 
   pool

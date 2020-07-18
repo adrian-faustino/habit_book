@@ -4,7 +4,7 @@ import { updateComment } from '../../../../helpers/commentDataHelpers';
 /** Styles **/
 import './CommentEditForm.css';
 
-const CommentEditForm = ({ comment, setIsEditMode, setTempComment }) => {
+const CommentEditForm = ({ comment, setIsEditMode, setTempComment, setTempEdited }) => {
   /** State **/
   const [value, setValue] = useState(comment.content);
 
@@ -17,8 +17,10 @@ const CommentEditForm = ({ comment, setIsEditMode, setTempComment }) => {
     updateComment(value, comment.comment_id, (content, err) => {
       if (err) return;
 
-      // close edit component
+      // temp view update for current user to prevent another db query just to update their state.
       setTempComment(content);
+      setTempEdited(true);
+      // close edit component
       setIsEditMode(false);
     });
   }

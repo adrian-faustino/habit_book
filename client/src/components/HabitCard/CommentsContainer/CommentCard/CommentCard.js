@@ -31,7 +31,9 @@ const CommentCard = ({ comment, setComments }) => {
   const [isMyComment, setIsMyComment] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  /** View change notes: these variables are to update the view temporarily for the user, to prevent another DB query just to update their view. These are set once we get OK from DB that data has been updated **/
   const [tempComment, setTempComment] = useState(content);
+  const [tempEdited, setTempEdited] = useState(is_edited);
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -99,6 +101,7 @@ const CommentCard = ({ comment, setComments }) => {
             {tempComment}
             {isEditMode && (
               <CommentEditForm
+                setTempEdited={setTempEdited}
                 setTempComment={setTempComment}
                 setIsEditMode={setIsEditMode}
                 comment={comment}/>
@@ -107,7 +110,7 @@ const CommentCard = ({ comment, setComments }) => {
         </div>
 
         <div className="CommentCard__buttons-container">
-          {is_edited && (
+          {tempEdited && (
             <span className="CommentCard__edited">
               (edited)
             </span>
