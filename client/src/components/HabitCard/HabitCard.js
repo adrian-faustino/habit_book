@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 /** npm **/
 import classNames from 'classnames';
 import axios from 'axios';
@@ -46,6 +46,9 @@ const HabitCard = ({habit}) => {
   const [comments, setComments] = useState([]);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [editMode, setEditMode] = useState(false);
+
+  /** useRef **/
+  const commentField = useRef();
 
   /** Redux **/
   const dispatch = useDispatch();
@@ -140,7 +143,8 @@ const HabitCard = ({habit}) => {
 
   const focusCommentField = e => {
     e.preventDefault();
-    ReactDOM.findDOMNode()
+    console.log('co', commentField.current)
+    commentField.current.focus();
   }
 
   return (
@@ -229,6 +233,7 @@ const HabitCard = ({habit}) => {
         title={title}/>}
         
       <CommentForm
+        commentField={commentField}
         handleExpandComments={handleExpandComments}
         habit_id={habit_id} />
       {comments.length !== 0 && <CommentsContainer

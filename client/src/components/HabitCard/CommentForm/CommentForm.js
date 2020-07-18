@@ -39,6 +39,7 @@ const CommentForm = props => {
           className="CommentForm__avatar"
           src={user.avatar_url} />
         <input
+          ref={props.commentField}
           autoComplete="off"
           name="content"
           value={values.content || ''}
