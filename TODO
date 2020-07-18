@@ -202,6 +202,9 @@ Comments
   [x] add delete confirmation
   [] edit comments
     [] validate route
+    [] show error messages
+    [] show (edited)
+    [] update (edited) in db
 
 [x] allow user to update habit
   [x] change db to indicate if habit has been edited
