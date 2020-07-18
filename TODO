@@ -141,6 +141,7 @@ Refactor tasks:
 [] debounce mouse clicks (like on calendar, follow, like btn etc)
 [x] have an offset class that offsets all the view by the nav bar height (apply it to sign up page, register page, home page, etc)
 [] feedback when trying to log in with a non existing account
+[] clean up how comments button is being written (close comments, view x comments etc);
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -219,11 +220,11 @@ Comments
       [x] set error messages 
       [x] set success messages
 
-[] refactor DO TODO #2
+[x] refactor DO TODO #2
 [x] if logged in and on welcome page, do not show log in/ registration forms
 [x] refresh button on find user page to refresh list of random users
 [x] indicate if you liked a habit
-[] view 'x' comments
+[x] view 'x' comments
 
 follow user:
 [x] display a list of people you follow
