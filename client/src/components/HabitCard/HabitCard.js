@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+/** npm **/
+import classNames from 'classnames';
 import axios from 'axios';
 /** Subcomponents **/
 import CalendarComponent from './CalendarComponent/CalendarComponent';
@@ -48,9 +50,12 @@ const HabitCard = ({habit}) => {
   /** Redux **/
   const dispatch = useDispatch();
   const counter = useSelector(state => state.counter);
-
-  /* STRETCH: use for auth later */
   const user = useSelector(state => state.user);
+
+  /** Classnames **/
+  const liked = classNames({
+    'liked': isMyLike
+  });
   
   // When each habit loads, get a list of completed days
   useEffect(() => {
@@ -177,10 +182,14 @@ const HabitCard = ({habit}) => {
         <footer className="HabitCard__footer">
           {likes.length > 0 && 
             (<span
-              className="HabitCard__likes-span">
+              className={`HabitCard__likes-span ${liked}`}>
                 {`${likes.length} ${formatPlural(likes.length, 'like')}`}
             </span>)}
-          <button onClick={handleLikeBtn}>like</button>
+          <button
+            className={liked}
+            onClick={handleLikeBtn}>
+              {isMyLike ? 'unlike' : 'like'}
+          </button>
           <button onClick={handleExpandComments}>view comments</button>
         </footer>
             

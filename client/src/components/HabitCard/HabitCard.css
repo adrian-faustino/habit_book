@@ -103,3 +103,11 @@
   font-weight: 500;
   font-style: italic;
 }
+
+.liked {
+  color:  rgb(0, 0, 255);
+}
+
+button.liked {
+  background: lightblue;
+}
