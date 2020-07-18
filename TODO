@@ -203,8 +203,8 @@ Comments
   [] edit comments
     [] validate route
     [] show error messages
-    [] show (edited)
-    [] update (edited) in db
+    [x] show (edited)
+    [x] update (edited) in db
 
 [x] allow user to update habit
   [x] change db to indicate if habit has been edited
