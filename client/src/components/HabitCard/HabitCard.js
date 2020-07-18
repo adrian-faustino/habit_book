@@ -56,6 +56,13 @@ const HabitCard = ({habit}) => {
   const liked = classNames({
     'liked': isMyLike
   });
+
+  // on mount, get comment number
+  useEffect(() => {
+    getComments(habit_id, comments => {
+      setComments(comments);
+    })
+  }, []);
   
   // When each habit loads, get a list of completed days
   useEffect(() => {
@@ -131,6 +138,11 @@ const HabitCard = ({habit}) => {
     setEditMode(true);
   }
 
+  const focusCommentField = e => {
+    e.preventDefault();
+    ReactDOM.findDOMNode()
+  }
+
   return (
     <div className="HabitCard">
       <div className="HabitCard__container">
@@ -190,7 +202,9 @@ const HabitCard = ({habit}) => {
             onClick={handleLikeBtn}>
               {isMyLike ? 'unlike' : 'like'}
           </button>
-          <button onClick={handleExpandComments}>view comments</button>
+          <button onClick={comments.length === 0 ? focusCommentField : handleExpandComments}>
+            {comments.length === 0 ? 'comment' : `view ${comments.length} ${formatPlural(comments.length, 'comment')}`}
+          </button>
         </footer>
             
         {isMyHabit && !editMode && (<button
