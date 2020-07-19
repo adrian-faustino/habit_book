@@ -112,26 +112,25 @@ router.get('/following/:user_id', (req, res) => {
 router.get('/:user_id', (req, res) => {
   const { user_id } = req.params;
   // get follow relations
+  const followersIDquery = `
+    (SELECT b.follower_id
+    FROM ${USERS_TABLE} as a
+    JOIN ${FOLLOWS_TABLE} as b
+    ON a.user_id = b.target_user_id
+    WHERE b.target_user_id = $1)
+  `;
+
   const query = `
-    SELECT * FROM ${FOLLOWS_TABLE}
-    WHERE target_user_id = $1;
+    SELECT user_id, username, first_name, last_name, email, is_active, avatar_url, created_at
+    FROM ${USERS_TABLE} as a
+    JOIN ${followersIDquery} as b
+    ON a.user_id = b.follower_id
   `;
   
   pool
     .query(query, [user_id])
-    .then(async data => {
-      let result = [];
-      for (let followObj of data.rows) {
-        // get follower user info
-        const query = `
-        SELECT user_id, username, first_name, last_name, email, is_active, avatar_url, created_at FROM ${USERS_TABLE}
-        WHERE user_id = ${followObj.follower_id}
-        LIMIT 1;
-        `;
-        const user = await pool.query(query);
-        result.push(user.rows[0]);
-      };
-      res.json(result);
+    .then(data => {
+      res.json(data.rows);
     })
     .catch(err => {
       console.error(err.message);
