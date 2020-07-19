@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 /** npm **/
 import { getHabitsAPIData, getUserAPIData } from '../../helpers/getDataHelpers';
-import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 /** Subcomponents **/
 import { UserCard } from '../../components/';
@@ -41,7 +40,7 @@ const UserPage = () => {
 
       <div className="UserPage__habits-container">
         {userHabits.map(habit => (
-          <HabitCard key={habit.habit_id} habit={habit} />
+          <HabitCard key={uuidv4()} habit={habit} />
         ))}
       </div>
 
