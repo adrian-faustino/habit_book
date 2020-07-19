@@ -26,6 +26,7 @@ const UserPage = () => {
   /** State **/
   const [userObj, setUserObj] = useState({});
   const [userHabits, setUserHabits] = useState([]);
+  const [toggledData, setToggledData] = useState(HABITS);
 
   /** Redux **/
   const counter = useSelector(state => state.counter);
@@ -50,17 +51,20 @@ const UserPage = () => {
     console.log(e.target.innerHTML);
     switch (e.target.innerHTML) {
       case HABITS:
+        setToggledData(HABITS);
         getHabitsAPIData(user_id, data => {
           // stretch: set error
           setUserHabits(data);
         });
         break;
       case FOLLOWERS:
+        setToggledData(FOLLOWERS);
         getUserFollowers(user_id, data => {
           console.log('followers:', data);
         });
         break;
       case FOLLOWING:
+        setToggledData(FOLLOWING);
         getUserFollowing(user_id, data => {
           console.log('following:', data)
         })
@@ -83,6 +87,17 @@ const UserPage = () => {
           {FOLLOWING}
         </Button>
       </ButtonGroup>
+
+      {toggledData === HABITS && (
+        'Habits'
+      )}
+      {toggledData === FOLLOWERS && (
+        'Followers'
+      )}
+      {toggledData === FOLLOWING && (
+        'Following'
+      )}
+      
 
       <div className="UserPage__habits-container">
         {userHabits.map(habit => (
