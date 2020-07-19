@@ -16,10 +16,7 @@ export const getTimeSince = dateStr => {
   const date = dateArr[0];
   const time = dateArr[1];
 
-  const today = new Date();
-  console.log('Type of: ', today);
-
-  
+  const today = new Date(); 
 }
 
 // borrowed function form stackoverflow
@@ -50,6 +47,3 @@ export function timeSince(date) {
   }
   return Math.floor(seconds) + " seconds";
 }
-var aDay = 24*60*60*1000;
-console.log(timeSince(new Date(Date.now()-aDay)));
-console.log(timeSince(new Date(Date.now()-aDay*2)));

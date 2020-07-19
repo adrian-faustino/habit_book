@@ -10,7 +10,6 @@ const ProtectedRoute = ({children, ...rest}) => {
     // 'accessToken' to their localStorage?
   };
 
-  console.log('Authenticated?', isAuth());
   return (
     <Route
       {...rest}

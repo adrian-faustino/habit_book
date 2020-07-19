@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const loginReq = (userLogin, callback) => {
-  console.log('Logging in with:', userLogin)
   const endpoint = 
   process.env.REACT_APP_API + 'login';
 
@@ -9,8 +8,6 @@ export const loginReq = (userLogin, callback) => {
     .post(endpoint, userLogin)
     .then(async res => {
       const { accessToken, user } = res.data;
-      console.log('Successfully logged in', user);
-      console.log('Access token:', accessToken);
       const _user = await JSON.stringify(user);
 
       // save to local storage ** this method takes a key and val

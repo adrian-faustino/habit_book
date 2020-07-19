@@ -84,7 +84,6 @@ const HabitCard = ({habit}) => {
 
     // get number of likes
     getLikes(user_id, habit_id, likes => {
-      console.log('Likes:', likes);
       setLikes(likes);
 
       // check if this user liked this habit
@@ -126,7 +125,6 @@ const HabitCard = ({habit}) => {
   }
 
   const handleExpandComments = e => {
-    console.log('Fetching comments...');
     e && e.preventDefault();
     if (commentsExpanded) {
       // close comments
@@ -135,7 +133,6 @@ const HabitCard = ({habit}) => {
 
     // get comments
     getComments(habit_id, comments => {
-      console.log('Comments:', comments);
       setComments(comments);
       // expand comments
       setCommentsExpanded(true);
@@ -149,7 +146,6 @@ const HabitCard = ({habit}) => {
 
   const focusCommentField = e => {
     e.preventDefault();
-    console.log('co', commentField.current)
     commentField.current.focus();
   }
 

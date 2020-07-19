@@ -6,7 +6,6 @@ import { config, headers } from '../util/config';
 
 // given user_id, get all habits
 export const getUserHabits = (user_id, callback) => {
-  console.log('Getting user habits for', user_id);
   const endpoint =
     process.env.REACT_APP_API + `habits/${user_id}`;
 
@@ -60,7 +59,6 @@ export const registerLike = (user, user_id, habit_id, callback) => {
   axios
     .post(endpoint, payload, config)
     .then(res => {
-      console.log('New like registered!', res);
       callback(res);
     })
     .catch(err => console.log(err));
@@ -74,7 +72,6 @@ export const getComments = (habit_id, callback) => {
   axios
     .get(endpoint)
     .then(res => {
-      console.log('setting comments', res.data)
       callback(res.data);
     })
     .catch(err => console.log(err));

@@ -20,7 +20,6 @@ const CardsContainer = () => {
   // on load, get all of the user's habits
   useEffect(() => {
     getUserHabits(user_id, data => {
-      console.log('Setting habits...', data);
       setHabits(data);
     });
   }, [counter]);
