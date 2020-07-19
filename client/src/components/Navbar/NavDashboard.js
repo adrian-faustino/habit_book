@@ -29,6 +29,9 @@ const NavDashboard = props => {
     dispatch(logout());
     dispatch(clearUser());
 
+    // refresh local storage
+    window.location.reload();
+
     // trigger view change
     push('/');
   };

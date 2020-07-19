@@ -116,7 +116,7 @@ const HabitCard = ({habit}) => {
 
     registerLike(user, user_id, habit_id, () => {
       // trigger view change
-      dispatch(increment(1));
+      // dispatch(increment(1));
     });
   };
 

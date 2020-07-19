@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 /** Helpers **/
 import { getUserHabitCountAPIData } from '../../helpers/getDataHelpers';
 import { formatToWords } from '../../helpers/formatHelpers';
-import { getUserFollowers, getMyFollows } from '../../helpers/followDataHelpers';
+import { getUserFollowers, getUserFollowing } from '../../helpers/followDataHelpers';
 /** Styles **/
 import './UserCard.css';
 /** React router **/
@@ -40,7 +40,7 @@ const UserCard = ({ userObj }) => {
 
   // check if the current user is a follower of the current card
   useEffect(() => {
-    getMyFollows(users => {
+    getUserFollowing(user.user_id, users => {
       for (let obj of users) {
         if (obj.target_user_id === user_id) {
           return setIsFollowedByMe(true);

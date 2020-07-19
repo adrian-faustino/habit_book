@@ -15,7 +15,7 @@ export const submitHabit_API = async (habit, callback) => {
     const response = await axios.post(endpoint, payload, config);
     callback(response);
   } catch (err) {
-    console.log(err);
+    console.log('WF',err);
   };
 };
 
