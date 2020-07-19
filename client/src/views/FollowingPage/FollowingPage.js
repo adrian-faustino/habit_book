@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+/** npm **/
+import { v4 as uuidv4 } from 'uuid';
 /** Helpers **/
 import { getMyFollows, getUserFollowers } from '../../helpers/followDataHelpers';
 import { getUserAPIData } from '../../helpers/getDataHelpers';
@@ -14,9 +16,7 @@ const FollowingPage = () => {
   // get a list of users the user follows
   useEffect(() => {
     getMyFollows(data => {
-      console.log(data)
       data.forEach(user => {
-        console.log(user)
         getUserAPIData(user.target_user_id, userObj => {
           setUsers(prev => [...prev, userObj]);
         });
@@ -28,7 +28,7 @@ const FollowingPage = () => {
   const _users = users.map(userObj => {
     return (
       <UserCard 
-        key={userObj.user_id}
+        key={uuidv4()}
         userObj={userObj} />
     );
   });

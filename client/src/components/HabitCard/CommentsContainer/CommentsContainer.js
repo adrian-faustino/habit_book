@@ -3,7 +3,7 @@ import React from 'react';
 import CommentCard from './CommentCard/CommentCard';
 /** Styles **/
 import './CommentsContainer.css';
-/** Helpers **/
+/** npm **/
 import { v4 as uuidv4 } from 'uuid';
 
 // Props notes: 

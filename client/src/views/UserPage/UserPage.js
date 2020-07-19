@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 /** npm **/
-import { getHabitsAPIData } from '../../helpers/getDataHelpers';
+import { getHabitsAPIData, getUserAPIData } from '../../helpers/getDataHelpers';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 /** Subcomponents **/
 import { UserCard } from '../../components/';
 /** Styles **/
@@ -14,7 +15,7 @@ import { useSelector } from 'react-redux';
 
 const UserPage = () => {
   /** State **/
-  const [userObj, setUserObj] = useState([]);
+  const [userObj, setUserObj] = useState({});
   const [userHabits, setUserHabits] = useState([]);
 
   /** Redux **/
@@ -24,30 +25,19 @@ const UserPage = () => {
   const user_id = window.location.href.split('users/')[1];
 
   useEffect(() => {
-    getUserInfo(user_id);
+    getUserAPIData(user_id, data => {
+      // stretch: set error
+      setUserObj(data);
+    });
     getHabitsAPIData(user_id, data => {
+      // stretch: set error
       setUserHabits(data);
     });
   }, [counter]);
 
-  const getUserInfo = async user_id => {
-    console.log('Fetching user data for:', user_id);
-
-    const endpoint = process.env.REACT_APP_API +
-      `users/${user_id}`;
-    
-    axios
-      .get(endpoint)
-      .then(res => {
-        console.log('Data', res.data);
-        setUserObj(res.data);
-      })
-      .catch(err => console.log(err));
-  };
-
   return (
     <section className="UserPage">
-      {userObj.map(user => (<UserCard key={user_id} userObj={user} />))}
+      <UserCard userObj={userObj} />
 
       <div className="UserPage__habits-container">
         {userHabits.map(habit => (
