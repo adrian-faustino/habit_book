@@ -1,6 +1,7 @@
 /** All the functions in this file are for follows CRUD requests **/
 import axios from 'axios';
 import { config, headers } from '../util/config';
+import EditHabitForm from '../components/HabitCard/EditHabitForm/EditHabitForm';
 
 // create a new follow relation between users
 /* param notes: follower_id refers to the   * user clicking follow button
@@ -51,6 +52,21 @@ export const getMyFollows = (callback) => {
       callback(null, err);
     });
 };
+
+export const getUserFollowing = (user_id, callback) => {
+  const endpoint = process.env.REACT_APP_API + 
+    `follows/following/${user_id}`;
+
+  axios
+    .get(endpoint)
+    .then(res => {
+      callback(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+      callback(null, err);
+    })
+}
 
 // update
 

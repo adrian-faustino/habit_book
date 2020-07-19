@@ -29,7 +29,7 @@ export const getUserHabitCountAPIData = async (user_id, callback) => {
 
 };
 
-// get a list of a user's habit
+// get a list of a user's habits
 export const getHabitsAPIData = async (user_id, callback) => {
   const endpoint = process.env.REACT_APP_API +
     `habits/${user_id}`;
