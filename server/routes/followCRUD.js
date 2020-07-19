@@ -80,7 +80,6 @@ router.get('/following/:user_id', (req, res) => {
   console.log('user id?', req.params);
   // stretch: add limit
   // stretch merge tables to make it one query...
-  // RESUME #1
   const followingIDquery = `
     (SELECT b.target_user_id
     FROM ${USERS_TABLE} as a

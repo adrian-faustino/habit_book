@@ -142,6 +142,7 @@ Refactor tasks:
 [x] have an offset class that offsets all the view by the nav bar height (apply it to sign up page, register page, home page, etc)
 [] feedback when trying to log in with a non existing account
 [] clean up how comments button is being written (close comments, view x comments etc);
+[] have a separate constant file for SQL queries like get user, get followers etc on a separate JS file
 
 Bugs:
 [x] username/password shouldn't have white space
@@ -232,6 +233,5 @@ follow user:
   [] on user cards, when you click 'followers' link to ^
   [x] if no one follows you, have 
   
-[] user profile
-  [] have a tab to select if you want to view a user's followers, following, habits
-  CONTINUE FROM RESUME #1
+[x] user profile
+  [x] have a tab to select if you want to view a user's followers, following, habits
