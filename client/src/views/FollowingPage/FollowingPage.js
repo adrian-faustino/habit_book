@@ -2,25 +2,25 @@ import React, { useState, useEffect } from 'react';
 /** npm **/
 import { v4 as uuidv4 } from 'uuid';
 /** Helpers **/
-import { getMyFollows, getUserFollowers } from '../../helpers/followDataHelpers';
+import { getUserFollowing, getUserFollowers } from '../../helpers/followDataHelpers';
 import { getUserAPIData } from '../../helpers/getDataHelpers';
 /** Subcomponents **/
 import { UserCard } from '../../components';
+/** Redux **/
+import { useSelector } from 'react-redux';
 
 
 const FollowingPage = () => {
   /** State **/
   const [users, setUsers] = useState([]);
 
+  /** Redux **/
+  const user = useSelector(state => state.user);
 
   // get a list of users the user follows
   useEffect(() => {
-    getMyFollows(data => {
-      data.forEach(user => {
-        getUserAPIData(user.target_user_id, userObj => {
-          setUsers(prev => [...prev, userObj]);
-        });
-      });
+    getUserFollowing(user.user_id, data => {
+      setUsers(data);
     });
   }, []);
 

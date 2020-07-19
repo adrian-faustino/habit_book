@@ -77,12 +77,14 @@ router.get('/myFollows', authenticateToken, (req, res) => {
 // get all the accounts a user follows (no auth)
 router.get('/following/:user_id', (req, res) => {
   const { user_id } = req.params;
-
+  // get follow relations
   const query = `
     SELECT * FROM ${FOLLOWS_TABLE}
     WHERE follower_id = $1;
   `;
   // stretch: add limit
+  // stretch merge tables to make it one query...
+  // RESUME #1
 
   pool
     .query(query, [user_id])
