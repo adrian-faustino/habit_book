@@ -26,6 +26,8 @@ const UserPage = () => {
   /** State **/
   const [userObj, setUserObj] = useState({});
   const [userHabits, setUserHabits] = useState([]);
+  const [userFollowers, setUserFollowers] = useState([]);
+  const [userFollowing, setUserFollowing] = useState([]);
   const [toggledData, setToggledData] = useState(HABITS);
 
   /** Redux **/
@@ -61,16 +63,39 @@ const UserPage = () => {
         setToggledData(FOLLOWERS);
         getUserFollowers(user_id, data => {
           console.log('followers:', data);
+          setUserFollowers(data);
         });
         break;
       case FOLLOWING:
         setToggledData(FOLLOWING);
         getUserFollowing(user_id, data => {
           console.log('following:', data)
-        })
+          setUserFollowing(data);
+        });
         break;
     }
   }
+
+  // returns a mapped array for rendering based on the current toggled view (3 buttons)
+  const spreadToggledData = () => {
+    switch (toggledData) {
+      case HABITS:
+        return userHabits.map(habit => {
+          return <HabitCard key={uuidv4()} habit={habit} />
+        });
+      case FOLLOWERS:
+        return userFollowers.map(userObj => {
+          return <UserCard key={uuidv4()} userObj={userObj} />
+        });
+      case FOLLOWING:
+        return userFollowing.map(userObj => {
+          return <UserCard key={uuidv4()} userObj={userObj} />
+        });
+    }
+  }
+
+  // return jsx based on current toggled data
+  const spread = spreadToggledData();
 
   return (
     <section className="UserPage">
@@ -88,22 +113,13 @@ const UserPage = () => {
         </Button>
       </ButtonGroup>
 
-      {toggledData === HABITS && (
-        'Habits'
-      )}
-      {toggledData === FOLLOWERS && (
-        'Followers'
-      )}
-      {toggledData === FOLLOWING && (
-        'Following'
-      )}
+      {spread}
       
-
-      <div className="UserPage__habits-container">
+      {/* <div className="UserPage__habits-container">
         {userHabits.map(habit => (
           <HabitCard key={uuidv4()} habit={habit} />
         ))}
-      </div>
+      </div> */}
 
       {userHabits.length === 0 && (
         <span className="UserPage__no-habits">
