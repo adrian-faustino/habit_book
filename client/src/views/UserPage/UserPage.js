@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+/** npm **/
+import { getHabitsAPIData } from '../../helpers/getDataHelpers';
 import axios from 'axios';
 /** Subcomponents **/
 import { UserCard } from '../../components/';
@@ -23,7 +25,9 @@ const UserPage = () => {
 
   useEffect(() => {
     getUserInfo(user_id);
-    getHabits(user_id);
+    getHabitsAPIData(user_id, data => {
+      setUserHabits(data);
+    });
   }, [counter]);
 
   const getUserInfo = async user_id => {
@@ -40,21 +44,6 @@ const UserPage = () => {
       })
       .catch(err => console.log(err));
   };
-
-  const getHabits = async user_id => {
-    console.log('Fetching user habits for:', user_id);
-    const endpoint = process.env.REACT_APP_API +
-      `habits/${user_id}`;
-    
-    axios
-      .get(endpoint)
-      .then(res => {
-        console.log('This user habits', res.data);
-        setUserHabits(res.data);
-      })
-      .catch(err => console.log(err));
-  };
-
 
   return (
     <section className="UserPage">
