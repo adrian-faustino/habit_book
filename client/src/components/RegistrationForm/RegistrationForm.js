@@ -110,7 +110,7 @@ const RegistrationForm = () => {
                   type="text"
                   value={values.first_name || ''}
                   onChange={handleChange}
-                  valid={values.first_name}
+                  valid={values.first_name && true}
                   invalid={error.first_name} />
                 <FormFeedback invalid>
                   {error.first_name}
@@ -126,7 +126,7 @@ const RegistrationForm = () => {
                   type="text"
                   value={values.last_name || ''}
                   onChange={handleChange}
-                  valid={values.last_name}
+                  valid={values.last_name && true}
                   invalid={error.last_name} />
                 <FormFeedback invalid>
                   {error.last_name}
