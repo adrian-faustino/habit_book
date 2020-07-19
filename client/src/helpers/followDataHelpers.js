@@ -57,7 +57,7 @@ export const getMyFollows = (callback) => {
 export const getUserFollowing = (user_id, callback) => {
   const endpoint = process.env.REACT_APP_API + 
     `follows/following/${user_id}`;
-
+  console.log('bro', user_id)
   axios
     .get(endpoint)
     .then(res => {

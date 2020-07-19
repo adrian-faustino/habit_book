@@ -77,14 +77,24 @@ router.get('/myFollows', authenticateToken, (req, res) => {
 // get all the accounts a user follows (no auth)
 router.get('/following/:user_id', (req, res) => {
   const { user_id } = req.params;
-  // get follow relations
-  const query = `
-    SELECT * FROM ${FOLLOWS_TABLE}
-    WHERE follower_id = $1;
-  `;
+  console.log('user id?', req.params);
   // stretch: add limit
   // stretch merge tables to make it one query...
   // RESUME #1
+  const followingIDquery = `
+    (SELECT b.target_user_id
+    FROM ${USERS_TABLE} as a
+    JOIN ${FOLLOWS_TABLE} as b
+    ON a.user_id = b.follower_id
+    WHERE b.follower_id = $1)
+  `;
+
+  const query = `
+    SELECT user_id, username, first_name, last_name, email, is_active, avatar_url, created_at
+    FROM ${USERS_TABLE} as a
+    JOIN ${followingIDquery} as b
+    ON a.user_id = b.target_user_id;
+  `;
 
   pool
     .query(query, [user_id])
@@ -121,7 +131,6 @@ router.get('/:user_id', (req, res) => {
         const user = await pool.query(query);
         result.push(user.rows[0]);
       };
-      console.log(result, 'MEE')
       res.json(result);
     })
     .catch(err => {
