@@ -77,7 +77,7 @@ router.post('/likes', authenticateToken, async (req, res) => {
         WHERE like_id = $1;
       `;
       await pool.query(deleteQuery, [like_id]);
-      res.json({ msg: 'Habit unliked.'});
+      res.json({ msg: 'Habit unliked.', action: 'UNLIKED' });
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ msg: err.message });
@@ -91,7 +91,7 @@ router.post('/likes', authenticateToken, async (req, res) => {
       VALUES ($1, $2, $3);
       `;
       await pool.query(insertQuery, VALUES);
-      res.json({ msg: 'Habit liked' });
+      res.json({ msg: 'Habit liked', action: 'LIKED' });
       } catch (err) {
         console.error(err.message);
         res.status(500).json({ msg: err.message });
@@ -116,6 +116,7 @@ router.get('/', async (req, res) => {
 
 /** Return all habits of a user **/
 router.get('/:user_id', async (req, res) => {
+  console.log('Getting habits for user:', req.params);
   try {
     const queryString = `
       SELECT * FROM ${HABITS_TABLE}

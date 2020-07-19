@@ -37,6 +37,7 @@ const UserPage = () => {
   const user_id = window.location.href.split('users/')[1];
 
   useEffect(() => {
+    console.log('On mount user_id', user_id);
     getUserAPIData(user_id, data => {
       // stretch: set error
       setUserObj(data);

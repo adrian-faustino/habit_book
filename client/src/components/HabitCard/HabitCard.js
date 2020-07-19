@@ -39,6 +39,7 @@ const HabitCard = ({habit}) => {
   const [isMyHabit, setIsMyHabit] = useState(false);
   const [isMyLike, setIsMyLike] = useState(false);
   const [likes, setLikes] = useState([]);
+  const [likesCount, setLikesCount] = useState('');
   const [err, setErr] = useState('');
   const [habit_by, setHabitBy] = useState('');
   const [success, setSuccess] = useState('');
@@ -84,6 +85,7 @@ const HabitCard = ({habit}) => {
 
     // get number of likes
     getLikes(user_id, habit_id, likes => {
+      setLikesCount(likes.length);
       setLikes(likes);
 
       // check if this user liked this habit
@@ -107,15 +109,23 @@ const HabitCard = ({habit}) => {
     getUserAPIData(user_id, data => {
       setHabitBy(data.username);
     });
-  });
+  }, []);
 
 
   const handleLikeBtn = e => {
     e.preventDefault();
 
-    registerLike(user, user_id, habit_id, () => {
-      // trigger view change
-      // dispatch(increment(1));
+    registerLike(user, user_id, habit_id, (success, err) => {
+      if (err) return;
+      switch (success.action) {
+        case 'LIKED':
+          setLikesCount(count => count + 1);
+          break;
+        case 'UNLIKED':
+          setLikesCount(count => count - 1);
+          break;
+      };
+      setIsMyLike(!isMyLike);
     });
   };
 
@@ -198,10 +208,10 @@ const HabitCard = ({habit}) => {
         </div>
 
         <footer className="HabitCard__footer">
-          {likes.length > 0 && 
+          {likesCount > 0 && 
             (<span
               className={`HabitCard__likes-span ${liked}`}>
-                {`${likes.length} ${formatPlural(likes.length, 'like')}`}
+                {`${likesCount} ${formatPlural(likesCount, 'like')}`}
             </span>)}
           <button
             className={liked}

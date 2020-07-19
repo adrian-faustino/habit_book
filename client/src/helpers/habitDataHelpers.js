@@ -59,9 +59,12 @@ export const registerLike = (user, user_id, habit_id, callback) => {
   axios
     .post(endpoint, payload, config)
     .then(res => {
-      callback(res);
+      callback(res.data);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      callback(null, err);
+    });
 };
 
 // get all comments on a habit
