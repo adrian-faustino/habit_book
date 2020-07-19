@@ -5,6 +5,7 @@ const authenticateToken = require('../helpers/auth');
 
 /** Constants **/
 const FOLLOWS_TABLE = 'follows';
+const USERS_TABLE = 'users';
 
 // @route   follows/~
 // @desc    handle follows CRUD requests
@@ -98,7 +99,7 @@ router.get('/following/:user_id', (req, res) => {
 // get a user's followers
 router.get('/:user_id', (req, res) => {
   const { user_id } = req.params;
-  
+  // get follow relations
   const query = `
     SELECT * FROM ${FOLLOWS_TABLE}
     WHERE target_user_id = $1;
@@ -106,8 +107,20 @@ router.get('/:user_id', (req, res) => {
   
   pool
     .query(query, [user_id])
-    .then(data => {
-      res.json(data.rows);
+    .then(async data => {
+      let result = [];
+      for (let followObj of data.rows) {
+        // get follower user info
+        const query = `
+        SELECT user_id, username, first_name, last_name, email, is_active, avatar_url, created_at FROM ${USERS_TABLE}
+        WHERE user_id = ${followObj.follower_id}
+        LIMIT 1;
+        `;
+        const user = await pool.query(query);
+        result.push(user.rows[0]);
+      };
+      console.log(result, 'MEE')
+      res.json(result);
     })
     .catch(err => {
       console.error(err.message);

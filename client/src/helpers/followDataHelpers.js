@@ -30,6 +30,7 @@ export const getUserFollowers = (user_id, callback) => {
   axios
     .get(endpoint)
     .then(users => {
+      console.log('MUH DATA', users.data)
       callback(users.data);
     })
     .catch(err => {

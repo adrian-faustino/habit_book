@@ -19,13 +19,7 @@ const FollowersPage = () => {
   useEffect(() => {
     getUserFollowers(user.user_id, (data, err) => {
       if (err) return console.log(err);
-
-      // take follower ID and get full user info
-      data.forEach(user => {
-        getUserAPIData(user.follower_id, userObj => {
-          setUsers(prev => [...prev, userObj]);
-        })
-      });
+      setUsers(data);
     });
   }, []);
 
