@@ -9,6 +9,7 @@ const validateForm = require('../helpers/habitValidationHelpers');
 const HABITS_TABLE = 'habits';
 const COMPLETED_AT_TABLE = 'completed_at';
 const HABIT_LIKES_TABLE = 'habit_likes';
+const HABIT_COMMENTS_TABLE = 'habit_comments';
 
 // @route   habits/~
 // @desc    handle habits CRUD requests
@@ -227,14 +228,22 @@ router.delete('/delete/:user_id/:habit_id', authenticateToken, async (req, res) 
       DELETE FROM ${HABIT_LIKES_TABLE}
       WHERE habit_id = $1;
     `;
-    
+
+    // delete all comments related to that habbit
+    const deleteHabit_comments = `
+      DELETE FROM ${HABIT_COMMENTS_TABLE}
+      WHERE habit_id = $1;
+    `;
+
     const deleteHabit = `
       DELETE FROM ${HABITS_TABLE}
       WHERE habit_id = $1;
     `;
+
     
     await pool.query(deleteCompleted_at, [habit_id, user_id]);
     await pool.query(deleteHabit_likes, [habit_id]);
+    await pool.query(deleteHabit_comments, [habit_id]);
     await pool.query(deleteHabit, [habit_id]);
     res.json({ msg: 'Successfully deleted habit.'});
   } catch (err) {
