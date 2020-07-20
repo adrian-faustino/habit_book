@@ -20,5 +20,8 @@ export const loginReq = (userLogin, callback) => {
       // trigger redirect
       callback();
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err)
+      callback(null, err);
+    });
 };

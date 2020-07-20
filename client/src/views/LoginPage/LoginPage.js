@@ -21,17 +21,26 @@ const LoginPage = () => {
     handleChange, 
     handleSubmit, 
     handleReset] = useForm(requestLogin);
+  const [errFlag, setErrFlag] = useState(false);
   
   /** Redux **/
   const dispatch = useDispatch();
   const isLogged = useSelector(state => state.isLogged);
 
   function requestLogin() {
-    loginReq(userLogin, () => {
-      dispatch(login());
-
+    loginReq(userLogin, (success, err) => {
+      if (err) {
+        setErrFlag(true);
+        setTimeout(() => {
+          setErrFlag(false);
+        }, 3000);
+        return;
+      }
+      
+      
       // sync local storage user info with redux
       getUserData(dispatch);
+      dispatch(login());
       setRedirectURL('/home')
     });
   };
@@ -83,6 +92,10 @@ const LoginPage = () => {
           className="LoginPage__submit-btn">
           Login
         </Button>
+
+        <span className="LoginPage__error-span">
+          {errFlag && 'Invalid email or password.'}
+        </span>
       </Form>
     </div>
     </section>
