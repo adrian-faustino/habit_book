@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 /** Redux actions */
 import { login } from '../../actions';
 /** Reactstrap **/
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 /** Styles **/
 import './LoginPage.css';
 /** Helpers **/
@@ -58,46 +58,51 @@ const LoginPage = () => {
     ) : (
     <section
       className="LoginPage">
-      <div className="LoginPage__form-container">
-      <h1>Login</h1>
-      <Form 
-        formNoValidate
-        onSubmit={handleSubmit}>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label 
-            for="email"
-            className="mr-sm-2">
-            Email:
-          </Label>
-          <Input
-            onChange={handleChange} 
-            type="email" 
-            name="email" 
-            id="email"/>
-        </FormGroup>
-        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-          <Label 
-            for="password"
-            className="mr-sm-2">
-            Password:
-          </Label>
-          <Input
-            onChange={handleChange} 
-            type="password"
-            name="password" 
-            id="password"/>
-        </FormGroup>
-        <Button
-          color="primary"
-          className="LoginPage__submit-btn">
-          Login
-        </Button>
+        <div className="LoginPage__form-container">
+        <h1>Login</h1>
+        <Form 
+          formNoValidate
+          onSubmit={handleSubmit}>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Label 
+              for="email"
+              className="mr-sm-2">
+              Email:
+            </Label>
+            <Input
+              onChange={handleChange} 
+              type="email" 
+              name="email" 
+              id="email"/>
+          </FormGroup>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Label 
+              for="password"
+              className="mr-sm-2">
+              Password:
+            </Label>
+            <Input
+              onChange={handleChange} 
+              type="password"
+              name="password" 
+              id="password"/>
+          </FormGroup>
+          <Button
+            color="primary"
+            className="LoginPage__submit-btn">
+            Login
+          </Button>
 
-        <span className="LoginPage__error-span">
-          {errFlag && 'Invalid email or password.'}
-        </span>
-      </Form>
-    </div>
+        </Form>
+
+          {errFlag && (
+            <Alert
+            color="danger"
+            className="LoginPage__error">
+              Invalid email or password.
+            </Alert>
+          )}
+        </div>
     </section>
     )
   );
