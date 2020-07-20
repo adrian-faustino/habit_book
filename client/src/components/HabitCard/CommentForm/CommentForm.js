@@ -27,7 +27,8 @@ const CommentForm = props => {
         // reset form
         handleReset();
         //trigger view change
-        props.handleExpandComments();
+        /* 2nd param true is to keep comment container open - find original function in habit card */
+        props.handleExpandComments(null, true);
       });
   };
 

@@ -134,9 +134,10 @@ const HabitCard = ({habit}) => {
     setDeleteConfirm(true);
   }
 
-  const handleExpandComments = e => {
+  /* 2nd param keepOpen is passed in after a submission in the CommentForm.js component - keeps comment section open after new submission */
+  const handleExpandComments = (e, keepOpen) => {
     e && e.preventDefault();
-    if (commentsExpanded) {
+    if (!keepOpen && commentsExpanded) {
       // close comments
       return setCommentsExpanded(false);
     }
