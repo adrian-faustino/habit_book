@@ -53,6 +53,7 @@ export const getMyFollows = (callback) => {
     });
 };
 
+// get all accounts a user follower
 export const getUserFollowing = (user_id, callback) => {
   const endpoint = process.env.REACT_APP_API + 
     `follows/following/${user_id}`;

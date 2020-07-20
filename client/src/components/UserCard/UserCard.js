@@ -42,7 +42,7 @@ const UserCard = ({ userObj }) => {
   useEffect(() => {
     getUserFollowing(user.user_id, users => {
       for (let obj of users) {
-        if (obj.target_user_id === user_id) {
+        if (obj.user_id === user_id) {
           return setIsFollowedByMe(true);
         };
       };

@@ -16,7 +16,7 @@ const USERS_TABLE = 'users';
 router.post('/', authenticateToken, (req, res) => {
   const { target_user_id } = req.body;
   const follower_id = req.user.user_id;
-console.log('following ok?')
+console.log('FOLLOW USER.')
   const query = `
     INSERT INTO ${FOLLOWS_TABLE}
       (target_user_id, follower_id)
@@ -146,6 +146,7 @@ router.delete('/:user_id', authenticateToken, (req, res) => {
     req.user.user_id,
     req.params.user_id
   ];
+  console.log('UNFOLLOWING')
   const query = `
     DELETE FROM ${FOLLOWS_TABLE}
     WHERE follower_id = $1
