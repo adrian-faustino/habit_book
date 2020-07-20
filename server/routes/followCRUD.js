@@ -13,10 +13,22 @@ const USERS_TABLE = 'users';
 
 // CREATE
 // create a new follow relation between users
-router.post('/', authenticateToken, (req, res) => {
+router.post('/', authenticateToken, async (req, res) => {
   const { target_user_id } = req.body;
   const follower_id = req.user.user_id;
-console.log('FOLLOW USER.')
+  const VALUES = [target_user_id, follower_id];
+
+  // stretch: validate to see if follow relation already exists
+  const searchQuery = `
+    SELECT * FROM ${FOLLOWS_TABLE}
+    WHERE target_user_id = $1
+    AND follower_id = $2;
+  `;
+  const exists = await pool.query(searchQuery, VALUES);
+  if (exists.rows.length > 0) {
+    return res.status(500).json({ err: 'Already following. '});
+  }
+
   const query = `
     INSERT INTO ${FOLLOWS_TABLE}
       (target_user_id, follower_id)
@@ -25,7 +37,7 @@ console.log('FOLLOW USER.')
   `;
 
   pool
-    .query(query, [target_user_id, follower_id])
+    .query(query, VALUES)
     .then(data => {
       res.json({ msg: 'Successfully liked user. '});
     })
@@ -77,7 +89,6 @@ router.get('/myFollows', authenticateToken, (req, res) => {
 // get all the accounts a user follows (no auth)
 router.get('/following/:user_id', (req, res) => {
   const { user_id } = req.params;
-  console.log('user id?', req.params);
   // stretch: add limit
   // stretch merge tables to make it one query...
   const followingIDquery = `

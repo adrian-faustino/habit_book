@@ -117,7 +117,6 @@ router.get('/', async (req, res) => {
 
 /** Return all habits of a user **/
 router.get('/:user_id', async (req, res) => {
-  console.log('Getting habits for user:', req.params);
   try {
     const queryString = `
       SELECT * FROM ${HABITS_TABLE}
