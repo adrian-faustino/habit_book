@@ -16,7 +16,7 @@ const USERS_TABLE = 'users';
 router.post('/', authenticateToken, (req, res) => {
   const { target_user_id } = req.body;
   const follower_id = req.user.user_id;
-
+console.log('following ok?')
   const query = `
     INSERT INTO ${FOLLOWS_TABLE}
       (target_user_id, follower_id)

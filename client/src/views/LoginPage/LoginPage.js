@@ -92,7 +92,6 @@ const LoginPage = () => {
             className="LoginPage__submit-btn">
             Login
           </Button>
-
         </Form>
 
           {errFlag && (
