@@ -141,7 +141,8 @@ router.get('/:user_id/:habit_id', async (req, res) => {
   try {
     const queryString = `
       SELECT * FROM ${COMPLETED_AT_TABLE}
-      WHERE user_id = $1 AND habit_id = $2;
+      WHERE user_id = $1 AND habit_id = $2
+      ORDER BY completed_at;
     `;
     const result = (
       await pool.query(queryString, [user_id, habit_id])

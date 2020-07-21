@@ -71,6 +71,7 @@ const HabitCard = ({habit}) => {
   // When each habit loads, get a list of completed days
   useEffect(() => {
     getCompleted_atAPIData(user_id, habit_id, data => {
+      console.log(data);
       setCompletedAt(data);
     });
   }, [counter]);
