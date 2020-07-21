@@ -244,3 +244,6 @@ follow user:
 [x] add feedback when no one follows a user/not following anyone (3 buttons)
 [x] add feedback to display current view mode
 [x] prevent another data fetch when user clicks button of current mode
+
+[] Longest streak on each habit
+  [] display streak somewhere on card
