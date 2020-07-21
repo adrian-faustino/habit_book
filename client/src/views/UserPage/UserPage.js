@@ -51,6 +51,11 @@ const UserPage = () => {
   const handleSwitchTab = e => {
     e.preventDefault();
 
+    // if current mode is selected again, do nothing
+    // stretch: add cooldown?
+    if (e.target.innerHTML === toggledData) return;
+
+
     console.log(e.target.innerHTML);
     switch (e.target.innerHTML) {
       case HABITS:
@@ -95,6 +100,7 @@ const UserPage = () => {
     }
   }
 
+  // feedback for when user has no habits/followers/following
   const displayEmptyFieldMsg = () => {
     switch (toggledData) {
       case HABITS:
