@@ -238,5 +238,7 @@ follow user:
 
   [?] like - make it "you and 86 others"
   [x] log in form feedback
+[x] fix follow button bug**
 
-[] fix follow button bug**
+[] add 3 toggle buttons on user home dashboard too
+[] add feedback when no one follows a user/not following anyone (3 buttons)

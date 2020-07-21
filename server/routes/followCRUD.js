@@ -18,7 +18,7 @@ router.post('/', authenticateToken, async (req, res) => {
   const follower_id = req.user.user_id;
   const VALUES = [target_user_id, follower_id];
 
-  // stretch: validate to see if follow relation already exists
+  // validate to see if follow relation already exists
   const searchQuery = `
     SELECT * FROM ${FOLLOWS_TABLE}
     WHERE target_user_id = $1
@@ -29,6 +29,7 @@ router.post('/', authenticateToken, async (req, res) => {
     return res.status(500).json({ err: 'Already following. '});
   }
 
+  // if validation passes, insert into DB
   const query = `
     INSERT INTO ${FOLLOWS_TABLE}
       (target_user_id, follower_id)
@@ -157,7 +158,7 @@ router.delete('/:user_id', authenticateToken, (req, res) => {
     req.user.user_id,
     req.params.user_id
   ];
-  console.log('UNFOLLOWING')
+  
   const query = `
     DELETE FROM ${FOLLOWS_TABLE}
     WHERE follower_id = $1

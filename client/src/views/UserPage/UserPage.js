@@ -95,8 +95,30 @@ const UserPage = () => {
     }
   }
 
+  const displayEmptyFieldMsg = () => {
+    switch (toggledData) {
+      case HABITS:
+        return (
+          <div className="UserPage__no-habits">This user has no habits yet.</div>
+        );
+      case FOLLOWERS:
+        return (
+          <div className="UserPage__no-habits">This user has no followers yet.</div>
+        );
+      case FOLLOWING:
+        return (
+          <div className="UserPage__no-habits">This user is not following anyone yet.</div>
+        );
+    }
+  }
+
   // return jsx based on current toggled data
-  const spread = spreadToggledData();
+  let spread = spreadToggledData();
+
+  // check if empty
+  if (spread.length === 0) {
+    spread = displayEmptyFieldMsg();
+  }
 
   return (
     <section className="UserPage">
@@ -115,18 +137,6 @@ const UserPage = () => {
       </ButtonGroup>
 
       {spread}
-      
-      {/* <div className="UserPage__habits-container">
-        {userHabits.map(habit => (
-          <HabitCard key={uuidv4()} habit={habit} />
-        ))}
-      </div> */}
-
-      {userHabits.length === 0 && (
-        <span className="UserPage__no-habits">
-          This user has no habits yet.
-        </span>
-      )}
     </section>
   )
 }
