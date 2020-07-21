@@ -14,3 +14,9 @@
   font-style: italic;
   color: grey;
 }
+
+/* removes outline after clicking button */
+.UserPage__button-group > .btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}

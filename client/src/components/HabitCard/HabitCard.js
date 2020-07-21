@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 /** npm **/
 import classNames from 'classnames';
-import axios from 'axios';
 /** Subcomponents **/
 import CalendarComponent from './CalendarComponent/CalendarComponent';
 import CommentsContainer from './CommentsContainer/CommentsContainer';

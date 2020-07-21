@@ -242,5 +242,5 @@ follow user:
 
 [] add 3 toggle buttons on user home dashboard too
 [x] add feedback when no one follows a user/not following anyone (3 buttons)
-[] add feedback to display current view mode
-[] prevent another data fetch when user clicks button of current mode
+[x] add feedback to display current view mode
+[x] prevent another data fetch when user clicks button of current mode

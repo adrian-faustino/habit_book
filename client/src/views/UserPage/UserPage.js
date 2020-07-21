@@ -130,15 +130,21 @@ const UserPage = () => {
     <section className="UserPage">
       <UserCard userObj={userObj} />
 
-      <ButtonGroup>
-        <Button onClick={handleSwitchTab}>
-          {HABITS}
+      <ButtonGroup className="UserPage__button-group">
+        <Button
+          color={toggledData === HABITS ? 'primary' : 'secondary'}
+          onClick={handleSwitchTab}>
+            {HABITS}
         </Button>
-        <Button onClick={handleSwitchTab}>
-          {FOLLOWERS}
+        <Button
+          color={toggledData === FOLLOWERS ? 'primary' : 'secondary'}
+          onClick={handleSwitchTab}>
+            {FOLLOWERS}
         </Button>
-        <Button onClick={handleSwitchTab}>
-          {FOLLOWING}
+        <Button
+          color={toggledData === FOLLOWING ? 'primary' : 'secondary'}
+          onClick={handleSwitchTab}>
+            {FOLLOWING}
         </Button>
       </ButtonGroup>
 
