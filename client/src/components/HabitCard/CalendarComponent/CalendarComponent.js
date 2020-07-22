@@ -40,7 +40,7 @@ const CalendarComponent = props => {
 
   // calculate longest streak
   useEffect(() => {
-    calcLongestStreak(completedAt);
+    console.log('Longest streak:', calcLongestStreak(completedAt));
   }, [completedAt]);
 
   // when user clicks a tile on the calendar...

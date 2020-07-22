@@ -39,6 +39,26 @@ export const deleteCompletedAt = (habit_id, date, callback) => {
 // Given array of dates, calculate longest streak
 export const calcLongestStreak = datesArr => {
   console.log('Calculating longest streak...', datesArr);
+  if (datesArr.length === 0) return 0;
+  if (datesArr.length === 1) return 1;
+  let currentCounter = 1;
+  let longest = 0;
+
+  for (let i = 1; i < datesArr.length; i++) {
+    const [prevYear, prevMonth, prevDay] = datesArr[i -1].split('-');
+    const [year, month, day] = datesArr[i].split('-');
+
+    if (parseInt(day) - 1 === parseInt(prevDay)) {
+      console.log('consecutive!')
+      currentCounter++;
+    } else {
+      if(currentCounter > longest) longest = currentCounter;
+      currentCounter = 1;
+    }
+  }
+
+  if (currentCounter > longest) longest = currentCounter;
+  return longest;
 };
 
 // Input: int. Output: int.
