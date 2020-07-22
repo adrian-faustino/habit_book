@@ -59,6 +59,8 @@ export const calcLongestStreak = datesArr => {
 
   if (currentCounter > longest) longest = currentCounter;
   return longest;
+
+  // TODO #3 - fix this function depending on month/leap year etc
 };
 
 // Input: int. Output: int.
