@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 /** Subcomponents **/
 import Calendar from 'react-calendar';
 /** Styles **/
 import './CalendarComponent.css';
 /** Helpers **/
 import { getDateYYYYMMDD } from '../../../helpers/dateObjHelpers';
-import { createCompletedAt, deleteCompletedAt } from '../../../helpers/CalendarHelpers';
+import { createCompletedAt, deleteCompletedAt, calcLongestStreak } from '../../../helpers/CalendarHelpers';
 /** Redux **/
 import { useDispatch, useSelector } from 'react-redux';
 /** Redux-actions **/
@@ -37,6 +37,11 @@ const CalendarComponent = props => {
   /** Redux **/
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+
+  // calculate longest streak
+  useEffect(() => {
+    calcLongestStreak(completedAt);
+  }, [completedAt]);
 
   // when user clicks a tile on the calendar...
   const handleClickDay = async (value, e) => {

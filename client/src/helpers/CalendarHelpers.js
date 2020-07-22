@@ -35,3 +35,23 @@ export const deleteCompletedAt = (habit_id, date, callback) => {
     })
     .catch(err => console.log(err));
 };
+
+// Given array of dates, calculate longest streak
+export const calcLongestStreak = datesArr => {
+  console.log('Calculating longest streak...', datesArr);
+};
+
+// Input: int. Output: int.
+/* param notes: month is NOT 0 index value of month
+ * i.e. January => 1, Feb => 2 */
+function daysInMonth(month) {
+  const month = parseInt(month);
+  const monthsWith31d = [1, 3, 5, 7, 8, 10, 12];
+  const monthsWith30d = [4, 6, 9, 11];
+  const monthsWith28d = [2];
+}
+
+// if leapyear, Feb has 29 days
+function isLeapYear() {
+
+}
