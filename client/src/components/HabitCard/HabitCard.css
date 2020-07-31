@@ -45,9 +45,9 @@
 
 .HabitCard__created-at {
   position: absolute;
-  top: 215px;
+  top: 245px;
   right: 23px;
-  font-style: italic;;
+  font-style: italic;
   font-size: 16px;
 }
 
@@ -105,7 +105,7 @@
 }
 
 .liked {
-  color:  rgb(0, 0, 255);
+  color: rgb(0, 0, 255);
 }
 
 button.liked {
