@@ -1,16 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 /** Auth **/
-import { config, headers } from '../util/config';
+import { config, headers } from "../util/config";
 
 // Input: Date YYYY-MM-DD. Ask server to insert new created_at into db
 export const createCompletedAt = async (date, user_id, habit_id, callback) => {
-  const endpoint = process.env.REACT_APP_API +
-    `completed_at`;
+  const endpoint = process.env.REACT_APP_API + `completed_at`;
 
   const payload = {
     date,
     user_id,
-    habit_id
+    habit_id,
   };
 
   try {
@@ -25,34 +24,34 @@ export const createCompletedAt = async (date, user_id, habit_id, callback) => {
 
 // Delete (untoggle) completed at
 export const deleteCompletedAt = (habit_id, date, callback) => {
-  const endpoint = process.env.REACT_APP_API + 
-    `completed_at/${habit_id}/${date}`;
+  const endpoint =
+    process.env.REACT_APP_API + `completed_at/${habit_id}/${date}`;
 
   axios
-    .delete(endpoint, {headers})
-    .then(res => {
+    .delete(endpoint, { headers })
+    .then((res) => {
       callback(res);
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 };
 
 // Given array of dates, calculate longest streak
-export const calcLongestStreak = datesArr => {
-  console.log('Calculating longest streak...', datesArr);
+export const calcLongestStreak = (datesArr) => {
+  console.log("Calculating longest streak...", datesArr);
   if (datesArr.length === 0) return 0;
   if (datesArr.length === 1) return 1;
   let currentCounter = 1;
   let longest = 0;
 
   for (let i = 1; i < datesArr.length; i++) {
-    const [prevYear, prevMonth, prevDay] = datesArr[i -1].split('-');
-    const [year, month, day] = datesArr[i].split('-');
+    const [prevYear, prevMonth, prevDay] = datesArr[i - 1].split("-");
+    const [year, month, day] = datesArr[i].split("-");
 
     if (parseInt(day) - 1 === parseInt(prevDay)) {
-      console.log('consecutive!')
+      console.log("consecutive!");
       currentCounter++;
     } else {
-      if(currentCounter > longest) longest = currentCounter;
+      if (currentCounter > longest) longest = currentCounter;
       currentCounter = 1;
     }
   }
@@ -80,7 +79,7 @@ function daysInMonth(MM, YYYY) {
     return 31;
   } else if (monthsWith30d.includes(month)) {
     return 30;
-  };
+  }
 }
 
 // if leapyear, Feb has 29 days
@@ -90,7 +89,7 @@ function isLeapYear(YYYY) {
   if (year % 100 === 0) {
     if (year % 400 === 0) return true;
     else return false;
-  };
+  }
   // if all validation pass, it is leap year
   return true;
 }

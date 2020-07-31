@@ -4,6 +4,7 @@
   min-width: 300px;
   width: 100%;
   background: pink;
+  margin-bottom: 30px;
 }
 
 .CalendarComponent__selected {
@@ -27,6 +28,11 @@
   box-shadow: 0 0 3px 5px grey;
   right: 46%;
   top: 56%;
+}
+
+.CalendarComponent__streak-span {
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .unclickable {
