@@ -114,7 +114,7 @@ CLIENT TODO:
 
   User Experience:
     [x] when visiting someone's profile, have feedback when they don't have any habits
-    [] have a 'longest streak' of habits etc
+    [X] have a 'longest streak' of habits etc
     [] on each habit card, display longest streak
 
   SECTION: My following
@@ -153,6 +153,7 @@ Bugs:
 [x] include time in db? new habits being posted but since they are being sorted by day and not time, it's not accurate
 [x] bug when creating new account (cannot split null when getting created_at for user)
 [] when clicking like, it triggers a view change on comments
+[] editing a comment and a habit description updates DB but resets view (view is not accurate)
 
 Notes:
 [x] use error obj e.g. { error : { email: "Must be valid", password: "Does not match" } }
