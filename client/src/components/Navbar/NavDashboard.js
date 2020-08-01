@@ -1,29 +1,24 @@
-import React from 'react'
+import React from "react";
 /** Redux **/
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 /** Redux actions */
-import { clearUser } from '../../actions/userActions';
-import { logout } from '../../actions';
+import { clearUser } from "../../actions/userActions";
+import { logout } from "../../actions";
 /** Reactstrap */
-import { Button } from 'reactstrap';
+import { Button } from "reactstrap";
 /** React router **/
-import { useHistory } from 'react-router';
+import { useHistory } from "react-router";
 /** Styles **/
-import './NavDashboard.css';
+import "./NavDashboard.css";
 
-const NavDashboard = props => {
+const NavDashboard = (props) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
-  const {
-    first_name,
-    last_name,
-    username,
-    email
-  } = user;
+  const user = useSelector((state) => state.user);
+  const { first_name, last_name, username, email } = user;
 
   const { push } = useHistory();
 
-  const handleLogout = e => {
+  const handleLogout = (e) => {
     e.preventDefault();
     localStorage.clear();
     dispatch(logout());
@@ -33,31 +28,27 @@ const NavDashboard = props => {
     window.location.reload();
 
     // trigger view change
-    push('/');
+    push("/");
   };
 
   return (
-    <div
-      className="NavDashboard__container">
-      <span 
-        className="NavDashboard__welcome-span">
+    <div className="NavDashboard__container">
+      <span className="NavDashboard__welcome-span">
         {`Welcome, ${first_name}`}
       </span>
 
-
-      <Button
+      {/* for development only  */}
+      {/* <Button
         className="NavDashboard__button"
         onClick={() => console.log(localStorage)}>
         localstorage
-      </Button>
+      </Button> */}
 
-      <Button
-        className="NavDashboard__button"
-        onClick={handleLogout}>
+      <Button className="NavDashboard__button" onClick={handleLogout}>
         logout
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default NavDashboard
+export default NavDashboard;
