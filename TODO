@@ -127,7 +127,7 @@ Refactor tasks:
 [x] fix CRUD response
 [x] fix response on successful CRUD (userCRUD.js)
 [x] fix username and password regex (special chars, _, -, etc);
-[] clean up React imports, comment (for consistency)
+[x] clean up React imports, comment (for consistency)
 [x] refresh page after all CRUD? (to show most updated version from DB)
 [x] when deleting a habit, delete all completed_at entries related to it
 [x] no dates in the future can be clicked for completed_at
@@ -141,7 +141,7 @@ Refactor tasks:
 [] debounce mouse clicks (like on calendar, follow, like btn etc)
 [x] have an offset class that offsets all the view by the nav bar height (apply it to sign up page, register page, home page, etc)
 [x] feedback when trying to log in with a non existing account
-[] clean up how comments button is being written (close comments, view x comments etc);
+[x] clean up how comments button is being written (close comments, view x comments etc);
 [] have a separate constant file for SQL queries like get user, get followers etc on a separate JS file
 
 Bugs:
