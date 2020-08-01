@@ -2,3 +2,18 @@
   position: relative;
   top: var(--navbar-height);
 }
+
+.HomePage__welcome-prompt {
+  font-weight: 600;
+}
+
+.HomePage__secondary-dashboard {
+  display: flex;
+  width: 55vw;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.HomePage__secondary-dashboard > * {
+  width: 500px;
+}

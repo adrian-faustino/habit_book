@@ -1,31 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 /** Redux **/
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 /** Helpers **/
-import { getUserData } from '../../helpers/protectedRouteOnMount';
+import { getUserData } from "../../helpers/protectedRouteOnMount";
 /** React router **/
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 /** Subcomponents */
-import NewHabit from '../../components/NewHabit/NewHabit';
-import CardsContainer from '../../components/CardsContainer/CardsContainer';
-import HabitCard from '../../components/HabitCard/HabitCard';
-import { UserCard } from '../../components/';
+import NewHabit from "../../components/NewHabit/NewHabit";
+import CardsContainer from "../../components/CardsContainer/CardsContainer";
+import HabitCard from "../../components/HabitCard/HabitCard";
+import { UserCard } from "../../components/";
 /** Styles **/
-import './HomePage.css';
+import "./HomePage.css";
 
 const HomePage = () => {
   /** Redux **/
-  const isLogged = useSelector(state => state.isLogged);
+  const isLogged = useSelector((state) => state.isLogged);
   const dispatch = useDispatch();
-  const refreshCount = useSelector(state => state.counter);
-  const user = useSelector(state => state.user);
-  const {
-    first_name,
-    last_name,
-    username,
-    email,
-    user_id
-  } = user;
+  const refreshCount = useSelector((state) => state.counter);
+  const user = useSelector((state) => state.user);
+  const { first_name, last_name, username, email, user_id } = user;
 
   /** On mount **/
   // sync local storage user info with redux
@@ -33,22 +27,21 @@ const HomePage = () => {
     getUserData(dispatch);
   }, []);
 
-  if (!isLogged) return <Redirect to="/"/>
+  if (!isLogged) return <Redirect to="/" />;
   return (
     <div className="HomePage">
-      <h2>
+      <h2 className="HomePage__welcome-prompt">
         Welcome to your dashboard, {`${username}`}!
       </h2>
 
-      {user && <UserCard userObj={user}/>}
-      <div>
-        Refresh count: {refreshCount}
+      <div className="HomePage__secondary-dashboard">
+        {user && <UserCard userObj={user} />}
+        <NewHabit />
       </div>
 
-      <NewHabit />
       {user_id && <CardsContainer />}
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

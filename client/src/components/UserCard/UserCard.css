@@ -1,9 +1,10 @@
 .UserCard__container {
-  background:peachpuff;
+  background: peachpuff;
   margin: 10px auto;
   padding: 10px;
-  min-width: 290px;
-  max-width: 500px;
+  min-width: 450px;
+  width: 450px;
+  height: min-content;
   border-radius: 4px;
   box-shadow: 0 0 3px black;
 
@@ -22,7 +23,7 @@
   justify-content: space-around;
   align-items: flex-start;
   margin: 0 auto;
-} 
+}
 
 .UserCard__right-container > span {
   display: block;
@@ -53,7 +54,7 @@
   font-weight: 550;
 }
 
-.UserCard__follow-button { 
+.UserCard__follow-button {
   position: absolute;
   top: 5px;
   right: 5px;
