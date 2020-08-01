@@ -29,6 +29,12 @@
   top: 56%;
 }
 
+.CalendarComponent__calendar-container {
+  background: red;
+  height: 204px;
+  overflow: hidden;
+}
+
 .CalendarComponent__streak-span {
   font-weight: 500;
   font-size: 18px;

@@ -132,11 +132,13 @@ const CalendarComponent = (props) => {
         isLoading && "unclickable"
       }`}
     >
-      <Calendar
-        value={value}
-        onClickDay={handleClickDay}
-        tileClassName={highlightRange}
-      />
+      <div className="CalendarComponent__calendar-container">
+        <Calendar
+          value={value}
+          onClickDay={handleClickDay}
+          tileClassName={highlightRange}
+        />
+      </div>
 
       {isLoading && <Spinner className="CalendarComponent__spinner" />}
 
