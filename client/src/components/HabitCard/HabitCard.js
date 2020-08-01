@@ -1,26 +1,41 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 /** npm **/
-import classNames from 'classnames';
+import classNames from "classnames";
 /** Subcomponents **/
-import CalendarComponent from './CalendarComponent/CalendarComponent';
-import CommentsContainer from './CommentsContainer/CommentsContainer';
-import CommentForm from './CommentForm/CommentForm';
-import DeleteConfirmation from './DeleteConfirmation/DeleteConfirmation';
-import EditHabitForm from './EditHabitForm/EditHabitForm';
+import CalendarComponent from "./CalendarComponent/CalendarComponent";
+import CommentsContainer from "./CommentsContainer/CommentsContainer";
+import CommentForm from "./CommentForm/CommentForm";
+import DeleteConfirmation from "./DeleteConfirmation/DeleteConfirmation";
+import EditHabitForm from "./EditHabitForm/EditHabitForm";
 /** Reactstrap **/
-import { Tooltip, Alert, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {
+  Tooltip,
+  Alert,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 /** Styles **/
-import './HabitCard.css';
+import "./HabitCard.css";
 /** Helpers **/
-import { formatToWords, formatPlural } from '../../helpers/formatHelpers';
-import { getCompleted_atAPIData, getUserAPIData } from '../../helpers/getDataHelpers';
-import { handleDeleteCard, getLikes, registerLike, getComments } from '../../helpers/habitDataHelpers';
+import { formatToWords, formatPlural } from "../../helpers/formatHelpers";
+import {
+  getCompleted_atAPIData,
+  getUserAPIData,
+} from "../../helpers/getDataHelpers";
+import {
+  handleDeleteCard,
+  getLikes,
+  registerLike,
+  getComments,
+} from "../../helpers/habitDataHelpers";
 /** Redux **/
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 /** Redux-actions **/
-import { increment } from '../../actions';
+import { increment } from "../../actions";
 
-const HabitCard = ({habit}) => {
+const HabitCard = ({ habit }) => {
   /** Props **/
   const {
     habit_id,
@@ -30,7 +45,7 @@ const HabitCard = ({habit}) => {
     last_completed_at,
     last_broken_at,
     is_edited,
-    user_id
+    user_id,
   } = habit;
 
   /** State **/
@@ -38,10 +53,10 @@ const HabitCard = ({habit}) => {
   const [isMyHabit, setIsMyHabit] = useState(false);
   const [isMyLike, setIsMyLike] = useState(false);
   const [likes, setLikes] = useState([]);
-  const [likesCount, setLikesCount] = useState('');
-  const [err, setErr] = useState('');
-  const [habit_by, setHabitBy] = useState('');
-  const [success, setSuccess] = useState('');
+  const [likesCount, setLikesCount] = useState("");
+  const [err, setErr] = useState("");
+  const [habit_by, setHabitBy] = useState("");
+  const [success, setSuccess] = useState("");
   // use null here for conditional rendering, instead of using empty array?
   const [comments, setComments] = useState([]);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
@@ -53,38 +68,38 @@ const HabitCard = ({habit}) => {
 
   /** Redux **/
   const dispatch = useDispatch();
-  const counter = useSelector(state => state.counter);
-  const user = useSelector(state => state.user);
+  const counter = useSelector((state) => state.counter);
+  const user = useSelector((state) => state.user);
 
   /** Classnames **/
   const liked = classNames({
-    'liked': isMyLike
+    liked: isMyLike,
   });
 
   // on mount, get comment number
   useEffect(() => {
-    getComments(habit_id, comments => {
+    getComments(habit_id, (comments) => {
       setComments(comments);
-    })
+    });
   }, []);
-  
+
   // When each habit loads, get a list of completed days
   useEffect(() => {
-    getCompleted_atAPIData(user_id, habit_id, data => {
+    getCompleted_atAPIData(user_id, habit_id, (data) => {
       console.log(data);
       setCompletedAt(data);
     });
   }, [counter]);
-  
+
   // If this habit belongs to this user, display delete btn
-  const _user_id = useSelector(state => state.user.user_id);
+  const _user_id = useSelector((state) => state.user.user_id);
   useEffect(() => {
     if (habit.user_id === _user_id) {
       setIsMyHabit(true);
     }
 
     // get number of likes
-    getLikes(user_id, habit_id, likes => {
+    getLikes(user_id, habit_id, (likes) => {
       setLikesCount(likes.length);
       setLikes(likes);
 
@@ -106,33 +121,32 @@ const HabitCard = ({habit}) => {
 
   // get name of user who created habit
   useEffect(() => {
-    getUserAPIData(user_id, data => {
+    getUserAPIData(user_id, (data) => {
       setHabitBy(data.username);
     });
   }, []);
 
-
-  const handleLikeBtn = e => {
+  const handleLikeBtn = (e) => {
     e.preventDefault();
 
     registerLike(user, user_id, habit_id, (success, err) => {
       if (err) return;
       switch (success.action) {
-        case 'LIKED':
-          setLikesCount(count => count + 1);
+        case "LIKED":
+          setLikesCount((count) => count + 1);
           break;
-        case 'UNLIKED':
-          setLikesCount(count => count - 1);
+        case "UNLIKED":
+          setLikesCount((count) => count - 1);
           break;
-      };
+      }
       setIsMyLike(!isMyLike);
     });
   };
 
-  const confirmDelete = e => {
+  const confirmDelete = (e) => {
     e.preventDefault();
     setDeleteConfirm(true);
-  }
+  };
 
   /* 2nd param keepOpen is passed in after a submission in the CommentForm.js component - keeps comment section open after new submission */
   const handleExpandComments = (e, keepOpen) => {
@@ -143,22 +157,22 @@ const HabitCard = ({habit}) => {
     }
 
     // get comments
-    getComments(habit_id, comments => {
+    getComments(habit_id, (comments) => {
       setComments(comments);
       // expand comments
       setCommentsExpanded(true);
     });
   };
 
-  const handleEditToggle = e => {
+  const handleEditToggle = (e) => {
     e.preventDefault();
     setEditMode(true);
-  }
+  };
 
-  const focusCommentField = e => {
+  const focusCommentField = (e) => {
     e.preventDefault();
     commentField.current.focus();
-  }
+  };
 
   return (
     <div className="HabitCard">
@@ -168,93 +182,105 @@ const HabitCard = ({habit}) => {
           user_id={user_id}
           completedAt={completedAt}
           setSuccess={setSuccess}
-          setErr={setErr}/>
+          setErr={setErr}
+        />
         <div className="HabitCard__data-container">
           <h4 className="HabitCard__title">{title}</h4>
-          <span
-            className="HabitCard__description">
-            {editMode && (<EditHabitForm
-              setSuccess={setSuccess}
-              setErr={setErr}
-              habit_id={habit_id}
-              setEditMode={setEditMode}
-              description={description}
-              title={title}/>)}
+          <span className="HabitCard__description">
+            {editMode && (
+              <EditHabitForm
+                setSuccess={setSuccess}
+                setErr={setErr}
+                habit_id={habit_id}
+                setEditMode={setEditMode}
+                description={description}
+                title={title}
+              />
+            )}
             {description ? description : <i>No description provided.</i>}
           </span>
-          <h5
-            className="HabitCard__created-at">
+          <h5 className="HabitCard__created-at">
             Created at {formatToWords(created_at)} by @{habit_by}
           </h5>
 
           {is_edited && (
-            <span className="HabitCard__edited-span">
-              (edited)
-            </span>
+            <span className="HabitCard__edited-span">(edited)</span>
           )}
 
           {/* error feedback */}
-          {err && <Alert
-            color="danger"
-            className="HabitCard__err-msg">
+          {err && (
+            <Alert color="danger" className="HabitCard__err-msg">
               {err}
-          </Alert>}
+            </Alert>
+          )}
 
           {/* success feedback */}
-          {success && <Alert
-            color="success"
-            className="HabitCard__success-msg">
+          {success && (
+            <Alert color="success" className="HabitCard__success-msg">
               {success}
-          </Alert>}
+            </Alert>
+          )}
         </div>
 
         <footer className="HabitCard__footer">
-          {likesCount > 0 && 
-            (<span
-              className={`HabitCard__likes-span ${liked}`}>
-                {`${likesCount} ${formatPlural(likesCount, 'like')}`}
-            </span>)}
-          <button
-            className={liked}
-            onClick={handleLikeBtn}>
-              {isMyLike ? 'unlike' : 'like'}
+          {likesCount > 0 && (
+            <span className={`HabitCard__likes-span ${liked}`}>
+              {`${likesCount} ${formatPlural(likesCount, "like")}`}
+            </span>
+          )}
+          <button className={liked} onClick={handleLikeBtn}>
+            {isMyLike ? "unlike" : "like"}
           </button>
           {/* if comments expanded, show 'close comments', else show number of comments viewable */}
-          <button onClick={comments.length === 0 ? focusCommentField : handleExpandComments}>
-            {commentsExpanded ? 'close comments' : (
-              comments.length === 0 ? 'comment' : `view ${comments.length} ${formatPlural(comments.length, 'comment')}`
-            )}
+          <button
+            className="HabitCard__view-comment-btn"
+            onClick={
+              comments.length === 0 ? focusCommentField : handleExpandComments
+            }
+          >
+            {commentsExpanded
+              ? "close comments"
+              : comments.length === 0
+              ? "comment"
+              : `view ${comments.length} ${formatPlural(
+                  comments.length,
+                  "comment"
+                )}`}
           </button>
-        </footer>
-            
-        {isMyHabit && !editMode && (<button
-          onClick={confirmDelete}
-          className="HabitCard__delete-btn">
-            delete
-        </button>)}
 
-        {isMyHabit && !editMode && (<button
-          onClick={handleEditToggle}
-          className="HabitCard__edit-btn">
+          <CommentForm
+            commentField={commentField}
+            handleExpandComments={handleExpandComments}
+            habit_id={habit_id}
+          />
+        </footer>
+
+        {isMyHabit && !editMode && (
+          <button onClick={confirmDelete} className="HabitCard__delete-btn">
+            delete
+          </button>
+        )}
+
+        {isMyHabit && !editMode && (
+          <button onClick={handleEditToggle} className="HabitCard__edit-btn">
             edit
           </button>
         )}
       </div>
 
-      {deleteConfirm && <DeleteConfirmation
-        closeModal={() => setDeleteConfirm(false)}
-        user_id={user_id}
-        habit_id={habit_id}
-        dispatch={dispatch}
-        title={title}/>}
-        
-      <CommentForm
-        commentField={commentField}
-        handleExpandComments={handleExpandComments}
-        habit_id={habit_id} />
-      {commentsExpanded && <CommentsContainer
-        setComments={setComments}
-        comments={comments}/>}
+      {deleteConfirm && (
+        <DeleteConfirmation
+          closeModal={() => setDeleteConfirm(false)}
+          user_id={user_id}
+          habit_id={habit_id}
+          dispatch={dispatch}
+          title={title}
+        />
+      )}
+
+      {commentsExpanded && (
+        <CommentsContainer setComments={setComments} comments={comments} />
+      )}
     </div>
   );
 };

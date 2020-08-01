@@ -45,7 +45,7 @@
 
 .HabitCard__created-at {
   position: absolute;
-  top: 245px;
+  top: 215px;
   right: 23px;
   font-style: italic;
   font-size: 16px;
@@ -53,14 +53,27 @@
 
 .HabitCard__footer {
   position: relative;
-  margin-top: 10px;
+  width: 200%;
+  margin-top: 30px;
+  padding-left: 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
 }
 
 .HabitCard__footer > button {
+  display: flex;
+  height: min-content;
+  text-align: center;
+  justify-content: center;
   border: none;
   border-radius: 4px;
-  padding: 2px 8px;
   margin: 0 5px;
+}
+
+.HabitCard__view-comment-btn {
+  width: 190px;
 }
 
 .HabitCard__err-msg,

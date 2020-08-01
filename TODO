@@ -246,5 +246,5 @@ follow user:
 [x] prevent another data fetch when user clicks button of current mode
 
 [] Longest streak on each habit
-  [] display streak somewhere on card
+  [x] display streak somewhere on card
   [] TODO #3
