@@ -1,7 +1,7 @@
 .NavDashboard__container {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 30px;
   height: 100%;
   display: flex;
   flex-direction: row;
