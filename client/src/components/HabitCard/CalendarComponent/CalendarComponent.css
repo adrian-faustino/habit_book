@@ -30,7 +30,6 @@
 }
 
 .CalendarComponent__calendar-container {
-  background: red;
   height: 204px;
   overflow: hidden;
 }
@@ -40,8 +39,16 @@
   font-size: 18px;
 }
 
-.unclickable {
+/* disable year nav */
+.unclickable,
+.react-calendar__navigation__label {
   pointer-events: none;
+}
+
+/* enable naviating calendar but not update */
+.react-calendar__navigation__arrow,
+.react-calendar__navigation__prev-button {
+  pointer-events: all;
 }
 
 abbr {
