@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const pool = require('../db/db');
-const authenticateToken = require('../helpers/auth');
+const pool = require("../db/db");
+const authenticateToken = require("../helpers/auth");
 
 /** Constants **/
-const USERS_TABLE = 'users';
+const USERS_TABLE = "users";
 const QUERY_RESULT_LIMIT = 30;
 
 // @route   search?search_query=
@@ -12,9 +12,9 @@ const QUERY_RESULT_LIMIT = 30;
 // @access  Private
 
 // Search for users
-router.get('/', async (req, res) => {
-  console.log('Search query name:', req.query.name);
-  const name = req.query.name.split(' ').join(''); // remove space
+router.get("/", async (req, res) => {
+  console.log("Search query name:", req.query.name);
+  const name = req.query.name.split(" ").join(""); // remove space
 
   const dbQuery = `
     SELECT avatar_url, created_at, email, first_name, last_name, user_id, username FROM ${USERS_TABLE}
@@ -28,17 +28,15 @@ router.get('/', async (req, res) => {
 
   try {
     const results = await pool.query(dbQuery, [name.toUpperCase()]);
-    res.json({ msg: 'Query results.', queryHits: results.rows });
+    res.json({ msg: "Query results.", queryHits: results.rows });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: err.message });
   }
 });
 
-
 // get a random list of users
-router.get('/explore', async (req, res) => {
-  console.log('exploring...');
+router.get("/explore", async (req, res) => {
   const query = `
     SELECT avatar_url, created_at, email, first_name, last_name, user_id, username
     FROM ${USERS_TABLE}
@@ -46,7 +44,7 @@ router.get('/explore', async (req, res) => {
     LIMIT ${QUERY_RESULT_LIMIT};
   `;
 
-  try {    
+  try {
     const users = await pool.query(query);
     res.json(users.rows);
   } catch (err) {
